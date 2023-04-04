@@ -1,18 +1,21 @@
 [
   {
     "name": "BPIC19",
-    "file_directory": "data\\BPIC19\\prepared\\",
+    "file_directory": "data\\BPIC19\\",
     "file_names": [
-      "BPIC19.csv"
+      "BPI_Challenge_2019.csv"
     ],
+    "encoding": "cp1252",
     "labels": [
       "Event"
     ],
+    "add_log": true,
+    "add_event_index": true,
     "samples": [
       {
-        "file_name": "BPIC19.csv",
+        "file_name": "BPI_Challenge_2019.csv",
         "use_random_sample": false,
-        "population_column": "casePurchasingDocument",
+        "population_column": "case Purchasing Document",
         "ids": [
           4508062571,
           4507010217,
@@ -39,20 +42,10 @@
     ],
     "attributes": [
       {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "Int64"
-          }
-        ],
-        "mandatory": true
-      },
-      {
         "name": "activity",
         "columns": [
           {
-            "name": "eventConceptName"
+            "name": "event concept:name"
           }
         ],
         "mandatory": true
@@ -61,7 +54,7 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "eventTimeTimestamp"
+            "name": "event time:timestamp"
           }
         ],
         "datetime_object": {
@@ -75,7 +68,7 @@
         "name": "id",
         "columns": [
           {
-            "name": "eventId",
+            "name": "eventID ",
             "dtype": "Int64"
           }
         ],
@@ -85,7 +78,7 @@
         "name": "cSpendAreaText",
         "columns": [
           {
-            "name": "caseSpendAreaText"
+            "name": "case Spend area text"
           }
         ],
         "mandatory": false
@@ -94,7 +87,7 @@
         "name": "cCompany",
         "columns": [
           {
-            "name": "caseCompany"
+            "name": "case Company"
           }
         ],
         "mandatory": true
@@ -103,7 +96,7 @@
         "name": "cDocType",
         "columns": [
           {
-            "name": "caseDocumentType"
+            "name": "case Document Type"
           }
         ],
         "mandatory": true
@@ -112,7 +105,7 @@
         "name": "cSubSPendAreaText",
         "columns": [
           {
-            "name": "caseSubSpendAreaText"
+            "name": "case Sub spend area text"
           }
         ],
         "mandatory": false
@@ -121,7 +114,7 @@
         "name": "cPoId",
         "columns": [
           {
-            "name": "casePurchasingDocument",
+            "name": "case Purchasing Document",
             "dtype": "Int64"
           }
         ],
@@ -131,7 +124,7 @@
         "name": "cPurDocCat",
         "columns": [
           {
-            "name": "casePurchDocCategoryName"
+            "name": "case Purch. Doc. Category name"
           }
         ],
         "mandatory": true
@@ -140,7 +133,7 @@
         "name": "cVendor",
         "columns": [
           {
-            "name": "caseVendor"
+            "name": "case Vendor"
           }
         ],
         "mandatory": false
@@ -149,7 +142,7 @@
         "name": "cItemType",
         "columns": [
           {
-            "name": "caseItemType"
+            "name": "case Item Type"
           }
         ],
         "mandatory": false
@@ -158,7 +151,7 @@
         "name": "cItemCat",
         "columns": [
           {
-            "name": "caseItemCategory"
+            "name": "case Item Category"
           }
         ],
         "mandatory": true
@@ -167,7 +160,7 @@
         "name": "cSpendClassText",
         "columns": [
           {
-            "name": "caseSpendClassificationText"
+            "name": "case Spend classification text"
           }
         ],
         "mandatory": false
@@ -176,7 +169,7 @@
         "name": "cVendorName",
         "columns": [
           {
-            "name": "caseName"
+            "name": "case Name"
           }
         ],
         "mandatory": true
@@ -185,7 +178,7 @@
         "name": "cGRbasedInvVerif",
         "columns": [
           {
-            "name": "caseGrBasedInvVerif",
+            "name": "case GR-Based Inv. Verif.",
             "dtype": "boolean"
           }
         ],
@@ -195,7 +188,7 @@
         "name": "cItem",
         "columns": [
           {
-            "name": "caseItem",
+            "name": "case Item",
             "dtype": "int"
           }
         ],
@@ -205,7 +198,7 @@
         "name": "cId",
         "columns": [
           {
-            "name": "caseConceptName"
+            "name": "case concept:name"
           }
         ],
         "mandatory": false
@@ -214,7 +207,7 @@
         "name": "cGR",
         "columns": [
           {
-            "name": "caseGoodsReceipt",
+            "name": "case Goods Receipt",
             "dtype": "boolean"
           }
         ],
@@ -224,7 +217,7 @@
         "name": "resource",
         "columns": [
           {
-            "name": "eventOrgResource",
+            "name": "event org:resource",
             "nan_values": ["NONE"]
           }
         ],
@@ -234,16 +227,7 @@
         "name": "eCumNetWorth",
         "columns": [
           {
-            "name": "eventCumulativeNetWorthEur"
-          }
-        ],
-        "mandatory": true
-      },
-      {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
+            "name": "event concept:name"
           }
         ],
         "mandatory": true
