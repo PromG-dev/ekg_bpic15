@@ -54,7 +54,8 @@ For datasets BPIC14, BPIC16 we provide:
 
 - **file_preparation/bpicXX_prepare.py** - normalizes the original CSV data to an event table in CSV
   format required for the import and stores the output in the directory _ROOT/data/.BPICXX/prepared/_
-- For datasets BPIC14, BPIC17 and BPIC19 no preparation is required
+
+For datasets BPIC14, BPIC17 and BPIC19 no preparation is required
 
 ### main script
 There is one script that creates the Event/System knowledge graph: **ekg_creator/main.py**
