@@ -2,57 +2,44 @@
   {
     "name": "BPIC16Clicks",
     "file_directory": "data\\BPIC16\\prepared\\",
-    "file_names": [
-      "BPIC16Clicks.csv"
-    ],
+    "file_name": "BPIC16Clicks.csv",
     "labels": [
       "Event"
     ],
-    "samples": [
-      {
-        "file_name": "BPIC16Clicks.csv",
-        "use_random_sample": false,
-        "population_column": "customerId",
-        "ids": [
-          2026796,
-          2223803,
-          2023026,
-          114939,
-          2011721,
-          2022933,
-          919259,
-          2079086,
-          466152,
-          2057965,
-          1039204,
-          395673,
-          1710155,
-          2081135,
-          1723340,
-          1893155,
-          1042998,
-          435939,
-          1735039,
-          2045407
-        ]
-      }
-    ],
+    "add_log": true,
+    "add_event_index": true,
+    "sample": {
+      "use_random_sample": false,
+      "population_column": "CustomerID",
+      "ids": [
+        2026796,
+        2223803,
+        2023026,
+        114939,
+        2011721,
+        2022933,
+        919259,
+        2079086,
+        466152,
+        2057965,
+        1039204,
+        395673,
+        1710155,
+        2081135,
+        1723340,
+        1893155,
+        1042998,
+        435939,
+        1735039,
+        2045407
+      ]
+    },
     "attributes": [
-      {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "int"
-          }
-        ],
-        "mandatory": true
-      },
       {
         "name": "activity",
         "columns": [
           {
-            "name": "pageName"
+            "name": "PAGE_NAME"
           }
         ],
         "mandatory": true
@@ -61,7 +48,7 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "timestamp"
+            "name": "TIMESTAMP"
           }
         ],
         "datetime_object": {
@@ -75,7 +62,7 @@
         "name": "customerId",
         "columns": [
           {
-            "name": "customerId",
+            "name": "CustomerID",
             "dtype": "Int64"
           }
         ],
@@ -85,7 +72,7 @@
         "name": "ageCategory",
         "columns": [
           {
-            "name": "ageCategory"
+            "name": "AgeCategory"
           }
         ],
         "mandatory": true
@@ -94,7 +81,7 @@
         "name": "gender",
         "columns": [
           {
-            "name": "gender"
+            "name": "Gender"
           }
         ],
         "mandatory": true
@@ -103,7 +90,7 @@
         "name": "officeU",
         "columns": [
           {
-            "name": "officeU",
+            "name": "Office_U",
             "dtype": "Int32"
           }
         ],
@@ -113,7 +100,7 @@
         "name": "officeW",
         "columns": [
           {
-            "name": "officeW",
+            "name": "Office_W",
             "dtype": "Int32"
           }
         ],
@@ -123,7 +110,7 @@
         "name": "sessionId",
         "columns": [
           {
-            "name": "sessionId",
+            "name": "SessionID",
             "dtype": "Int64"
           }
         ],
@@ -133,7 +120,7 @@
         "name": "ipid",
         "columns": [
           {
-            "name": "ipid",
+            "name": "IPID",
             "dtype": "Int64"
           }
         ],
@@ -143,7 +130,7 @@
         "name": "vhost",
         "columns": [
           {
-            "name": "vhost"
+            "name": "VHOST"
           }
         ],
         "mandatory": true
@@ -152,16 +139,7 @@
         "name": "urlFile",
         "columns": [
           {
-            "name": "urlFile"
-          }
-        ],
-        "mandatory": true
-      },
-      {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
+            "name": "URL_FILE"
           }
         ],
         "mandatory": true
@@ -171,57 +149,44 @@
   {
     "name": "BPIC16Complaints",
     "file_directory": "data\\BPIC16\\prepared\\",
-    "file_names": [
-      "BPIC16Complaints.csv"
-    ],
+    "file_name": "BPIC16Complaints.csv",
     "labels": [
       "Event"
     ],
-    "samples": [
-      {
-        "file_name": "BPIC16Complaints.csv",
-        "use_random_sample": false,
-        "population_column": "customerId",
-        "ids": [
-          2026796,
-          2223803,
-          2023026,
-          114939,
-          2011721,
-          2022933,
-          919259,
-          2079086,
-          466152,
-          2057965,
-          1039204,
-          395673,
-          1710155,
-          2081135,
-          1723340,
-          1893155,
-          1042998,
-          435939,
-          1735039,
-          2045407
-        ]
-      }
-    ],
+    "add_log": true,
+    "add_event_index": true,
+    "sample": {
+      "use_random_sample": false,
+      "population_column": "CustomerID",
+      "ids": [
+        2026796,
+        2223803,
+        2023026,
+        114939,
+        2011721,
+        2022933,
+        919259,
+        2079086,
+        466152,
+        2057965,
+        1039204,
+        395673,
+        1710155,
+        2081135,
+        1723340,
+        1893155,
+        1042998,
+        435939,
+        1735039,
+        2045407
+      ]
+    },
     "attributes": [
-      {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "int"
-          }
-        ],
-        "mandatory": true
-      },
       {
         "name": "activity",
         "columns": [
           {
-            "name": "complaintTheme"
+            "name": "ComplaintTheme"
           }
         ],
         "mandatory": true
@@ -230,7 +195,7 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "contactDate"
+            "name": "ContactDate"
           }
         ],
         "datetime_object": {
@@ -243,7 +208,7 @@
         "name": "customerId",
         "columns": [
           {
-            "name": "customerId",
+            "name": "CustomerID",
             "dtype": "Int64"
           }
         ],
@@ -253,7 +218,7 @@
         "name": "ageCategory",
         "columns": [
           {
-            "name": "ageCategory"
+            "name": "AgeCategory"
           }
         ],
         "mandatory": true
@@ -262,7 +227,7 @@
         "name": "gender",
         "columns": [
           {
-            "name": "gender"
+            "name": "Gender"
           }
         ],
         "mandatory": true
@@ -271,7 +236,7 @@
         "name": "officeU",
         "columns": [
           {
-            "name": "officeU",
+            "name": "Office_U",
             "dtype": "Int32"
           }
         ],
@@ -281,7 +246,7 @@
         "name": "officeW",
         "columns": [
           {
-            "name": "officeW",
+            "name": "Office_W",
             "dtype": "Int32"
           }
         ],
@@ -291,7 +256,7 @@
         "name": "complaintDossierId",
         "columns": [
           {
-            "name": "complaintDossierId",
+            "name": "ComplaintDossierID",
             "dtype": "Int32"
           }
         ],
@@ -301,7 +266,7 @@
         "name": "complaintId",
         "columns": [
           {
-            "name": "complaintId",
+            "name": "ComplaintID",
             "dtype": "Int32"
           }
         ],
@@ -311,7 +276,7 @@
         "name": "contactChannelId",
         "columns": [
           {
-            "name": "contactChannelId",
+            "name": "ContactChannelID",
             "dtype": "Int32"
           }
         ],
@@ -321,7 +286,7 @@
         "name": "complaintThemeId",
         "columns": [
           {
-            "name": "complaintThemeId",
+            "name": "ComplaintThemeID",
             "dtype": "Int32"
           }
         ],
@@ -331,7 +296,7 @@
         "name": "complaintSubthemeId",
         "columns": [
           {
-            "name": "complaintSubthemeId",
+            "name": "ComplaintSubthemeID",
             "dtype": "Int32"
           }
         ],
@@ -341,7 +306,7 @@
         "name": "complaintTopicId",
         "columns": [
           {
-            "name": "complaintTopicId",
+            "name": "ComplaintTopicID",
             "dtype": "Int32"
           }
         ],
@@ -351,7 +316,10 @@
         "name": "complaintSubtheme",
         "columns": [
           {
-            "name": "complaintSubtheme"
+            "name": "ComplaintSubtheme",
+            "nan_values": [
+              "n.v.t."
+            ]
           }
         ],
         "mandatory": true
@@ -360,7 +328,7 @@
         "name": "complaintTopic",
         "columns": [
           {
-            "name": "complaintTopic"
+            "name": "ComplaintTopic"
           }
         ],
         "mandatory": true
@@ -369,7 +337,7 @@
         "name": "complaintThemeEn",
         "columns": [
           {
-            "name": "complaintThemeEn"
+            "name": "ComplaintTheme_EN"
           }
         ],
         "mandatory": true
@@ -378,7 +346,10 @@
         "name": "complaintSubthemeEn",
         "columns": [
           {
-            "name": "complaintSubthemeEn"
+            "name": "ComplaintSubtheme_EN",
+            "nan_values": [
+              "N.A."
+            ]
           }
         ],
         "mandatory": true
@@ -387,16 +358,7 @@
         "name": "complaintTopicEn",
         "columns": [
           {
-            "name": "complaintTopicEn"
-          }
-        ],
-        "mandatory": true
-      },
-      {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
+            "name": "ComplaintTopic_EN"
           }
         ],
         "mandatory": true
@@ -406,57 +368,44 @@
   {
     "name": "BPIC16Questions",
     "file_directory": "data\\BPIC16\\prepared\\",
-    "file_names": [
-      "BPIC16Questions.csv"
-    ],
+    "file_name": "BPIC16Questions.csv",
     "labels": [
       "Event"
     ],
-    "samples": [
-      {
-        "file_name": "BPIC16Questions.csv",
-        "use_random_sample": false,
-        "population_column": "customerId",
-        "ids": [
-          2026796,
-          2223803,
-          2023026,
-          114939,
-          2011721,
-          2022933,
-          919259,
-          2079086,
-          466152,
-          2057965,
-          1039204,
-          395673,
-          1710155,
-          2081135,
-          1723340,
-          1893155,
-          1042998,
-          435939,
-          1735039,
-          2045407
-        ]
-      }
-    ],
+    "add_log": true,
+    "add_event_index": true,
+    "sample": {
+      "use_random_sample": false,
+      "population_column": "CustomerID",
+      "ids": [
+        2026796,
+        2223803,
+        2023026,
+        114939,
+        2011721,
+        2022933,
+        919259,
+        2079086,
+        466152,
+        2057965,
+        1039204,
+        395673,
+        1710155,
+        2081135,
+        1723340,
+        1893155,
+        1042998,
+        435939,
+        1735039,
+        2045407
+      ]
+    },
     "attributes": [
-      {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "int"
-          }
-        ],
-        "mandatory": true
-      },
       {
         "name": "activity",
         "columns": [
           {
-            "name": "questionTheme"
+            "name": "QuestionTheme"
           }
         ],
         "mandatory": true
@@ -465,10 +414,10 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "contactDate"
+            "name": "ContactDate"
           },
           {
-            "name": "contactTimeEnd"
+            "name": "ContactTimeEnd"
           }
         ],
         "separator": " ",
@@ -483,10 +432,10 @@
         "name": "start",
         "columns": [
           {
-            "name": "contactDate"
+            "name": "ContactDate"
           },
           {
-            "name": "contactTimeStart"
+            "name": "ContactTimeStart"
           }
         ],
         "separator": " ",
@@ -501,7 +450,7 @@
         "name": "customerId",
         "columns": [
           {
-            "name": "customerId",
+            "name": "CustomerID",
             "dtype": "Int64"
           }
         ],
@@ -511,7 +460,7 @@
         "name": "ageCategory",
         "columns": [
           {
-            "name": "ageCategory"
+            "name": "AgeCategory"
           }
         ],
         "mandatory": true
@@ -520,7 +469,7 @@
         "name": "gender",
         "columns": [
           {
-            "name": "gender"
+            "name": "Gender"
           }
         ],
         "mandatory": true
@@ -529,7 +478,7 @@
         "name": "officeU",
         "columns": [
           {
-            "name": "officeU",
+            "name": "Office_U",
             "dtype": "Int32"
           }
         ],
@@ -539,7 +488,7 @@
         "name": "officeW",
         "columns": [
           {
-            "name": "officeW",
+            "name": "Office_W",
             "dtype": "Int32"
           }
         ],
@@ -549,7 +498,7 @@
         "name": "questionThemeId",
         "columns": [
           {
-            "name": "questionThemeId",
+            "name": "QuestionThemeID",
             "dtype": "Int32"
           }
         ],
@@ -559,7 +508,7 @@
         "name": "questionSubthemeId",
         "columns": [
           {
-            "name": "questionSubthemeId",
+            "name": "QuestionSubthemeID",
             "dtype": "Int32"
           }
         ],
@@ -569,7 +518,7 @@
         "name": "questionTopicId",
         "columns": [
           {
-            "name": "questionTopicId",
+            "name": "QuestionTopicID",
             "dtype": "Int32"
           }
         ],
@@ -579,7 +528,7 @@
         "name": "questionSubtheme",
         "columns": [
           {
-            "name": "questionSubtheme"
+            "name": "QuestionSubtheme"
           }
         ],
         "mandatory": true
@@ -588,7 +537,7 @@
         "name": "questionTopic",
         "columns": [
           {
-            "name": "questionTopic"
+            "name": "QuestionTopic"
           }
         ],
         "mandatory": true
@@ -597,7 +546,7 @@
         "name": "questionThemeEn",
         "columns": [
           {
-            "name": "questionThemeEn"
+            "name": "QuestionTheme_EN"
           }
         ],
         "mandatory": true
@@ -606,7 +555,7 @@
         "name": "questionSubthemeEn",
         "columns": [
           {
-            "name": "questionSubthemeEn"
+            "name": "QuestionSubtheme_EN"
           }
         ],
         "mandatory": true
@@ -615,16 +564,7 @@
         "name": "questionTopicEn",
         "columns": [
           {
-            "name": "questionTopicEn"
-          }
-        ],
-        "mandatory": true
-      },
-      {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
+            "name": "QuestionTopic_EN"
           }
         ],
         "mandatory": true
@@ -634,57 +574,45 @@
   {
     "name": "BPIC16Messages",
     "file_directory": "data\\BPIC16\\prepared\\",
-    "file_names": [
-      "BPIC16Messages.csv"
-    ],
+    "file_name": "BPIC16Messages.csv",
     "labels": [
       "Event"
     ],
-    "samples": [
-      {
-        "file_name": "BPIC16Messages.csv",
-        "use_random_sample": false,
-        "population_column": "customerId",
-        "ids": [
-          2026796,
-          2223803,
-          2023026,
-          114939,
-          2011721,
-          2022933,
-          919259,
-          2079086,
-          466152,
-          2057965,
-          1039204,
-          395673,
-          1710155,
-          2081135,
-          1723340,
-          1893155,
-          1042998,
-          435939,
-          1735039,
-          2045407
-        ]
-      }
-    ],
+    "add_log": true,
+    "add_event_index": true,
+    "sample": {
+      "file_name": "BPIC16Messages.csv",
+      "use_random_sample": false,
+      "population_column": "CustomerID",
+      "ids": [
+        2026796,
+        2223803,
+        2023026,
+        114939,
+        2011721,
+        2022933,
+        919259,
+        2079086,
+        466152,
+        2057965,
+        1039204,
+        395673,
+        1710155,
+        2081135,
+        1723340,
+        1893155,
+        1042998,
+        435939,
+        1735039,
+        2045407
+      ]
+    },
     "attributes": [
-      {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "int"
-          }
-        ],
-        "mandatory": true
-      },
       {
         "name": "activity",
         "columns": [
           {
-            "name": "eventType"
+            "name": "EventType"
           }
         ],
         "mandatory": true
@@ -693,7 +621,7 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "eventDateTime"
+            "name": "EventDateTime"
           }
         ],
         "separator": " ",
@@ -708,7 +636,7 @@
         "name": "customerId",
         "columns": [
           {
-            "name": "customerId",
+            "name": "CustomerID",
             "dtype": "Int64"
           }
         ],
@@ -718,7 +646,7 @@
         "name": "ageCategory",
         "columns": [
           {
-            "name": "ageCategory"
+            "name": "AgeCategory"
           }
         ],
         "mandatory": true
@@ -727,7 +655,7 @@
         "name": "gender",
         "columns": [
           {
-            "name": "gender"
+            "name": "Gender"
           }
         ],
         "mandatory": true
@@ -736,7 +664,7 @@
         "name": "officeU",
         "columns": [
           {
-            "name": "officeU",
+            "name": "Office_U",
             "dtype": "Int32"
           }
         ],
@@ -746,7 +674,7 @@
         "name": "officeW",
         "columns": [
           {
-            "name": "officeW",
+            "name": "Office_W",
             "dtype": "Int32"
           }
         ],
@@ -756,17 +684,8 @@
         "name": "handlingChannelId",
         "columns": [
           {
-            "name": "handlingChannelId",
+            "name": "HandlingChannelID",
             "dtype": "Int32"
-          }
-        ],
-        "mandatory": true
-      },
-      {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
           }
         ],
         "mandatory": true

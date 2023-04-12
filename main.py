@@ -8,14 +8,16 @@ from ekg_creator.database_managers import authentication
 from ekg_creator.data_managers.datastructures import ImportedDataStructures
 
 from ekg_creator.utilities.performance_handling import Performance
+from ekg_creator_custom.ekg_modules.ekg_custom_module import CustomModule
 
 # several steps of import, each can be switch on/off
 from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC19'
+dataset_name = 'BPIC17'
 use_sample = True
+use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
 
@@ -42,10 +44,11 @@ def create_graph_instance(perf: Performance) -> EventKnowledgeGraph:
     Creates an instance of an EventKnowledgeGraph
     @return: returns an EventKnowledgeGraph
     """
-
     return EventKnowledgeGraph(db_connection=db_connection, db_name=connection.user,
                                batch_size=5000, event_tables=datastructures, use_sample=use_sample,
-                               semantic_header=semantic_header, perf=perf)
+                               use_preprocessed_files=use_preprocessed_files,
+                               semantic_header=semantic_header, perf=perf,
+                               custom_module_name=CustomModule)
 
 
 def clear_graph(graph: EventKnowledgeGraph, perf: Performance) -> None:
@@ -81,6 +84,9 @@ def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
 
     graph.correlate_events_to_entities(node_label="Event")
     perf.finished_step(log_message=f"[:CORR] edges done")
+
+    if dataset_name == "BPIC17":
+        graph.do_custom_query("get_corr_between_o_created_events_and_offer_entities")
 
     graph.create_classes()
     perf.finished_step(log_message=f"(:Class) nodes done")

@@ -1,43 +1,31 @@
 [
   {
     "name": "BPIC14Change",
-    "file_directory": "data\\BPIC14\\prepared\\",
-    "file_names": [
-      "BPIC14Change.csv"
-    ],
+    "file_directory": "data\\BPIC14\\",
+    "file_name": "Detail_Change.csv",
     "labels": [
       "Event"
     ],
+    "add_log": true,
+    "add_event_index": true,
+    "seperator": ";",
     "true_values": [
       "Y"
     ],
     "false_values": [
       "N"
     ],
-    "samples": [
-      {
-        "file_name": "BPIC14Change.csv",
-        "use_random_sample": true,
-        "population_column": "serviceComponentWbsAff",
-        "size": 20
-      }
-    ],
+    "sample": {
+      "use_random_sample": true,
+      "population_column": "Service Component WBS (aff)",
+      "size": 20
+    },
     "attributes": [
-      {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "int"
-          }
-        ],
-        "mandatory": true
-      },
       {
         "name": "ciNameAff",
         "columns": [
           {
-            "name": "ciNameAff"
+            "name": "CI Name (aff)"
           }
         ],
         "mandatory": true
@@ -46,8 +34,10 @@
         "name": "ciTypeAff",
         "columns": [
           {
-            "name": "ciTypeAff",
-            "nan_values": ["no type"]
+            "name": "CI Type (aff)",
+            "nan_values": [
+              "no type"
+            ]
           }
         ],
         "mandatory": false
@@ -56,8 +46,10 @@
         "name": "ciSubtypeAff",
         "columns": [
           {
-            "name": "ciSubtypeAff",
-            "nan_values": ["no subtype"]
+            "name": "CI Subtype (aff)",
+            "nan_values": [
+              "no subtype"
+            ]
           }
         ],
         "mandatory": false
@@ -66,7 +58,7 @@
         "name": "serviceComponentAff",
         "columns": [
           {
-            "name": "serviceComponentWbsAff"
+            "name": "Service Component WBS (aff)"
           }
         ],
         "mandatory": true
@@ -75,7 +67,7 @@
         "name": "changeId",
         "columns": [
           {
-            "name": "changeId"
+            "name": "Change ID"
           }
         ],
         "mandatory": true
@@ -84,7 +76,7 @@
         "name": "activity",
         "columns": [
           {
-            "name": "changeType"
+            "name": "Change Type"
           }
         ],
         "mandatory": true
@@ -93,7 +85,7 @@
         "name": "riskAssessment",
         "columns": [
           {
-            "name": "riskAssessment"
+            "name": "Risk Assessment"
           }
         ],
         "mandatory": true
@@ -102,7 +94,7 @@
         "name": "emergencyChange",
         "columns": [
           {
-            "name": "emergencyChange",
+            "name": "Emergency Change",
             "dtype": "boolean"
           }
         ],
@@ -112,7 +104,7 @@
         "name": "cabApprovalNeeded",
         "columns": [
           {
-            "name": "cabApprovalNeeded",
+            "name": "CAB-approval needed",
             "dtype": "boolean"
           }
         ],
@@ -122,7 +114,7 @@
         "name": "plannedStart",
         "columns": [
           {
-            "name": "plannedStart"
+            "name": "Planned Start"
           }
         ],
         "datetime_object": {
@@ -136,7 +128,7 @@
         "name": "plannedEnd",
         "columns": [
           {
-            "name": "plannedEnd"
+            "name": "Planned End"
           }
         ],
         "datetime_object": {
@@ -150,7 +142,7 @@
         "name": "scheduledDowntimeStart",
         "columns": [
           {
-            "name": "scheduledDowntimeStart"
+            "name": "Scheduled Downtime Start"
           }
         ],
         "datetime_object": {
@@ -164,7 +156,7 @@
         "name": "scheduledDowntimeEnd",
         "columns": [
           {
-            "name": "scheduledDowntimeEnd"
+            "name": "Scheduled Downtime End"
           }
         ],
         "datetime_object": {
@@ -178,12 +170,12 @@
         "name": "start",
         "columns": [
           {
-            "name": "actualStart"
+            "name": "Actual Start"
           }
         ],
         "na_rep_columns": [
           {
-            "name": "changeRecordOpenTime"
+            "name": "Change record Open Time"
           }
         ],
         "datetime_object": {
@@ -197,12 +189,12 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "actualEnd"
+            "name": "Actual End"
           }
         ],
         "na_rep_columns": [
           {
-            "name": "changeRecordCloseTime"
+            "name": "Change record Close Time"
           }
         ],
         "datetime_object": {
@@ -216,7 +208,7 @@
         "name": "requestedEndDate",
         "columns": [
           {
-            "name": "requestedEndDate"
+            "name": "Requested End Date"
           }
         ],
         "datetime_object": {
@@ -230,7 +222,7 @@
         "name": "changeRecordOpenTime",
         "columns": [
           {
-            "name": "changeRecordOpenTime"
+            "name": "Change record Open Time"
           }
         ],
         "datetime_object": {
@@ -244,7 +236,7 @@
         "name": "changeRecordCloseTime",
         "columns": [
           {
-            "name": "changeRecordCloseTime"
+            "name": "Change record Close Time"
           }
         ],
         "datetime_object": {
@@ -258,7 +250,7 @@
         "name": "originatedFrom",
         "columns": [
           {
-            "name": "originatedFrom"
+            "name": "Originated from"
           }
         ],
         "mandatory": true
@@ -267,7 +259,7 @@
         "name": "numRelatedInteractions",
         "columns": [
           {
-            "name": "numRelatedInteractions",
+            "name": "# Related Interactions",
             "dtype": "Int64"
           }
         ],
@@ -277,56 +269,34 @@
         "name": "numRelatedIncidents",
         "columns": [
           {
-            "name": "numRelatedIncidents",
+            "name": "# Related Incidents",
             "dtype": "Int64"
           }
         ],
         "mandatory": false
-      },
-      {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
-          }
-        ],
-        "mandatory": true
       }
     ]
   },
   {
     "name": "BPIC14Incident",
     "file_directory": "data\\BPIC14\\prepared\\",
-    "file_names": [
-      "BPIC14Incident.csv"
-    ],
+    "file_name": "BPIC14Incident.csv",
     "labels": [
       "Event"
     ],
-    "samples": [
-      {
-        "file_name": "BPIC14Incident.csv",
-        "use_random_sample": true,
-        "population_column": "serviceComponentWbsAff",
-        "size": 20
-      }
-    ],
+    "add_log": true,
+    "add_event_index": true,
+    "sample": {
+      "use_random_sample": true,
+      "population_column": "Service Component WBS (aff)",
+      "size": 20
+    },
     "attributes": [
-      {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "int"
-          }
-        ],
-        "mandatory": true
-      },
       {
         "name": "ciNameAff",
         "columns": [
           {
-            "name": "ciNameAff"
+            "name": "CI Name (aff)"
           }
         ],
         "mandatory": true
@@ -335,8 +305,10 @@
         "name": "ciTypeAff",
         "columns": [
           {
-            "name": "ciTypeAff",
-            "nan_values": ["no type"]
+            "name": "CI Type (aff)",
+            "nan_values": [
+              "no type"
+            ]
           }
         ],
         "mandatory": false
@@ -345,8 +317,10 @@
         "name": "ciSubtypeAff",
         "columns": [
           {
-            "name": "ciSubtypeAff",
-            "nan_values": ["no subtype"]
+            "name": "CI Subtype (aff)",
+            "nan_values": [
+              "no subtype"
+            ]
           }
         ],
         "mandatory": false
@@ -355,7 +329,7 @@
         "name": "serviceComponentAff",
         "columns": [
           {
-            "name": "serviceComponentWbsAff"
+            "name": "Service Component WBS (aff)"
           }
         ],
         "mandatory": true
@@ -364,7 +338,7 @@
         "name": "incidentId",
         "columns": [
           {
-            "name": "incidentId"
+            "name": "Incident ID"
           }
         ],
         "mandatory": true
@@ -373,7 +347,7 @@
         "name": "status",
         "columns": [
           {
-            "name": "status"
+            "name": "Status"
           }
         ],
         "mandatory": true
@@ -382,7 +356,7 @@
         "name": "impact",
         "columns": [
           {
-            "name": "impact",
+            "name": "Impact",
             "dtype": "Int64"
           }
         ],
@@ -392,7 +366,7 @@
         "name": "urgency",
         "columns": [
           {
-            "name": "urgency",
+            "name": "Urgency",
             "dtype": "Int64"
           }
         ],
@@ -402,7 +376,7 @@
         "name": "priority",
         "columns": [
           {
-            "name": "priority",
+            "name": "Priority",
             "dtype": "Int64"
           }
         ],
@@ -412,7 +386,7 @@
         "name": "category",
         "columns": [
           {
-            "name": "category"
+            "name": "Category"
           }
         ],
         "mandatory": true
@@ -421,7 +395,7 @@
         "name": "kmNumber",
         "columns": [
           {
-            "name": "kmNumber"
+            "name": "KM number"
           }
         ],
         "mandatory": true
@@ -430,7 +404,7 @@
         "name": "alertStatus",
         "columns": [
           {
-            "name": "alertStatus"
+            "name": "Alert Status"
           }
         ],
         "mandatory": true
@@ -439,7 +413,7 @@
         "name": "numReassignments",
         "columns": [
           {
-            "name": "numReassignments",
+            "name": "# Reassignments",
             "dtype": "Int64"
           }
         ],
@@ -449,7 +423,7 @@
         "name": "start",
         "columns": [
           {
-            "name": "openTime"
+            "name": "Open Time"
           }
         ],
         "datetime_object": {
@@ -463,7 +437,7 @@
         "name": "reopenTime",
         "columns": [
           {
-            "name": "reopenTime"
+            "name": "Reopen Time"
           }
         ],
         "datetime_object": {
@@ -477,7 +451,7 @@
         "name": "resolvedTime",
         "columns": [
           {
-            "name": "resolvedTime"
+            "name": "Resolved Time"
           }
         ],
         "datetime_object": {
@@ -491,7 +465,7 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "closeTime"
+            "name": "Close Time"
           }
         ],
         "datetime_object": {
@@ -505,7 +479,7 @@
         "name": "handleTimeHours",
         "columns": [
           {
-            "name": "handleTimeHours",
+            "name": "Handle Time (Hours)",
             "dtype": "float"
           }
         ],
@@ -515,7 +489,7 @@
         "name": "numRelatedInteractions",
         "columns": [
           {
-            "name": "numRelatedInteractions",
+            "name": "# Related Interactions",
             "dtype": "Int64"
           }
         ],
@@ -525,8 +499,11 @@
         "name": "relatedInteraction",
         "columns": [
           {
-            "name": "relatedInteraction",
-            "nan_values": ["#N/B", "#MULTIVALUE"]
+            "name": "Related Interaction",
+            "nan_values": [
+              "#N/B",
+              "#MULTIVALUE"
+            ]
           }
         ],
         "mandatory": false
@@ -535,7 +512,7 @@
         "name": "numRelatedIncidents",
         "columns": [
           {
-            "name": "numRelatedIncidents",
+            "name": "# Related Incidents",
             "dtype": "Int64"
           }
         ],
@@ -545,7 +522,7 @@
         "name": "numRelatedChanges",
         "columns": [
           {
-            "name": "numRelatedChanges",
+            "name": "# Related Changes",
             "dtype": "Int64"
           }
         ],
@@ -555,8 +532,10 @@
         "name": "relatedChange",
         "columns": [
           {
-            "name": "relatedChange",
-            "nan_values": ["#MULTIVALUE"]
+            "name": "Related Change",
+            "nan_values": [
+              "#MULTIVALUE"
+            ]
           }
         ],
         "mandatory": false
@@ -565,8 +544,10 @@
         "name": "ciNameCby",
         "columns": [
           {
-            "name": "ciNameCby",
-            "nan_values": ["#N/B"]
+            "name": "CI Name (CBy)",
+            "nan_values": [
+              "#N/B"
+            ]
           }
         ],
         "mandatory": false
@@ -575,8 +556,10 @@
         "name": "ciTypeCby",
         "columns": [
           {
-            "name": "ciTypeCby",
-            "nan_values": ["#N/B"]
+            "name": "CI Type (CBy)",
+            "nan_values": [
+              "#N/B"
+            ]
           }
         ],
         "mandatory": false
@@ -585,8 +568,10 @@
         "name": "ciSubtypeCby",
         "columns": [
           {
-            "name": "ciSubtypeCby",
-            "nan_values": ["#N/B"]
+            "name": "CI Subtype (CBy)",
+            "nan_values": [
+              "#N/B"
+            ]
           }
         ],
         "mandatory": false
@@ -595,30 +580,25 @@
         "name": "serviceComponentCBy",
         "columns": [
           {
-            "name": "serviceCompWbsCby",
-            "nan_values": ["#N/B"]
+            "name": "ServiceComp WBS (CBy)",
+            "nan_values": [
+              "#N/B"
+            ]
           }
         ],
         "mandatory": false
       },
       {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
-          }
-        ],
-        "mandatory": true
-      },
-      {
         "name": "activity",
         "columns": [
           {
-            "name": "category"
+            "name": "Category"
           },
           {
-            "name": "closureCode",
-            "nan_values": ["Unknown"]
+            "name": "Closure Code",
+            "nan_values": [
+              "Unknown"
+            ]
           }
         ],
         "separator": ": ",
@@ -628,37 +608,25 @@
   },
   {
     "name": "BPIC14IncidentDetail",
-    "file_directory": "data\\BPIC14\\prepared\\",
-    "file_names": [
-      "BPIC14IncidentDetail.csv"
-    ],
-    "samples": [
-      {
-        "file_name": "BPIC14IncidentDetail.csv",
-        "use_random_sample": true,
-        "population_column": "incidentId",
-        "size": 20
-      }
-    ],
+    "file_directory": "data\\BPIC14\\",
+    "file_name": "Detail_Incident_Activity.csv",
+    "sample": {
+      "use_random_sample": true,
+      "population_column": "Incident ID",
+      "size": 20
+    },
     "labels": [
       "Event"
     ],
+    "add_log": true,
+    "add_event_index": true,
+    "seperator": ";",
     "attributes": [
-      {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "int"
-          }
-        ],
-        "mandatory": true
-      },
       {
         "name": "incidentId",
         "columns": [
           {
-            "name": "incidentId"
+            "name": "Incident ID"
           }
         ],
         "mandatory": true
@@ -667,7 +635,7 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "dateStamp"
+            "name": "DateStamp"
           }
         ],
         "datetime_object": {
@@ -681,7 +649,7 @@
         "name": "incidentActivityNumber",
         "columns": [
           {
-            "name": "incidentActivityNumber"
+            "name": "IncidentActivity_Number"
           }
         ],
         "mandatory": true
@@ -690,7 +658,7 @@
         "name": "activity",
         "columns": [
           {
-            "name": "incidentActivityType"
+            "name": "IncidentActivity_Type"
           }
         ],
         "mandatory": true
@@ -699,7 +667,7 @@
         "name": "resource",
         "columns": [
           {
-            "name": "assignmentGroup"
+            "name": "Assignment Group"
           }
         ],
         "mandatory": true
@@ -708,7 +676,7 @@
         "name": "kmNumber",
         "columns": [
           {
-            "name": "kmNumber"
+            "name": "KM number"
           }
         ],
         "mandatory": true
@@ -717,57 +685,39 @@
         "name": "interactionId",
         "columns": [
           {
-            "name": "interactionId",
-            "nan-values": ["#N/B"]
+            "name": "Interaction ID",
+            "nan-values": [
+              "#N/B"
+            ]
           }
         ],
         "mandatory": false
-      },
-      {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
-          }
-        ],
-        "mandatory": true
       }
     ]
   },
   {
     "name": "BPIC14Interaction",
     "file_directory": "data\\BPIC14\\prepared\\",
-    "file_names": [
-      "BPIC14Interaction.csv"
-    ],
+    "file_name": "BPIC14Interaction.csv",
     "labels": [
       "Event"
     ],
-    "samples": [
-      {
-        "file_name": "BPIC14Interaction.csv",
-        "use_random_sample": true,
-        "population_column": "serviceCompWbsAff",
-        "size": 10
-      }
-    ],
+    "add_log": true,
+    "add_event_index": true,
+    "sample": {
+      "use_random_sample": true,
+      "population_column": "Service Comp WBS (aff)",
+      "size": 10
+    },
     "attributes": [
-      {
-        "name": "idx",
-        "columns": [
-          {
-            "name": "idx",
-            "dtype": "int"
-          }
-        ],
-        "mandatory": true
-      },
       {
         "name": "ciNameAff",
         "columns": [
           {
-            "name": "ciNameAff",
-            "nan_values": ["#N/B"]
+            "name": "CI Name (aff)",
+            "nan_values": [
+              "#N/B"
+            ]
           }
         ],
         "mandatory": false
@@ -776,8 +726,11 @@
         "name": "ciSubtypeAff",
         "columns": [
           {
-            "name": "ciSubtypeAff",
-            "nan_values": ["no type", "#N/B"]
+            "name": "CI Subtype (aff)",
+            "nan_values": [
+              "no type",
+              "#N/B"
+            ]
           }
         ],
         "mandatory": false
@@ -786,8 +739,11 @@
         "name": "serviceComponentAff",
         "columns": [
           {
-            "name": "serviceCompWbsAff",
-            "nan_values": ["no subtype", "#N/B"]
+            "name": "Service Comp WBS (aff)",
+            "nan_values": [
+              "no subtype",
+              "#N/B"
+            ]
           }
         ],
         "mandatory": false
@@ -796,7 +752,7 @@
         "name": "interactionId",
         "columns": [
           {
-            "name": "interactionId"
+            "name": "Interaction ID"
           }
         ],
         "mandatory": true
@@ -805,7 +761,7 @@
         "name": "status",
         "columns": [
           {
-            "name": "status"
+            "name": "Status"
           }
         ],
         "mandatory": true
@@ -814,7 +770,7 @@
         "name": "impact",
         "columns": [
           {
-            "name": "impact",
+            "name": "Impact",
             "dtype": "Int64"
           }
         ],
@@ -824,7 +780,7 @@
         "name": "urgency",
         "columns": [
           {
-            "name": "urgency",
+            "name": "Urgency",
             "dtype": "Int64"
           }
         ],
@@ -834,7 +790,7 @@
         "name": "priority",
         "columns": [
           {
-            "name": "priority",
+            "name": "Priority",
             "dtype": "Int64"
           }
         ],
@@ -844,7 +800,7 @@
         "name": "category",
         "columns": [
           {
-            "name": "category"
+            "name": "Category"
           }
         ],
         "mandatory": true
@@ -853,7 +809,7 @@
         "name": "kmNumber",
         "columns": [
           {
-            "name": "kmNumber"
+            "name": "KM number"
           }
         ],
         "mandatory": true
@@ -862,7 +818,7 @@
         "name": "start",
         "columns": [
           {
-            "name": "openTimeFirstTouch"
+            "name": "Open Time (First Touch)"
           }
         ],
         "datetime_object": {
@@ -876,7 +832,7 @@
         "name": "timestamp",
         "columns": [
           {
-            "name": "closeTime"
+            "name": "Close Time"
           }
         ],
         "datetime_object": {
@@ -890,8 +846,10 @@
         "name": "closureCode",
         "columns": [
           {
-            "name": "closureCode",
-            "nan_values": ["Unknown"]
+            "name": "Closure Code",
+            "nan_values": [
+              "Unknown"
+            ]
           }
         ],
         "mandatory": false
@@ -900,7 +858,7 @@
         "name": "firstCallResolution",
         "columns": [
           {
-            "name": "firstCallResolution"
+            "name": "First Call Resolution"
           }
         ],
         "mandatory": true
@@ -909,7 +867,7 @@
         "name": "handleTimeSecs",
         "columns": [
           {
-            "name": "handleTimeSecs",
+            "name": "Handle Time (secs)",
             "dtype": "Int64"
           }
         ],
@@ -919,29 +877,22 @@
         "name": "relatedIncident",
         "columns": [
           {
-            "name": "relatedIncident",
-            "nan_values": ["#MULTIVALUE"]
+            "name": "Related Incident",
+            "nan_values": [
+              "#MULTIVALUE"
+            ]
           }
         ],
         "mandatory": false
       },
       {
-        "name": "log",
-        "columns": [
-          {
-            "name": "log"
-          }
-        ],
-        "mandatory": true
-      },
-      {
         "name": "activity",
         "columns": [
           {
-            "name": "category"
+            "name": "Category"
           },
           {
-            "name": "closureCode"
+            "name": "Closure Code"
           }
         ],
         "separator": ": ",
