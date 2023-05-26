@@ -15,7 +15,7 @@ from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC17'
+dataset_name = 'BPIC14'
 use_sample = True
 use_preprocessed_files = False
 
@@ -45,7 +45,7 @@ def create_graph_instance(perf: Performance) -> EventKnowledgeGraph:
     @return: returns an EventKnowledgeGraph
     """
     return EventKnowledgeGraph(db_connection=db_connection, db_name=connection.user,
-                               batch_size=5000, event_tables=datastructures, use_sample=use_sample,
+                               batch_size=5000, specification_of_data_structures=datastructures, use_sample=use_sample,
                                use_preprocessed_files=use_preprocessed_files,
                                semantic_header=semantic_header, perf=perf,
                                custom_module_name=CustomModule)
@@ -79,10 +79,10 @@ def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
     perf.finished_step(log_message=f"(:Log) nodes and [:HAS] relations done")
 
     # for each entity, we add the entity nodes to graph and correlate them to the correct events
-    graph.create_entities_by_nodes(node_label="Event")
+    graph.create_entities_by_nodes()
     perf.finished_step(log_message=f"(:Entity) nodes done")
 
-    graph.correlate_events_to_entities(node_label="Event")
+    graph.correlate_events_to_entities()
     perf.finished_step(log_message=f"[:CORR] edges done")
 
     if dataset_name == "BPIC17":
