@@ -98,7 +98,7 @@ How to use
 For data import
 
 1. start the Neo4j server
-2. run bpicXX_prepare.py (except for BPIC19)
+2. For BPIC14 and BPIC16, run bpicXX_prepare.py
 3. set dataset_name to BPICXX in main.py and set use_sample to True/False
 4. run main.py
 
