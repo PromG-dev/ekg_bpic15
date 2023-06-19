@@ -8,79 +8,50 @@
         "node": "(e:Event {eventOrigin: 'Application'})"
       },
       "result": "(a:Entity:Application {sysId: e.case})",
-      "labels": [
-        "Application"
-      ],
-      "primary_keys": [
-        "case"
-      ],
       "corr": true,
       "df": true,
       "include_label_in_df": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node": "(:Event {eventOrigin: 'Workflow'})"
-      },
       "type": "Workflow",
-      "labels": [
-        "Workflow"
-      ],
-      "primary_keys": [
-        "case"
-      ],
+      "constructed_by_node": {
+        "node": "(e:Event {eventOrigin: 'Workflow'})"
+      },
+      "result": "(w:Entity:Workflow {sysId: e.case})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node": "(:Event {eventOrigin: 'Offer'})"
-      },
       "type": "Offer",
-      "labels": [
-        "Offer"
-      ],
-      "primary_keys": [
-        "offerId"
-      ],
-      "entity_attributes": [
-        "case"
-      ],
+      "constructed_by_node": {
+        "node": "(e:Event {eventOrigin: 'Offer'})"
+      },
+      "result": "(o:Entity:Offer {sysId: e.offerId, case: e.case})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node": "(:Event)"
-      },
       "type": "Resource",
-      "labels": [
-        "Resource"
-      ],
-      "primary_keys": [
-        "resource"
-      ],
+      "constructed_by_node": {
+        "node": "(e:Event)"
+      },
+      "result": "(r:Entity:Resource {sysId: e.resource})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node": "(:Event)"
-      },
       "type": "CaseAWO",
-      "labels": [
-        "CaseAWO"
-      ],
-      "primary_keys": [
-        "case"
-      ],
+      "constructed_by_node": {
+        "node": "(e:Event)"
+      },
+      "result": "(case:Entity:CaseAWO {sysId: e.case)}",
       "corr": false,
       "df": false
     },
@@ -94,7 +65,7 @@
       ],
       "primary_keys": [
         "offerId",
-        "applicationId"
+        "sysId"
       ],
       "corr": true,
       "df": false
@@ -137,6 +108,7 @@
       "constructed_by_nodes": {
         "from_node_label": "Offer",
         "to_node_label": "Application",
+        "primary_key": "sysId",
         "foreign_key": "case"
       }
     },
@@ -145,7 +117,8 @@
       "constructed_by_nodes": {
         "from_node_label": "Workflow",
         "to_node_label": "Application",
-        "foreign_key": "ID"
+        "primary_key": "sysId",
+        "foreign_key": "sysId"
       }
     },
     {
@@ -153,7 +126,8 @@
       "constructed_by_nodes": {
         "from_node_label": "Offer",
         "to_node_label": "Workflow",
-        "foreign_key": "case"
+        "foreign_key": "case",
+        "primary_key": "sysId"
       }
     }
   ],
