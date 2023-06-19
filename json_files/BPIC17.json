@@ -3,18 +3,11 @@
   "version": "1.0.0",
   "entities": [
     {
-      "constructed_by_node": {
-        "node_label": "Event",
-        "conditions": [
-          {
-            "attribute": "eventOrigin",
-            "values": [
-              "Application"
-            ]
-          }
-        ]
-      },
       "type": "Application",
+      "constructed_by_node": {
+        "node": "(e:Event {eventOrigin: 'Application'})"
+      },
+      "result": "(a:Entity:Application {sysId: e.case})",
       "labels": [
         "Application"
       ],
@@ -28,15 +21,7 @@
     },
     {
       "constructed_by_node": {
-        "node_label": "Event",
-        "conditions": [
-          {
-            "attribute": "eventOrigin",
-            "values": [
-              "Workflow"
-            ]
-          }
-        ]
+        "node": "(:Event {eventOrigin: 'Workflow'})"
       },
       "type": "Workflow",
       "labels": [
@@ -52,15 +37,7 @@
     },
     {
       "constructed_by_node": {
-        "node_label": "Event",
-        "conditions": [
-          {
-            "attribute": "eventOrigin",
-            "values": [
-              "Offer"
-            ]
-          }
-        ]
+        "node": "(:Event {eventOrigin: 'Offer'})"
       },
       "type": "Offer",
       "labels": [
@@ -79,11 +56,11 @@
     },
     {
       "constructed_by_node": {
-        "node_label": "Event"
+        "node": "(:Event)"
       },
-      "type": "CaseR",
+      "type": "Resource",
       "labels": [
-        "CaseR"
+        "Resource"
       ],
       "primary_keys": [
         "resource"
@@ -95,7 +72,7 @@
     },
     {
       "constructed_by_node": {
-        "node_label": "Event"
+        "node": "(:Event)"
       },
       "type": "CaseAWO",
       "labels": [
@@ -139,7 +116,8 @@
     },
     {
       "constructed_by_relation": {
-        "relation_type": "(:Offer) - [:CASE_WO] -> (:Workflow)"
+        "relation_type": "(o:Offer) - [:CASE_WO] -> (w:Workflow)",
+        "consequent": "(o) - [:REIFIED] -> (:CaseWO) <- [:REIFIED] - (w)"
       },
       "type": "CaseWO",
       "labels": [
@@ -167,7 +145,7 @@
       "constructed_by_nodes": {
         "from_node_label": "Workflow",
         "to_node_label": "Application",
-        "foreign_key": "case"
+        "foreign_key": "ID"
       }
     },
     {

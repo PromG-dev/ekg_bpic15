@@ -3,11 +3,7 @@ from typing import Dict, Optional
 
 from string import Template
 
-
-@dataclass
-class Query:
-    query_string: str
-    kwargs: Optional[Dict[str, any]]
+from ekg_creator.database_managers.db_connection import Query
 
 
 class CustomCypherQueryLibrary:
@@ -28,4 +24,4 @@ class CustomCypherQueryLibrary:
             MERGE (f) - [:CORR] -> (o)
         '''
 
-        return Query(query_string=query_str, kwargs={})
+        return Query(query_str=query_str)
