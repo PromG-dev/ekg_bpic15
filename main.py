@@ -15,7 +15,7 @@ from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC17'
+dataset_name = 'BPIC14'
 use_sample = True
 use_preprocessed_files = False
 
@@ -75,21 +75,15 @@ def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
     graph.set_constraints()
     perf.finished_step(log_message=f"All constraints are set")
 
-    graph.create_log()
-    perf.finished_step(log_message=f"(:Log) nodes and [:HAS] relations done")
-
     # for each entity, we add the entity nodes to graph and correlate them to the correct events
-    graph.create_entities_by_nodes()
+    graph.create_nodes_by_nodes()
     perf.finished_step(log_message=f"(:Entity) nodes done")
-
-    graph.correlate_events_to_entities()
-    perf.finished_step(log_message=f"[:CORR] edges done")
 
     if dataset_name == "BPIC17":
         graph.do_custom_query("get_corr_between_o_created_events_and_offer_entities")
 
-    graph.create_classes()
-    perf.finished_step(log_message=f"(:Class) nodes done")
+    # graph.create_classes()
+    # perf.finished_step(log_message=f"(:Class) nodes done")
 
     graph.create_entity_relations_using_nodes()
     graph.create_entity_relations_using_relations()
@@ -97,9 +91,6 @@ def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
 
     graph.create_entities_by_relations()
     perf.finished_step(log_message=f"Reified (:Entity) nodes done")
-
-    graph.correlate_events_to_reification()
-    perf.finished_step(log_message=f"[:CORR] edges for Reified (:Entity) nodes done")
 
     graph.create_df_edges()
     perf.finished_step(log_message=f"[:DF] edges done")
