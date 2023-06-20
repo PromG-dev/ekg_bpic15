@@ -1,13 +1,22 @@
 {
   "name": "BPIC17",
   "version": "1.0.0",
-  "entities": [
+  "nodes": [
+    {
+      "type": "Event",
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(e:Event {timestamp:entry.timestamp, activity:entry.activity, lifecycle:entry.lifecycle})"
+    },
+    {
+      "type": "Activity",
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(a:Activity {activity:entry.activity, lifecycle:entry.lifecycle})",
+      "observed": true
+    },
     {
       "type": "Application",
-      "constructed_by_node": {
-        "node": "(e:Event {eventOrigin: 'Application'})"
-      },
-      "result": "(a:Entity:Application {sysId: e.case})",
+      "constructed_by_node": "(entry:EventEntry {eventOrigin: 'Application'})",
+      "result": "(a:Entity:Application {sysId: entry.case, loanGoal: entry.loanGoal, requestedAmount: entry.requestedAmount})",
       "corr": true,
       "df": true,
       "include_label_in_df": true,
@@ -15,10 +24,8 @@
     },
     {
       "type": "Workflow",
-      "constructed_by_node": {
-        "node": "(e:Event {eventOrigin: 'Workflow'})"
-      },
-      "result": "(w:Entity:Workflow {sysId: e.case})",
+      "constructed_by_node": "(entry:EventEntry {eventOrigin: 'Workflow'})",
+      "result": "(w:Entity:Workflow {sysId: entry.case})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
@@ -26,21 +33,28 @@
     },
     {
       "type": "Offer",
-      "constructed_by_node": {
-        "node": "(e:Event {eventOrigin: 'Offer'})"
-      },
-      "result": "(o:Entity:Offer {sysId: e.offerId, case: e.case})",
+      "constructed_by_node": "(entry:EventEntry WHERE entry.eventOrigin = 'Offer' AND entry.eventId STARTS WITH 'Offer_')",
+      "result": "(o:Entity:Offer {sysId: entry.eventId, case: entry.case, creditScore: entry.creditScore, firstWithdrawalAmount: entry.firstWithdrawalAmount, monthlyCost: entry.monthlyCost, numberOfTerms: entry.numberOfTerms, offeredAmount: entry.offeredAmount})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
       "merge_duplicate_df": true
     },
+
+    {
+      "type": "Offer",
+      "constructed_by_node": "(entry:EventEntry WHERE entry.eventOrigin = 'Offer' AND entry.eventId STARTS WITH 'OfferState_')",
+      "result": "(o:Entity:Offer {sysId: entry.offerId})",
+      "df": true,
+      "include_label_in_df": true,
+      "corr": true,
+      "merge_duplicate_df": true
+    },
+
     {
       "type": "Resource",
-      "constructed_by_node": {
-        "node": "(e:Event)"
-      },
-      "result": "(r:Entity:Resource {sysId: e.resource})",
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(r:Entity:Resource {sysId: entry.resource})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
@@ -48,55 +62,34 @@
     },
     {
       "type": "CaseAWO",
-      "constructed_by_node": {
-        "node": "(e:Event)"
-      },
-      "result": "(case:Entity:CaseAWO {sysId: e.case)}",
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(case_awo:Entity:CaseAWO {sysId: entry.case)}",
       "corr": false,
       "df": false
     },
     {
-      "constructed_by_relation": {
-        "relation_type": "(:Offer) - [:CASE_AO] -> (:Application)"
-      },
       "type": "CaseAO",
-      "labels": [
-        "CaseAO"
-      ],
-      "primary_keys": [
-        "offerId",
-        "sysId"
-      ],
+      "constructed_by_relation": "(o:Offer) - [:CASE_AO] -> (a:Application)",
+      "result": "(case_ao:Entity:CaseAO {offerId: o.sysId, applicationId: a.sysId)",
+      "model_reified_relations": true,
       "corr": true,
       "df": false
     },
     {
-      "constructed_by_relation": {
-        "relation_type": "(:Workflow) - [:CASE_AW] -> (:Application)"
-      },
       "type": "CaseAW",
-      "labels": [
-        "CaseAW"
-      ],
-      "primary_keys": [
-        "workflowId",
-        "applicationId"
-      ],
+      "constructed_by_relation": "(w:Workflow) - [:CASE_AW] -> (a:Application)",
+      "result": "(case_aw:Entity:CaseAW {workflowId: w.sysId, applicationId: a.sysId)",
+      "model_reified_relations": true,
       "corr": true,
       "df": false
     },
     {
-      "constructed_by_relation": {
-        "relation_type": "(o:Offer) - [:CASE_WO] -> (w:Workflow)",
-        "consequent": "(o) - [:REIFIED] -> (:CaseWO) <- [:REIFIED] - (w)"
-      },
       "type": "CaseWO",
+      "constructed_by_relation": "(o:Offer) - [:CASE_WO] -> (w:Workflow)",
+      "result": "(case_wo:Entity:CaseWO {workflowId: w.sysId, offerId: o.sysId)",
+      "model_reified_relations": true,
       "labels": [
         "CaseWO"
-      ],
-      "primary_keys": [
-        "workflowId",
-        "offerId"
       ],
       "corr": true,
       "df": false
@@ -106,42 +99,26 @@
     {
       "type": "CASE_AO",
       "constructed_by_nodes": {
-        "from_node_label": "Offer",
-        "to_node_label": "Application",
-        "primary_key": "sysId",
-        "foreign_key": "case"
-      }
+        "from_node": "(o:Offer {case: a.sysId})",
+        "to_node": "(a: Application)"
+      },
+      "result": "(o) - [:CASE_AO] -> (a)"
     },
     {
       "type": "CASE_AW",
       "constructed_by_nodes": {
-        "from_node_label": "Workflow",
-        "to_node_label": "Application",
-        "primary_key": "sysId",
-        "foreign_key": "sysId"
-      }
+        "from_node": "(w: Workflow)",
+        "to_node": "(a: Application {case: w.sysId})"
+      },
+      "result": "(w) - [:CASE_AW] -> (a)"
     },
     {
       "type": "CASE_WO",
       "constructed_by_nodes": {
-        "from_node_label": "Offer",
-        "to_node_label": "Workflow",
-        "foreign_key": "case",
-        "primary_key": "sysId"
-      }
+        "from_node": "(o: Offer {case: w.sysId})",
+        "to_node": "(w: Workflow)"
+      },
+      "result": "(o) - [:CASE_WO] -> (w)"
     }
-  ],
-  "classes": [
-    {
-      "label": "Event",
-      "class_identifiers": [
-        "activity",
-        "lifecycle"
-      ]
-    }
-  ],
-  "log": {
-    "include": true,
-    "has": true
-  }
+  ]
 }

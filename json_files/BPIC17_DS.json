@@ -4,7 +4,7 @@
     "file_directory": "data\\BPIC17\\",
     "file_name": "BPI_Challenge_2017.csv",
     "labels": [
-      "Event"
+      "EventEntry"
     ],
     "add_log": true,
     "add_event_index": true,

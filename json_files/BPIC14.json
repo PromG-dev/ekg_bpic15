@@ -1,120 +1,76 @@
 {
   "name": "BPIC14",
   "version": "1.0.0",
-  "entities": [
+  "nodes": [
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
+      "type": "Event",
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(e:Event {timestamp:entry.timestamp, activity:entry.activity)"
+    },
+    {
+      "type": "Activity",
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(a:Activity {activity:entry.activity})",
+      "observed": true
+    },
+    {
       "type": "ConfigurationItem",
-      "labels": [
-        "ConfigurationItem"
-      ],
-      "primary_keys": [
-        "ciNameAff"
-      ],
-      "entity_attributes": [
-        "serviceComponentAff"
-      ],
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(ci:Entity:ConfigurationItem {sysId: entry.ciNameAff})",
       "corr": true,
       "df": true,
       "include_label_in_df": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "ServiceComponent",
-      "labels": [
-        "ServiceComponent"
-      ],
-      "primary_keys": [
-        "serviceComponentAff"
-      ],
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(sc:Entity:ServiceComponent {sysId: entry.serviceComponentAff})",
       "corr": true,
       "df": true,
       "include_label_in_df": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "Incident",
-      "labels": [
-        "Incident"
-      ],
-      "primary_keys": [
-        "incidentId"
-      ],
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(i:Entity:Incident {sysId: entry.incidentId})",
       "corr": true,
       "df": true,
       "include_label_in_df": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "Interaction",
-      "labels": [
-        "Interaction"
-      ],
-      "primary_keys": [
-        "interactionId"
-      ],
-      "entity_attributes": [
-        "relatedIncident"
-      ],
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(it:Entity:Interaction {sysId: entry.interactionId})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "Change",
-      "labels": [
-        "Change"
-      ],
-      "primary_keys": [
-        "changeId"
-      ],
+      "constructed_by_node": "(entry: EventEntry)",
+      "result": "(c:Entity:Change {sysId: entry.changeId})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
-      "type": "CaseR",
-      "labels": [
-        "CaseR"
-      ],
-      "primary_keys": [
-        "resource"
-      ],
+      "type": "Resource",
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(res:Entity:Resource {sysId: entry.resource})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "KM",
-      "labels": [
-        "KM"
-      ],
-      "primary_keys": [
-        "kmNumber"
-      ],
+      "constructed_by_node": "(entry:EventEntry)",
+      "result": "(km:Entity:KM {sysId: entry.kmNumber})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
@@ -125,30 +81,18 @@
     {
       "type": "RELATED_INCIDENT",
       "constructed_by_nodes": {
-        "from_node_label": "Interaction",
-        "to_node_label": "Incident",
-        "foreign_key": "relatedIncident"
-      }
+        "from_node": "(it:Interaction {relatedIncident: i.sysId})",
+        "to_node": "(i:Interaction)"
+      },
+      "result": "(it) - [:RELATED_INCIDENT] -> (i)"
     },
     {
       "type": "PART_OF",
       "constructed_by_nodes": {
-        "from_node_label": "ConfigurationItem",
-        "to_node_label": "ServiceComponent",
-        "foreign_key": "serviceComponentAff"
-      }
+        "from_node": "(ci:ConfigurationItem {serviceComponentAff: sc.sysId})",
+        "to_node": "(sc: ServiceComponent)"
+      },
+      "result": "(ci) - [:PART_OF] -> (sc)"
     }
-  ],
-  "classes": [
-    {
-      "label": "Event",
-      "class_identifiers": [
-        "activity"
-      ]
-    }
-  ],
-  "log": {
-    "include": true,
-    "has": true
-  }
+  ]
 }
