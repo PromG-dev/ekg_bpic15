@@ -4,28 +4,28 @@
   "nodes": [
     {
       "type": "Event",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(e:Event {timestamp:entry.timestamp, activity:entry.activity, lifecycle:entry.lifecycle})"
+      "constructed_by_node": "(record:EventRecord)",
+      "result": "(e:Event {timestamp:record.timestamp, activity:record.activity, lifecycle:record.lifecycle})"
     },
     {
       "type": "Activity",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(a:Activity {activity:entry.activity, lifecycle:entry.lifecycle})",
-      "observed": true
+      "constructed_by_node": "(record:EventRecord)",
+      "result": "(a:Activity {activity:record.activity, lifecycle:record.lifecycle})",
+      "infer_observed": true
     },
     {
       "type": "Application",
-      "constructed_by_node": "(entry:EventEntry {eventOrigin: 'Application'})",
-      "result": "(a:Entity:Application {sysId: entry.case, loanGoal: entry.loanGoal, requestedAmount: entry.requestedAmount})",
-      "corr": true,
-      "df": true,
+      "constructed_by_node": "(record:EventRecord {eventOrigin: 'Application'})",
+      "result": "(a:Entity:Application {sysId: record.case, loanGoal: record.loanGoal, requestedAmount: record.requestedAmount})",
+      "infer_corr_from_event_prevalent_record": true,
+      "infer_df": true,
       "include_label_in_df": true,
       "merge_duplicate_df": true
     },
     {
       "type": "Workflow",
-      "constructed_by_node": "(entry:EventEntry {eventOrigin: 'Workflow'})",
-      "result": "(w:Entity:Workflow {sysId: entry.case})",
+      "constructed_by_node": "(record:EventRecord {eventOrigin: 'Workflow'})",
+      "result": "(w:Entity:Workflow {sysId: record.case})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
@@ -33,8 +33,8 @@
     },
     {
       "type": "Offer",
-      "constructed_by_node": "(entry:EventEntry WHERE entry.eventOrigin = 'Offer' AND entry.eventId STARTS WITH 'Offer_')",
-      "result": "(o:Entity:Offer {sysId: entry.eventId, case: entry.case, creditScore: entry.creditScore, firstWithdrawalAmount: entry.firstWithdrawalAmount, monthlyCost: entry.monthlyCost, numberOfTerms: entry.numberOfTerms, offeredAmount: entry.offeredAmount})",
+      "constructed_by_node": "(record:EventRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'Offer_')",
+      "result": "(o:Entity:Offer {sysId: record.eventId, case: record.case, creditScore: record.creditScore, firstWithdrawalAmount: record.firstWithdrawalAmount, monthlyCost: record.monthlyCost, numberOfTerms: record.numberOfTerms, offeredAmount: record.offeredAmount})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
@@ -43,8 +43,8 @@
 
     {
       "type": "Offer",
-      "constructed_by_node": "(entry:EventEntry WHERE entry.eventOrigin = 'Offer' AND entry.eventId STARTS WITH 'OfferState_')",
-      "result": "(o:Entity:Offer {sysId: entry.offerId})",
+      "constructed_by_node": "(record:EventRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'OfferState_')",
+      "result": "(o:Entity:Offer {sysId: record.offerId})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
@@ -53,8 +53,8 @@
 
     {
       "type": "Resource",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(r:Entity:Resource {sysId: entry.resource})",
+      "constructed_by_node": "(record:EventRecord)",
+      "result": "(r:Entity:Resource {sysId: record.resource})",
       "df": true,
       "include_label_in_df": true,
       "corr": true,
@@ -62,8 +62,8 @@
     },
     {
       "type": "CaseAWO",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(case_awo:Entity:CaseAWO {sysId: entry.case)}",
+      "constructed_by_node": "(record:EventRecord)",
+      "result": "(case_awo:Entity:CaseAWO {sysId: record.case)}",
       "corr": false,
       "df": false
     },
@@ -86,11 +86,8 @@
     {
       "type": "CaseWO",
       "constructed_by_relation": "(o:Offer) - [:CASE_WO] -> (w:Workflow)",
-      "result": "(case_wo:Entity:CaseWO {workflowId: w.sysId, offerId: o.sysId)",
+      "result": "(case_wo:Entity:CaseWO {workflowId: w.sysId, offerId: o.sysId})",
       "model_reified_relations": true,
-      "labels": [
-        "CaseWO"
-      ],
       "corr": true,
       "df": false
     }
@@ -99,7 +96,8 @@
     {
       "type": "CASE_AO",
       "constructed_by_nodes": {
-        "from_node": "(o:Offer {case: a.sysId})",
+        "relation_record": "(:EventRecord {case: a.sysId, offerId: o.sysId})",
+        "from_node": "(o: Offer)", # throw warning, model is incosistent
         "to_node": "(a: Application)"
       },
       "result": "(o) - [:CASE_AO] -> (a)"
