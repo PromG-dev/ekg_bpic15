@@ -4,100 +4,151 @@
   "nodes": [
     {
       "type": "Event",
-      "constructed_by_node": "(record:EventRecord)",
-      "result": "(e:Event {timestamp:record.timestamp, activity:record.activity, lifecycle:record.lifecycle})"
+      "construction": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(e:Event {timestamp:record.timestamp, activity:record.activity, lifecycle:record.lifecycle})"
+        }
+      ]
     },
     {
       "type": "Activity",
-      "constructed_by_node": "(record:EventRecord)",
-      "result": "(a:Activity {activity:record.activity, lifecycle:record.lifecycle})",
-      "infer_observed": true
+      "construction": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(a:Activity {activity:record.activity, lifecycle:record.lifecycle})",
+          "infer_observed": true
+        }
+      ]
     },
     {
       "type": "Application",
-      "constructed_by_node": "(record:EventRecord {eventOrigin: 'Application'})",
-      "result": "(a:Entity:Application {sysId: record.case, loanGoal: record.loanGoal, requestedAmount: record.requestedAmount})",
-      "infer_corr_from_event_prevalent_record": true,
+      "construction": [
+        {
+          "prevalent_record": "(record:EventRecord {eventOrigin: 'Application'})",
+          "result": "(a:Entity:Application {sysId: record.case, loanGoal: record.loanGoal, requestedAmount: record.requestedAmount})",
+          "infer_corr_from_event_record": true
+        },
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(a:Entity:Application {sysId: record.case})",
+          "infer_corr_from_event_record": false
+        }
+      ],
       "infer_df": true,
       "include_label_in_df": true,
       "merge_duplicate_df": true
     },
     {
       "type": "Workflow",
-      "constructed_by_node": "(record:EventRecord {eventOrigin: 'Workflow'})",
-      "result": "(w:Entity:Workflow {sysId: record.case})",
-      "df": true,
+      "construction": [
+        {
+          "prevalent_record": "(record:EventRecord {eventOrigin: 'Workflow'})",
+          "result": "(w:Entity:Workflow {sysId: record.case})",
+          "infer_corr_from_event_record": true
+        },
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(w:Entity:Workflow {sysId: record.case})",
+          "infer_corr_from_event_record": false
+        }
+      ],
+      "infer_df": true,
       "include_label_in_df": true,
-      "corr": true,
       "merge_duplicate_df": true
     },
     {
       "type": "Offer",
-      "constructed_by_node": "(record:EventRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'Offer_')",
-      "result": "(o:Entity:Offer {sysId: record.eventId, case: record.case, creditScore: record.creditScore, firstWithdrawalAmount: record.firstWithdrawalAmount, monthlyCost: record.monthlyCost, numberOfTerms: record.numberOfTerms, offeredAmount: record.offeredAmount})",
-      "df": true,
+      "construction": [
+        {
+          "prevalent_record": "(record:EventRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'Offer_')",
+          "result": "(o:Entity:Offer {sysId: record.eventId, case: record.case, creditScore: record.creditScore, firstWithdrawalAmount: record.firstWithdrawalAmount, monthlyCost: record.monthlyCost, numberOfTerms: record.numberOfTerms, offeredAmount: record.offeredAmount})",
+          "infer_corr_from_event_record": true
+        },
+        {
+          "prevalent_record": "(record:EventRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'OfferState_')",
+          "result": "(o:Entity:Offer {sysId: record.offerId})",
+          "infer_corr_from_event_record": true
+        }
+      ],
+      "infer_df": true,
       "include_label_in_df": true,
-      "corr": true,
       "merge_duplicate_df": true
     },
-
-    {
-      "type": "Offer",
-      "constructed_by_node": "(record:EventRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'OfferState_')",
-      "result": "(o:Entity:Offer {sysId: record.offerId})",
-      "df": true,
-      "include_label_in_df": true,
-      "corr": true,
-      "merge_duplicate_df": true
-    },
-
     {
       "type": "Resource",
-      "constructed_by_node": "(record:EventRecord)",
-      "result": "(r:Entity:Resource {sysId: record.resource})",
-      "df": true,
+      "construction": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(r:Entity:Resource {sysId: record.resource})",
+          "infer_corr_from_event_record": true
+        }
+      ],
+      "infer_df": true,
       "include_label_in_df": true,
-      "corr": true,
       "merge_duplicate_df": true
     },
     {
       "type": "CaseAWO",
-      "constructed_by_node": "(record:EventRecord)",
-      "result": "(case_awo:Entity:CaseAWO {sysId: record.case)}",
-      "corr": false,
-      "df": false
+      "construction": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(case_awo:Entity:CaseAWO {sysId: record.case)}",
+          "infer_corr_from_event_record": false
+        }
+      ],
+      "infer_df": false
     },
     {
       "type": "CaseAO",
-      "constructed_by_relation": "(o:Offer) - [:CASE_AO] -> (a:Application)",
-      "result": "(case_ao:Entity:CaseAO {offerId: o.sysId, applicationId: a.sysId)",
-      "model_reified_relations": true,
-      "corr": true,
-      "df": false
+      "construction": [
+        {
+          "relation": "(o:Offer) - [:CASE_AO] -> (a:Application)",
+          "result": "(case_ao:Entity:CaseAO {offerId: o.sysId, applicationId: a.sysId})",
+          "infer_reified_relation": true,
+          "infer_corr_from_reified_parents": true
+        }
+      ],
+      "infer_df": false
     },
     {
       "type": "CaseAW",
-      "constructed_by_relation": "(w:Workflow) - [:CASE_AW] -> (a:Application)",
-      "result": "(case_aw:Entity:CaseAW {workflowId: w.sysId, applicationId: a.sysId)",
-      "model_reified_relations": true,
-      "corr": true,
-      "df": false
+      "construction": [
+        {
+          "relation": "(w:Workflow) - [:CASE_AW] -> (a:Application)",
+          "result": "(case_aw:Entity:CaseAW {workflowId: w.sysId, applicationId: a.sysId})",
+          "infer_reified_relation": true,
+          "infer_corr_from_reified_parents": true
+        }
+      ],
+      "infer_df": false
     },
     {
       "type": "CaseWO",
-      "constructed_by_relation": "(o:Offer) - [:CASE_WO] -> (w:Workflow)",
-      "result": "(case_wo:Entity:CaseWO {workflowId: w.sysId, offerId: o.sysId})",
-      "model_reified_relations": true,
-      "corr": true,
-      "df": false
+      "construction": {
+        "relation": "(o:Offer) - [:CASE_WO] -> (w:Workflow)",
+        "result": "(case_wo:Entity:CaseWO {workflowId: w.sysId, offerId: o.sysId})",
+        "infer_reified_relation": true,
+        "infer_corr_from_reified_parents": true
+      },
+      "infer_df": false
     }
   ],
   "relations": [
     {
       "type": "CASE_AO",
       "constructed_by_nodes": {
-        "relation_record": "(:EventRecord {case: a.sysId, offerId: o.sysId})",
-        "from_node": "(o: Offer)", # throw warning, model is incosistent
+        "prevalent_record": "(:EventRecord {case: a.sysId, offerId: o.sysId})",
+        "from_node": "(o: Offer)",
+        "to_node": "(a: Application)"
+      },
+      "result": "(o) - [:CASE_AO] -> (a)"
+    },
+    {
+      "type": "CASE_AO",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:EventRecord {case: a.sysId, eventId: o.sysId})",
+        "from_node": "(o: Offer)",
         "to_node": "(a: Application)"
       },
       "result": "(o) - [:CASE_AO] -> (a)"
@@ -105,15 +156,26 @@
     {
       "type": "CASE_AW",
       "constructed_by_nodes": {
+        "prevalent_record": "(:EventRecord {case: w.sysId})",
         "from_node": "(w: Workflow)",
-        "to_node": "(a: Application {case: w.sysId})"
+        "to_node": "(a: Application {sysId: w.sysId})"
       },
       "result": "(w) - [:CASE_AW] -> (a)"
     },
     {
       "type": "CASE_WO",
       "constructed_by_nodes": {
-        "from_node": "(o: Offer {case: w.sysId})",
+        "prevalent_record": "(:EventRecord {case: w.sysId, offerId: o.sysId})",
+        "from_node": "(o: Offer)",
+        "to_node": "(w: Workflow)"
+      },
+      "result": "(o) - [:CASE_WO] -> (w)"
+    },
+    {
+      "type": "CASE_WO",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:EventRecord {case: w.sysId, eventId: o.sysId})",
+        "from_node": "(o: Offer)",
         "to_node": "(w: Workflow)"
       },
       "result": "(o) - [:CASE_WO] -> (w)"
