@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-from ekg_creator.data_managers.interpreters import Interpreter
 from ekg_creator.data_managers.semantic_header import SemanticHeader
 from ekg_creator.database_managers.EventKnowledgeGraph import EventKnowledgeGraph, DatabaseConnection
 from ekg_creator.database_managers import authentication
