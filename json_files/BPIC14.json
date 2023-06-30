@@ -4,95 +4,220 @@
   "nodes": [
     {
       "type": "Event",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(e:Event {timestamp:entry.timestamp, activity:entry.activity)"
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(e:Event {timestamp:record.timestamp, activity:record.activity})"
+        }
+      ]
     },
     {
       "type": "Activity",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(a:Activity {activity:entry.activity})",
-      "observed": true
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(a:Activity {activity:record.activity, activity_number:record.activityNumber})",
+          "infer_observed": true
+        }
+      ]
     },
     {
       "type": "ConfigurationItem",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(ci:Entity:ConfigurationItem {sysId: entry.ciNameAff})",
-      "corr": true,
-      "df": true,
-      "include_label_in_df": true,
-      "merge_duplicate_df": true
+      "constructor": [
+        {
+          "prevalent_record": "(record:ACIRecord)",
+          "result": "(ci:Entity:ConfigurationItem {sysId: record.ciNameAff})",
+          "set_properties": "ci.type = record.ciTypeAff, ci.subType = record.ciSubtypeAff"
+        },
+        {
+          "prevalent_record": "(record:CBCIRecord)",
+          "result": "(ci:Entity:ConfigurationItem {sysId: record.ciNameCBy})",
+          "set_properties": "ci.type = record.ciTypeCBy, ci.subType = record.ciSubtypeCBy"
+        }
+      ]
     },
     {
       "type": "ServiceComponent",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(sc:Entity:ServiceComponent {sysId: entry.serviceComponentAff})",
-      "corr": true,
-      "df": true,
-      "include_label_in_df": true,
-      "merge_duplicate_df": true
+      "constructor": [
+        {
+          "prevalent_record": "(record:ACIRecord)",
+          "result": "(sc:Entity:ServiceComponent {sysId: record.serviceComponentAff})"
+        },
+        {
+          "prevalent_record": "(record:CBCIRecord)",
+          "result": "(sc:Entity:ServiceComponent {sysId: record.serviceComponentCBy})"
+        }
+      ]
     },
     {
       "type": "Incident",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(i:Entity:Incident {sysId: entry.incidentId})",
-      "corr": true,
-      "df": true,
+      "constructor": [
+        {
+          "prevalent_record": "(record:IncidentRecord)",
+          "result": "(i:Entity:Incident {sysId: record.incidentId, category: record.category, openTime: record.openTime, reopenTime: record.reopenTime, closeTime: record.closeTime, resolvedTime: record.resolvedTime, status: record.status, alertStatus: record.alertStatus, impact: record.impact, urgency: record.urgency, priority: record.priority, numReassignments: record.numReassignments})",
+          "set_properties": "i.handleTimeHours = record.handleTimeHours, i.closureCode = record.closureCode"
+        },
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(i:Entity:Incident {sysId: record.incidentId})",
+          "infer_corr_from_event_record": true
+        }
+      ],
+      "infer_df": true,
       "include_label_in_df": true,
       "merge_duplicate_df": true
     },
     {
       "type": "Interaction",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(it:Entity:Interaction {sysId: entry.interactionId})",
-      "df": true,
+      "constructor": [
+        {
+          "prevalent_record": "(record:InteractionRecord)",
+          "result": "(it:Entity:Interaction {sysId: record.interactionId, impact:record.impact, urgency:record.urgency, priority:record.priority, status:record.status,firstCallResolution:record.firstCallResolution, category: record.category, openTime: record.openTime, closeTime: record.closeTime, handleTimeSecs: record.handleTimeSecs})",
+          "set_properties": "it.closureCode = record.closureCode"
+        },
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(it:Entity:Interaction {sysId: record.interactionId})",
+          "infer_corr_from_event_record": true
+        }
+      ],
       "include_label_in_df": true,
-      "corr": true,
       "merge_duplicate_df": true
     },
     {
       "type": "Change",
-      "constructed_by_node": "(entry: EventEntry)",
-      "result": "(c:Entity:Change {sysId: entry.changeId})",
-      "df": true,
-      "include_label_in_df": true,
-      "corr": true,
-      "merge_duplicate_df": true
+      "constructor": [
+        {
+          "prevalent_record": "(record: ChangeRecord)",
+          "result": "(c:Entity:Change {sysId: record.changeId, type: record.changeType, riskAssessment: record.riskAssessment, emergencyChange: record.emergencyChange, cabApprovalNeeded: record.cabApprovalNeeded, plannedStart: record.plannedStart, requestedEndDate: record.requestedEndDate, changeRecordOpenTime: record.changeRecordOpenTime, changeRecordCloseTime: record.changeRecordCloseTime, originatedFrom: record.originatedFrom})",
+          "set_properties": "c.plannedEnd: record.plannedEnd, c.scheduledDowntimeStart: record.scheduledDowntimeStart, c.scheduledDowntimeEnd: record.scheduledDowntimeEnd, c.actualStart: record.actualEnd, c.numRelatedIncidents: record.numRelatedIncidents, c.numRelatedInteractions: record.numRelatedInteractions"
+        },
+        {
+          "prevalent_record": "(record:IncidentRecord)",
+          "result": "(c:Entity:Change {sysId: record.relatedChange})"
+        }
+      ]
     },
     {
       "type": "Resource",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(res:Entity:Resource {sysId: entry.resource})",
-      "df": true,
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(res:Entity:Resource {sysId: record.assignmentGroup})",
+          "infer_corr_from_event_record": true
+        }
+      ],
+      "infer_df": true,
       "include_label_in_df": true,
-      "corr": true,
       "merge_duplicate_df": true
     },
     {
-      "type": "KM",
-      "constructed_by_node": "(entry:EventEntry)",
-      "result": "(km:Entity:KM {sysId: entry.kmNumber})",
-      "df": true,
+      "type": "KnowledgeDocument",
+      "constructor": [
+        {
+          "prevalent_record": "(record:KMRecord)",
+          "result": "(km:Entity:KnowledgeDocument {sysId: record.kmNumber})",
+          "infer_corr_from_event_record": true
+        }
+      ],
+      "infer_df": true,
       "include_label_in_df": true,
-      "corr": true,
       "merge_duplicate_df": true
     }
   ],
   "relations": [
     {
-      "type": "RELATED_INCIDENT",
+      "type": "RELATED_CHANGE",
       "constructed_by_nodes": {
-        "from_node": "(it:Interaction {relatedIncident: i.sysId})",
-        "to_node": "(i:Interaction)"
+        "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, relatedChange: c.sysId})",
+        "from_node": "(i:Incident)",
+        "to_node": "(c:Change)"
       },
-      "result": "(it) - [:RELATED_INCIDENT] -> (i)"
+      "result": "(i) - [:RELATED_CHANGE] -> (c)"
+    },
+
+    {
+      "type": "CAUSED_BY",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, ciNameCBy: ci.sysId})",
+        "from_node": "(i:Incident)",
+        "to_node": "(ci:ConfigurationItem)"
+      },
+      "result": "(i) - [:CAUSED_BY] -> (ci)"
+    },
+
+    {
+      "type": "AFFECTED_CI_Incident",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, ciNameAff: ci.sysId})",
+        "from_node": "(i:Incident)",
+        "to_node": "(ci:ConfigurationItem)"
+      },
+      "result": "(i) - [:AFFECTED_CI] -> (ci)"
+    },
+
+    {
+      "type": "AFFECTED_CI_Interaction",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:InteractionRecord {interactionId: i.sysId, ciNameAff: ci.sysId})",
+        "from_node": "(i:Interaction)",
+        "to_node": "(ci:ConfigurationItem)"
+      },
+      "result": "(i) - [:AFFECTED_CI] -> (ci)"
     },
     {
-      "type": "PART_OF",
+      "type": "RelatedServiceComponentAff",
       "constructed_by_nodes": {
-        "from_node": "(ci:ConfigurationItem {serviceComponentAff: sc.sysId})",
-        "to_node": "(sc: ServiceComponent)"
+        "prevalent_record": "(:ACIRecord {ciNameAff: ci.sysId, serviceComponentAff: sc.sysId})",
+        "from_node": "(ci:ConfigurationItem)",
+        "to_node": "(sc:ServiceComponent)"
       },
-      "result": "(ci) - [:PART_OF] -> (sc)"
+      "result": "(ci) - [:RELATED_SERVICE_COMPONENT] -> (sc)"
+    },
+    {
+      "type": "RelatedServiceComponentCBy",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:CBCIRecord {ciNameCBy: ci.sysId, serviceComponentCBy: sc.sysId})",
+        "from_node": "(ci:ConfigurationItem)",
+        "to_node": "(sc:ServiceComponent)"
+      },
+      "result": "(ci) - [:RELATED_SERVICE_COMPONENT] -> (sc)"
+    },
+    {
+      "type": "ChangedBy",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:ChangeRecord {changeId:c.sysId, ciNameAff: ci.sysId})",
+        "from_node": "(ci:ConfigurationItem)",
+        "to_node": "(c:Change)"
+      },
+      "result": "(ci) - [:CHANGED_BY] -> (c)"
+    },
+    {
+      "type": "UsedKM_interaction",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:InteractionRecord {interactionId: i.sysId, kmNumber: kd.sysId})",
+        "from_node": "(i:Interaction)",
+        "to_node": "(kd:KnowledgeDocument)"
+      },
+      "result": "(i) - [:USED_KM] -> (kd)"
+    },
+    {
+      "type": "UsedKM2_incident",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, kmNumber: kd.sysId})",
+        "from_node": "(i:Incident)",
+        "to_node": "(kd:KnowledgeDocument)"
+      },
+      "result": "(i) - [:USED_KM] -> (kd)"
+    },
+    {
+      "type": "RELATED_INTERACTION",
+      "constructed_by_nodes": {
+        "prevalent_record": "(:IncidentRecord {incidentId: id.sysId, relatedInteraction: it.sysId})",
+        "from_node": "(id:Incident)",
+        "to_node": "(it:Interaction)"
+      },
+      "result": "(id) - [:RELATED_INTERACTION] -> (it)"
     }
   ]
 }

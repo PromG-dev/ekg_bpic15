@@ -4,10 +4,9 @@
     "file_directory": "data\\BPIC14\\",
     "file_name": "Detail_Change.csv",
     "labels": [
-      "EventEntry"
+      "ChangeRecord",
+      "ACIRecord"
     ],
-    "add_log": true,
-    "add_event_index": true,
     "seperator": ";",
     "true_values": [
       "Y"
@@ -25,7 +24,8 @@
         "name": "ciNameAff",
         "columns": [
           {
-            "name": "CI Name (aff)"
+            "name": "CI Name (aff)",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -35,6 +35,7 @@
         "columns": [
           {
             "name": "CI Type (aff)",
+            "dtype": "str",
             "nan_values": [
               "no type"
             ]
@@ -47,6 +48,7 @@
         "columns": [
           {
             "name": "CI Subtype (aff)",
+            "dtype": "str",
             "nan_values": [
               "no subtype"
             ]
@@ -58,7 +60,8 @@
         "name": "serviceComponentAff",
         "columns": [
           {
-            "name": "Service Component WBS (aff)"
+            "name": "Service Component WBS (aff)",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -67,16 +70,18 @@
         "name": "changeId",
         "columns": [
           {
-            "name": "Change ID"
+            "name": "Change ID",
+            "dtype": "str"
           }
         ],
         "mandatory": true
       },
       {
-        "name": "activity",
+        "name": "changeType",
         "columns": [
           {
-            "name": "Change Type"
+            "name": "Change Type",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -85,7 +90,8 @@
         "name": "riskAssessment",
         "columns": [
           {
-            "name": "Risk Assessment"
+            "name": "Risk Assessment",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -167,42 +173,32 @@
         "mandatory": false
       },
       {
-        "name": "start",
+        "name": "actualStart",
         "columns": [
           {
             "name": "Actual Start"
           }
         ],
-        "na_rep_columns": [
-          {
-            "name": "Change record Open Time"
-          }
-        ],
         "datetime_object": {
           "format": "d-M-y H:mX",
           "timezone_offset": "+01",
           "convert_to": "ISO_DATE_TIME"
         },
-        "mandatory": true
+        "mandatory": false
       },
       {
-        "name": "timestamp",
+        "name": "actualEnd",
         "columns": [
           {
             "name": "Actual End"
           }
         ],
-        "na_rep_columns": [
-          {
-            "name": "Change record Close Time"
-          }
-        ],
         "datetime_object": {
           "format": "d-M-y H:mX",
           "timezone_offset": "+01",
           "convert_to": "ISO_DATE_TIME"
         },
-        "mandatory": true
+        "mandatory": false
       },
       {
         "name": "requestedEndDate",
@@ -282,10 +278,11 @@
     "file_directory": "data\\BPIC14\\prepared\\",
     "file_name": "BPIC14Incident.csv",
     "labels": [
-      "EventEntry"
+      "IncidentRecord",
+      "ACIRecord",
+      "CBCIRecord",
+      "KMRecord"
     ],
-    "add_log": true,
-    "add_event_index": true,
     "sample": {
       "use_random_sample": true,
       "population_column": "Service Component WBS (aff)",
@@ -296,7 +293,8 @@
         "name": "ciNameAff",
         "columns": [
           {
-            "name": "CI Name (aff)"
+            "name": "CI Name (aff)",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -306,6 +304,7 @@
         "columns": [
           {
             "name": "CI Type (aff)",
+            "dtype": "str",
             "nan_values": [
               "no type"
             ]
@@ -318,6 +317,7 @@
         "columns": [
           {
             "name": "CI Subtype (aff)",
+            "dtype": "str",
             "nan_values": [
               "no subtype"
             ]
@@ -329,7 +329,8 @@
         "name": "serviceComponentAff",
         "columns": [
           {
-            "name": "Service Component WBS (aff)"
+            "name": "Service Component WBS (aff)",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -338,7 +339,8 @@
         "name": "incidentId",
         "columns": [
           {
-            "name": "Incident ID"
+            "name": "Incident ID",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -347,7 +349,8 @@
         "name": "status",
         "columns": [
           {
-            "name": "Status"
+            "name": "Status",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -386,7 +389,8 @@
         "name": "category",
         "columns": [
           {
-            "name": "Category"
+            "name": "Category",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -395,7 +399,8 @@
         "name": "kmNumber",
         "columns": [
           {
-            "name": "KM number"
+            "name": "KM number",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -404,7 +409,8 @@
         "name": "alertStatus",
         "columns": [
           {
-            "name": "Alert Status"
+            "name": "Alert Status",
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -420,7 +426,7 @@
         "mandatory": true
       },
       {
-        "name": "start",
+        "name": "openTime",
         "columns": [
           {
             "name": "Open Time"
@@ -462,7 +468,7 @@
         "mandatory": false
       },
       {
-        "name": "timestamp",
+        "name": "closeTime",
         "columns": [
           {
             "name": "Close Time"
@@ -587,22 +593,6 @@
           }
         ],
         "mandatory": false
-      },
-      {
-        "name": "activity",
-        "columns": [
-          {
-            "name": "Category"
-          },
-          {
-            "name": "Closure Code",
-            "nan_values": [
-              "Unknown"
-            ]
-          }
-        ],
-        "separator": ": ",
-        "mandatory": true
       }
     ]
   },
@@ -616,7 +606,8 @@
       "size": 20
     },
     "labels": [
-      "EventEntry"
+      "EventRecord",
+      "KMRecord"
     ],
     "add_log": true,
     "add_event_index": true,
@@ -646,7 +637,7 @@
         "mandatory": true
       },
       {
-        "name": "incidentActivityNumber",
+        "name": "activityNumber",
         "columns": [
           {
             "name": "IncidentActivity_Number"
@@ -664,7 +655,7 @@
         "mandatory": true
       },
       {
-        "name": "resource",
+        "name": "assignmentGroup",
         "columns": [
           {
             "name": "Assignment Group"
@@ -700,7 +691,15 @@
     "file_directory": "data\\BPIC14\\prepared\\",
     "file_name": "BPIC14Interaction.csv",
     "labels": [
-      "EventEntry"
+      "ACIRecord",
+      "KMRecord",
+      "InteractionRecord"
+    ],
+    "true_values": [
+      "Y"
+    ],
+    "false_values": [
+      "N"
     ],
     "add_log": true,
     "add_event_index": true,
@@ -710,13 +709,24 @@
       "size": 10
     },
     "attributes": [
-      {
+            {
         "name": "ciNameAff",
         "columns": [
           {
             "name": "CI Name (aff)",
+            "dtype": "str"
+          }
+        ],
+        "mandatory": true
+      },
+      {
+        "name": "ciTypeAff",
+        "columns": [
+          {
+            "name": "CI Type (aff)",
+            "dtype": "str",
             "nan_values": [
-              "#N/B"
+              "no type"
             ]
           }
         ],
@@ -727,9 +737,9 @@
         "columns": [
           {
             "name": "CI Subtype (aff)",
+            "dtype": "str",
             "nan_values": [
-              "no type",
-              "#N/B"
+              "no subtype"
             ]
           }
         ],
@@ -740,13 +750,10 @@
         "columns": [
           {
             "name": "Service Comp WBS (aff)",
-            "nan_values": [
-              "no subtype",
-              "#N/B"
-            ]
+            "dtype": "str"
           }
         ],
-        "mandatory": false
+        "mandatory": true
       },
       {
         "name": "interactionId",
@@ -815,7 +822,7 @@
         "mandatory": true
       },
       {
-        "name": "start",
+        "name": "openTime",
         "columns": [
           {
             "name": "Open Time (First Touch)"
@@ -829,7 +836,7 @@
         "mandatory": true
       },
       {
-        "name": "timestamp",
+        "name": "closeTime",
         "columns": [
           {
             "name": "Close Time"
@@ -858,7 +865,8 @@
         "name": "firstCallResolution",
         "columns": [
           {
-            "name": "First Call Resolution"
+            "name": "First Call Resolution",
+            "dtype": "boolean"
           }
         ],
         "mandatory": true
@@ -884,19 +892,6 @@
           }
         ],
         "mandatory": false
-      },
-      {
-        "name": "activity",
-        "columns": [
-          {
-            "name": "Category"
-          },
-          {
-            "name": "Closure Code"
-          }
-        ],
-        "separator": ": ",
-        "mandatory": true
       }
     ]
   }

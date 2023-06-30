@@ -14,8 +14,8 @@ from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC17'
-use_sample = True
+dataset_name = 'BPIC14'
+use_sample = False
 use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
