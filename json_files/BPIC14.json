@@ -3,25 +3,18 @@
   "version": "1.0.0",
   "nodes": [
     {
-      "type": "Event",
-      "constructor": [
-        {
-          "prevalent_record": "(record:EventRecord)",
-          "result": "(e:Event {timestamp:record.timestamp, activity:record.activity})"
-        }
-      ]
-    },
-    {
+      "include": false,
       "type": "Activity",
       "constructor": [
         {
           "prevalent_record": "(record:EventRecord)",
-          "result": "(a:Activity {activity:record.activity, activity_number:record.activityNumber})",
+          "result": "(a:Activity {activity:record.activity})",
           "infer_observed": true
         }
       ]
     },
     {
+       "include": false,
       "type": "ConfigurationItem",
       "constructor": [
         {
@@ -37,6 +30,7 @@
       ]
     },
     {
+       "include": false,
       "type": "ServiceComponent",
       "constructor": [
         {
@@ -52,11 +46,7 @@
     {
       "type": "Incident",
       "constructor": [
-        {
-          "prevalent_record": "(record:IncidentRecord)",
-          "result": "(i:Entity:Incident {sysId: record.incidentId, category: record.category, openTime: record.openTime, reopenTime: record.reopenTime, closeTime: record.closeTime, resolvedTime: record.resolvedTime, status: record.status, alertStatus: record.alertStatus, impact: record.impact, urgency: record.urgency, priority: record.priority, numReassignments: record.numReassignments})",
-          "set_properties": "i.handleTimeHours = record.handleTimeHours, i.closureCode = record.closureCode"
-        },
+
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(i:Entity:Incident {sysId: record.incidentId})",

@@ -101,7 +101,7 @@
         "columns": [
           {
             "name": "Emergency Change",
-            "dtype": "boolean"
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -111,7 +111,7 @@
         "columns": [
           {
             "name": "CAB-approval needed",
-            "dtype": "boolean"
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -866,7 +866,7 @@
         "columns": [
           {
             "name": "First Call Resolution",
-            "dtype": "boolean"
+            "dtype": "str"
           }
         ],
         "mandatory": true
@@ -879,7 +879,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "mandatory": false
       },
       {
         "name": "relatedIncident",

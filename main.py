@@ -27,11 +27,11 @@ number_of_steps = 100
 ds_path = Path(f'json_files/{dataset_name}_DS.json')
 datastructures = ImportedDataStructures(ds_path)
 
-step_clear_db = True
+step_clear_db = False
 step_populate_graph = True
 
 use_preloaded_files = False  # if false, read/import files instead
-verbose = False
+verbose = True
 
 db_connection = DatabaseConnection(db_name=connection.user, uri=connection.uri, user=connection.user,
                                    password=connection.password, verbose=verbose)
@@ -66,8 +66,8 @@ def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
     graph.create_static_nodes_and_relations()
 
     # import the events from all sublogs in the graph with the corresponding labels
-    graph.import_data()
-    perf.finished_step(log_message=f"(:Event) nodes done")
+    # graph.import_data()
+    # perf.finished_step(log_message=f"(:Event) nodes done")
 
     # TODO: constraints in semantic header?
     graph.set_constraints()
