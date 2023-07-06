@@ -15,8 +15,8 @@ from colorama import Fore
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
 dataset_name = 'BPIC14'
-use_sample = False
-use_preprocessed_files = False
+use_sample = True
+use_preprocessed_files = True
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
 
@@ -27,11 +27,11 @@ number_of_steps = 100
 ds_path = Path(f'json_files/{dataset_name}_DS.json')
 datastructures = ImportedDataStructures(ds_path)
 
-step_clear_db = False
+step_clear_db = True
 step_populate_graph = True
 
 use_preloaded_files = False  # if false, read/import files instead
-verbose = True
+verbose = False
 
 db_connection = DatabaseConnection(db_name=connection.user, uri=connection.uri, user=connection.user,
                                    password=connection.password, verbose=verbose)
@@ -66,8 +66,8 @@ def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
     graph.create_static_nodes_and_relations()
 
     # import the events from all sublogs in the graph with the corresponding labels
-    # graph.import_data()
-    # perf.finished_step(log_message=f"(:Event) nodes done")
+    graph.import_data()
+    perf.finished_step(log_message=f"(:Event) nodes done")
 
     # TODO: constraints in semantic header?
     graph.set_constraints()
@@ -80,14 +80,7 @@ def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
     if dataset_name == "BPIC17":
         graph.do_custom_query("get_corr_between_o_created_events_and_offer_entities")
 
-    # graph.create_classes()
-    # perf.finished_step(log_message=f"(:Class) nodes done")
-
-    graph.create_entity_relations_using_nodes()
-    graph.create_entity_relations_using_relations()
-    perf.finished_step(log_message=f"[:REL] edges done")
-
-    graph.create_entities_by_relations()
+    graph.create_relations_using_record()
     perf.finished_step(log_message=f"Reified (:Entity) nodes done")
 
     graph.create_df_edges()

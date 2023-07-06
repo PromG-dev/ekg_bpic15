@@ -15,9 +15,9 @@
       "N"
     ],
     "sample": {
-      "use_random_sample": true,
-      "population_column": "Service Component WBS (aff)",
-      "size": 20
+      "use_random_sample": false,
+      "population_column": "Change record Close Time",
+      "between": ["01-01-2014", "30-06-2014"]
     },
     "attributes": [
       {
@@ -284,9 +284,9 @@
       "KMRecord"
     ],
     "sample": {
-      "use_random_sample": true,
-      "population_column": "Service Component WBS (aff)",
-      "size": 20
+      "use_random_sample": false,
+      "population_column": "Resolved Time",
+      "between": ["01-01-2014", "30-06-2014"]
     },
     "attributes": [
       {
@@ -601,9 +601,9 @@
     "file_directory": "data\\BPIC14\\",
     "file_name": "Detail_Incident_Activity.csv",
     "sample": {
-      "use_random_sample": true,
-      "population_column": "Incident ID",
-      "size": 20
+      "use_random_sample": false,
+      "population_column": "DateStamp",
+      "between": ["01-01-2014", "30-06-2014"]
     },
     "labels": [
       "EventRecord",
@@ -704,9 +704,9 @@
     "add_log": true,
     "add_event_index": true,
     "sample": {
-      "use_random_sample": true,
-      "population_column": "Service Comp WBS (aff)",
-      "size": 10
+      "use_random_sample": false,
+      "population_column": "Close Time",
+      "between": ["01-01-2014", "30-06-2014"]
     },
     "attributes": [
             {

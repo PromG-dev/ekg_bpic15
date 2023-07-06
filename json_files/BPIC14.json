@@ -3,7 +3,17 @@
   "version": "1.0.0",
   "nodes": [
     {
-      "include": false,
+      "include": true,
+      "type": "Event",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(e:Event {timestamp:record.timestamp, activity:record.activity})"
+        }
+      ]
+    },
+    {
+      "include": true,
       "type": "Activity",
       "constructor": [
         {
@@ -14,7 +24,7 @@
       ]
     },
     {
-       "include": false,
+      "include": true,
       "type": "ConfigurationItem",
       "constructor": [
         {
@@ -30,7 +40,7 @@
       ]
     },
     {
-       "include": false,
+      "include": true,
       "type": "ServiceComponent",
       "constructor": [
         {
@@ -44,9 +54,14 @@
       ]
     },
     {
+      "include": true,
       "type": "Incident",
       "constructor": [
-
+        {
+          "prevalent_record": "(record:IncidentRecord)",
+          "result": "(i:Entity:Incident {sysId: record.incidentId})",
+          "set_properties": "i.category = record.category, i.openTime = record.openTime, i.reopenTime = record.reopenTime, i.closeTime = record.closeTime, i.resolvedTime = record.resolvedTime, i.status = record.status, i.alertStatus = record.alertStatus, i.impact = record.impact, i.urgency = record.urgency, i.priority = record.priority, i.numReassignments = record.numReassignments, i.handleTimeHours = record.handleTimeHours, i.closureCode = record.closureCode"
+        },
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(i:Entity:Incident {sysId: record.incidentId})",
@@ -58,12 +73,13 @@
       "merge_duplicate_df": true
     },
     {
+      "include": true,
       "type": "Interaction",
       "constructor": [
         {
           "prevalent_record": "(record:InteractionRecord)",
-          "result": "(it:Entity:Interaction {sysId: record.interactionId, impact:record.impact, urgency:record.urgency, priority:record.priority, status:record.status,firstCallResolution:record.firstCallResolution, category: record.category, openTime: record.openTime, closeTime: record.closeTime, handleTimeSecs: record.handleTimeSecs})",
-          "set_properties": "it.closureCode = record.closureCode"
+          "result": "(it:Entity:Interaction {sysId: record.interactionId})",
+          "set_properties": "it.impact = record.impact, it.urgency = record.urgency, it.priority = record.priority, it.status = record.status, it.firstCallResolution = record.firstCallResolution, it.category = record.category, it.openTime = record.openTime, it.closeTime = record.closeTime, it.handleTimeSecs = record.handleTimeSecs, it.closureCode = record.closureCode"
         },
         {
           "prevalent_record": "(record:EventRecord)",
@@ -75,12 +91,13 @@
       "merge_duplicate_df": true
     },
     {
+      "include": true,
       "type": "Change",
       "constructor": [
         {
           "prevalent_record": "(record: ChangeRecord)",
-          "result": "(c:Entity:Change {sysId: record.changeId, type: record.changeType, riskAssessment: record.riskAssessment, emergencyChange: record.emergencyChange, cabApprovalNeeded: record.cabApprovalNeeded, plannedStart: record.plannedStart, requestedEndDate: record.requestedEndDate, changeRecordOpenTime: record.changeRecordOpenTime, changeRecordCloseTime: record.changeRecordCloseTime, originatedFrom: record.originatedFrom})",
-          "set_properties": "c.plannedEnd: record.plannedEnd, c.scheduledDowntimeStart: record.scheduledDowntimeStart, c.scheduledDowntimeEnd: record.scheduledDowntimeEnd, c.actualStart: record.actualEnd, c.numRelatedIncidents: record.numRelatedIncidents, c.numRelatedInteractions: record.numRelatedInteractions"
+          "result": "(c:Entity:Change {sysId: record.changeId})",
+          "set_properties": "c.type = record.changeType, c.riskAssessment = record.riskAssessment, c.emergencyChange = record.emergencyChange, c.cabApprovalNeeded = record.cabApprovalNeeded, c.plannedStart = record.plannedStart, c.requestedEndDate = record.requestedEndDate, c.changeRecordOpenTime = record.changeRecordOpenTime, c.changeRecordCloseTime = record.changeRecordCloseTime, c.originatedFrom = record.originatedFrom, c.plannedEnd: record.plannedEnd, c.scheduledDowntimeStart: record.scheduledDowntimeStart, c.scheduledDowntimeEnd: record.scheduledDowntimeEnd, c.actualStart: record.actualEnd, c.numRelatedIncidents: record.numRelatedIncidents, c.numRelatedInteractions: record.numRelatedInteractions"
         },
         {
           "prevalent_record": "(record:IncidentRecord)",
@@ -89,6 +106,7 @@
       ]
     },
     {
+      "include": true,
       "type": "Resource",
       "constructor": [
         {
@@ -102,6 +120,7 @@
       "merge_duplicate_df": true
     },
     {
+      "include": true,
       "type": "KnowledgeDocument",
       "constructor": [
         {
@@ -118,96 +137,90 @@
   "relations": [
     {
       "type": "RELATED_CHANGE",
-      "constructed_by_nodes": {
+      "constructor": {
         "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, relatedChange: c.sysId})",
         "from_node": "(i:Incident)",
-        "to_node": "(c:Change)"
-      },
-      "result": "(i) - [:RELATED_CHANGE] -> (c)"
+        "to_node": "(c:Change)",
+        "result": "(i) - [:RELATED_CHANGE] -> (c)"
+      }
     },
-
     {
       "type": "CAUSED_BY",
-      "constructed_by_nodes": {
+      "constructor": {
         "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, ciNameCBy: ci.sysId})",
         "from_node": "(i:Incident)",
-        "to_node": "(ci:ConfigurationItem)"
-      },
-      "result": "(i) - [:CAUSED_BY] -> (ci)"
-    },
-
-    {
-      "type": "AFFECTED_CI_Incident",
-      "constructed_by_nodes": {
-        "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, ciNameAff: ci.sysId})",
-        "from_node": "(i:Incident)",
-        "to_node": "(ci:ConfigurationItem)"
-      },
-      "result": "(i) - [:AFFECTED_CI] -> (ci)"
-    },
-
-    {
-      "type": "AFFECTED_CI_Interaction",
-      "constructed_by_nodes": {
-        "prevalent_record": "(:InteractionRecord {interactionId: i.sysId, ciNameAff: ci.sysId})",
-        "from_node": "(i:Interaction)",
-        "to_node": "(ci:ConfigurationItem)"
-      },
-      "result": "(i) - [:AFFECTED_CI] -> (ci)"
+        "to_node": "(ci:ConfigurationItem)",
+        "result": "(i) - [:CAUSED_BY] -> (ci)"
+      }
     },
     {
-      "type": "RelatedServiceComponentAff",
-      "constructed_by_nodes": {
-        "prevalent_record": "(:ACIRecord {ciNameAff: ci.sysId, serviceComponentAff: sc.sysId})",
-        "from_node": "(ci:ConfigurationItem)",
-        "to_node": "(sc:ServiceComponent)"
-      },
-      "result": "(ci) - [:RELATED_SERVICE_COMPONENT] -> (sc)"
+      "type": "AFFECTED_CI",
+      "constructor": [
+        {
+          "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, ciNameAff: ci.sysId})",
+          "from_node": "(i:Incident)",
+          "to_node": "(ci:ConfigurationItem)",
+          "result": "(i) - [:AFFECTED_CI] -> (ci)"
+        },
+        {
+          "prevalent_record": "(:InteractionRecord {interactionId: i.sysId, ciNameAff: ci.sysId})",
+          "from_node": "(i:Interaction)",
+          "to_node": "(ci:ConfigurationItem)",
+          "result": "(i) - [:AFFECTED_CI] -> (ci)"
+        }
+      ]
     },
     {
-      "type": "RelatedServiceComponentCBy",
-      "constructed_by_nodes": {
-        "prevalent_record": "(:CBCIRecord {ciNameCBy: ci.sysId, serviceComponentCBy: sc.sysId})",
-        "from_node": "(ci:ConfigurationItem)",
-        "to_node": "(sc:ServiceComponent)"
-      },
-      "result": "(ci) - [:RELATED_SERVICE_COMPONENT] -> (sc)"
+      "type": "RelatedServiceComponent",
+      "constructor": [
+        {
+          "prevalent_record": "(:ACIRecord {ciNameAff: ci.sysId, serviceComponentAff: sc.sysId})",
+          "from_node": "(ci:ConfigurationItem)",
+          "to_node": "(sc:ServiceComponent)",
+          "result": "(ci) - [:RELATED_SERVICE_COMPONENT] -> (sc)"
+        },
+        {
+          "prevalent_record": "(:CBCIRecord {ciNameCBy: ci.sysId, serviceComponentCBy: sc.sysId})",
+          "from_node": "(ci:ConfigurationItem)",
+          "to_node": "(sc:ServiceComponent)",
+          "result": "(ci) - [:RELATED_SERVICE_COMPONENT] -> (sc)"
+        }
+      ]
     },
     {
       "type": "ChangedBy",
-      "constructed_by_nodes": {
+      "constructor": {
         "prevalent_record": "(:ChangeRecord {changeId:c.sysId, ciNameAff: ci.sysId})",
         "from_node": "(ci:ConfigurationItem)",
-        "to_node": "(c:Change)"
-      },
-      "result": "(ci) - [:CHANGED_BY] -> (c)"
+        "to_node": "(c:Change)",
+        "result": "(ci) - [:CHANGED_BY] -> (c)"
+      }
     },
     {
-      "type": "UsedKM_interaction",
-      "constructed_by_nodes": {
-        "prevalent_record": "(:InteractionRecord {interactionId: i.sysId, kmNumber: kd.sysId})",
-        "from_node": "(i:Interaction)",
-        "to_node": "(kd:KnowledgeDocument)"
-      },
-      "result": "(i) - [:USED_KM] -> (kd)"
-    },
-    {
-      "type": "UsedKM2_incident",
-      "constructed_by_nodes": {
-        "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, kmNumber: kd.sysId})",
-        "from_node": "(i:Incident)",
-        "to_node": "(kd:KnowledgeDocument)"
-      },
-      "result": "(i) - [:USED_KM] -> (kd)"
+      "type": "UsedKM",
+      "constructor": [
+        {
+          "prevalent_record": "(:InteractionRecord {interactionId: i.sysId, kmNumber: kd.sysId})",
+          "from_node": "(i:Interaction)",
+          "to_node": "(kd:KnowledgeDocument)",
+          "result": "(i) - [:USED_KM] -> (kd)"
+        },
+        {
+          "prevalent_record": "(:IncidentRecord {incidentId: i.sysId, kmNumber: kd.sysId})",
+          "from_node": "(i:Incident)",
+          "to_node": "(kd:KnowledgeDocument)",
+          "result": "(i) - [:USED_KM] -> (kd)"
+        }
+      ]
     },
     {
       "type": "RELATED_INTERACTION",
-      "constructed_by_nodes": {
+      "constructor": {
         "prevalent_record": "(:IncidentRecord {incidentId: id.sysId, relatedInteraction: it.sysId})",
         "from_node": "(id:Incident)",
-        "to_node": "(it:Interaction)"
-      },
-      "result": "(id) - [:RELATED_INTERACTION] -> (it)"
+        "to_node": "(it:Interaction)",
+        "result": "(id) - [:RELATED_INTERACTION] -> (it)"
+      }
     }
   ]
 }
