@@ -7,7 +7,7 @@
       "constructor": [
         {
           "prevalent_record": "(record:EventRecord)",
-          "result": "(e:Event {timestamp:record.timestamp})"
+          "result": "(e:Event {timestamp:record.timestamp, activity:record.activity})"
         }
       ]
     },
@@ -17,6 +17,7 @@
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(a:Activity {activity:record.activity, code:record.code})",
+          "set_properties": "a.activityDutch = record.activityDutch",
           "infer_observed": true
         }
       ]
@@ -27,17 +28,40 @@
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(a:Entity:Application {sysId: record.caseId, startDate:record.startDate, caseStatus:record.caseStatus, parts:record.parts, requestComplete:record.requestComplete, lastPhase:record.lastPhase})",
-          "set_properties": "a.termName = record.termName, a.caseProcedure = record.caseProcedure, a.includesSubCases = record.includesSubCases, a.endDate = record.endDate, a.landRegisterId = record.landRegisterId, a.sumleges = record.sumleges, a.idOfConceptCase = record.idOfConceptCase",
+          "set_properties": "a.termName = record.termName, a.caseProcedure = record.caseProcedure, a.includesSubCases = record.includesSubCases, a.endDatePlanned = record.endDatePlanned, a.landRegisterId = record.landRegisterId, a.sumleges = record.sumleges, a.idOfConceptCase = record.idOfConceptCase",
           "infer_corr_from_event_record": true
         }
-      ]
+      ],
+      "infer_df": true,
+      "include_label_in_df": true,
+      "merge_duplicate_df": true
     },
     {
       "type": "Municipality",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
-          "result": "(a:Entity:Municipality {sysId: record.log})",
+          "prevalent_record": "(record:EventRecord {log:\"BPIC15_1.csv\"})",
+          "result": "(a:Entity:Municipality {sysId: \"MunicipalityA\"})",
+          "infer_corr_from_event_record": true
+        },
+        {
+          "prevalent_record": "(record:EventRecord {log:\"BPIC15_2.csv\"})",
+          "result": "(a:Entity:Municipality {sysId: \"MunicipalityB\"})",
+          "infer_corr_from_event_record": true
+        },
+        {
+          "prevalent_record": "(record:EventRecord {log:\"BPIC15_3.csv\"})",
+          "result": "(a:Entity:Municipality {sysId: \"MunicipalityC\"})",
+          "infer_corr_from_event_record": true
+        },
+        {
+          "prevalent_record": "(record:EventRecord {log:\"BPIC15_4.csv\"})",
+          "result": "(a:Entity:Municipality {sysId: \"MunicipalityD\"})",
+          "infer_corr_from_event_record": true
+        },
+        {
+          "prevalent_record": "(record:EventRecord {log:\"BPIC15_5.csv\"})",
+          "result": "(a:Entity:Municipality {sysId: \"MunicipalityE\"})",
           "infer_corr_from_event_record": true
         }
       ]
@@ -48,9 +72,13 @@
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(resource:Entity:Resource {sysId:record.resource})",
-          "infer_corr_from_event_record": true
+          "infer_corr_from_event_record": true,
+          "corr_type": "EXECUTED_BY"
         }
-      ]
+      ],
+      "infer_df": true,
+      "include_label_in_df": true,
+      "merge_duplicate_df": true
     },
     {
       "type": "MonitoringResource",
@@ -59,7 +87,8 @@
           "prevalent_record": "(record:EventRecord)",
           "result": "(resource:Entity:Resource {sysId:record.monitoringResource})",
           "set_labels": "MonitoringResource",
-          "infer_corr_from_event_record": true
+          "infer_corr_from_event_record": true,
+          "corr_type": "MONITORED_BY"
         }
       ]
     },
@@ -70,7 +99,8 @@
           "prevalent_record": "(record:EventRecord)",
           "result": "(resource:Entity:Resource {sysId:record.responsibleActor})",
           "set_labels": "ResponsibleActor",
-          "infer_corr_from_event_record": true
+          "infer_corr_from_event_record": true,
+          "corr_type": "RESPONSIBLE"
         }
       ]
     }
@@ -95,13 +125,13 @@
       "result": "(m) - [:MONITORS] -> (r)"
     },
     {
-      "type": "WORKS_IN",
+      "type": "WORKS_FOR",
       "constructed_by_nodes": {
         "prevalent_record": "(:EventRecord {resource:r.sysId, log: m.sysId})",
         "to_node": "(m:Municipality)",
         "from_node": "(r:Resource)"
       },
-      "result": "(r) - [:WORKS_IN] -> (m)"
+      "result": "(r) - [:WORKS_FOR] -> (m)"
     }
   ]
 }

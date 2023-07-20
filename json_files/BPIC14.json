@@ -12,18 +12,15 @@
         },
         {
           "prevalent_record": "(record:IncidentRecord)",
-          "result": "(e:Event {timestamp:record.openTime})",
-          "set_properties": "e.activity = \"Open Incident\""
+          "result": "(e:Event:IncidentEvent {timestamp:record.openTime, activity = \"Open Incident\"})"
         },
         {
           "prevalent_record": "(record:IncidentRecord)",
-          "result": "(e:Event {timestamp:record.reopenTime})",
-          "set_properties": "e.activity = \"Reopen Incident\""
+          "result": "(e:Event:IncidentEvent {timestamp:record.reopenTime, activity = \"Reopen Incident\"})"
         },
         {
           "prevalent_record": "(record:IncidentRecord)",
-          "result": "(e:Event {timestamp:record.closeTime})",
-          "set_properties": "e.activity = \"Close Incident\""
+          "result": "(e:Event:IncidentEvent {timestamp:record.closeTime, activity = \"Close Incident\"})"
         }
       ]
     },
@@ -34,6 +31,21 @@
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(a:Activity {activity:record.activity})",
+          "infer_observed": true
+        },
+        {
+          "prevalent_record": "(record:IncidentRecord)",
+          "result": "(a:Activity {activity: \"Open Incident\"})",
+          "infer_observed": true
+        },
+        {
+          "prevalent_record": "(record:IncidentRecord)",
+          "result": "(a:Activity {activity: \"Reopen Incident\"})",
+          "infer_observed": true
+        },
+        {
+          "prevalent_record": "(record:IncidentRecord)",
+          "result": "(a:Activity {activity: \"Close Incident\"})",
           "infer_observed": true
         }
       ]
@@ -76,7 +88,8 @@
           "prevalent_record": "(record:IncidentRecord)",
           "result": "(i:Entity:Incident {sysId: record.incidentId})",
           "set_properties": "i.category = record.category, i.openTime = record.openTime, i.reopenTime = record.reopenTime, i.closeTime = record.closeTime, i.resolvedTime = record.resolvedTime, i.status = record.status, i.alertStatus = record.alertStatus, i.impact = record.impact, i.urgency = record.urgency, i.priority = record.priority, i.numReassignments = record.numReassignments, i.handleTimeHours = record.handleTimeHours, i.closureCode = record.closureCode",
-          "infer_corr_from_entity_record": true
+          "infer_corr_from_entity_record": true,
+          "event_label": "IncidentEvent"
         },
         {
           "prevalent_record": "(record:EventRecord)",
@@ -142,12 +155,9 @@
         {
           "prevalent_record": "(record:KMRecord)",
           "result": "(km:Entity:KnowledgeDocument {sysId: record.kmNumber})",
-          "infer_corr_from_event_record": true
+          "infer_corr_from_event_record": false
         }
-      ],
-      "infer_df": true,
-      "include_label_in_df": true,
-      "merge_duplicate_df": true
+      ]
     }
   ],
   "relations": [

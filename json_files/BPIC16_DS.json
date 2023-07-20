@@ -4,10 +4,12 @@
     "file_directory": "data\\BPIC16\\prepared\\",
     "file_name": "BPIC16Clicks.csv",
     "labels": [
-      "Event"
+      "CustomerRecord",
+      "OfficeRecord",
+      "ClickEventRecord"
     ],
     "add_log": true,
-    "add_event_index": true,
+    "add_index": false,
     "sample": {
       "use_random_sample": false,
       "population_column": "CustomerID",
@@ -36,7 +38,7 @@
     },
     "attributes": [
       {
-        "name": "activity",
+        "name": "pageName",
         "columns": [
           {
             "name": "PAGE_NAME"
@@ -117,7 +119,7 @@
         "mandatory": true
       },
       {
-        "name": "ipid",
+        "name": "ipId",
         "columns": [
           {
             "name": "IPID",
@@ -127,7 +129,7 @@
         "mandatory": true
       },
       {
-        "name": "vhost",
+        "name": "vHost",
         "columns": [
           {
             "name": "VHOST"
@@ -143,6 +145,16 @@
           }
         ],
         "mandatory": true
+      },
+
+      {
+        "name": "pageLoadError",
+        "columns": [
+          {
+            "name": "page_load_error"
+          }
+        ],
+        "mandatory": true
       }
     ]
   },
@@ -151,10 +163,12 @@
     "file_directory": "data\\BPIC16\\prepared\\",
     "file_name": "BPIC16Complaints.csv",
     "labels": [
-      "Event"
+      "CustomerRecord",
+      "OfficeRecord",
+      "ComplaintEventRecord"
     ],
     "add_log": true,
-    "add_event_index": true,
+    "add_index": false,
     "sample": {
       "use_random_sample": false,
       "population_column": "CustomerID",
@@ -183,7 +197,7 @@
     },
     "attributes": [
       {
-        "name": "activity",
+        "name": "complaintThemeNL",
         "columns": [
           {
             "name": "ComplaintTheme"
@@ -313,7 +327,7 @@
         "mandatory": true
       },
       {
-        "name": "complaintSubtheme",
+        "name": "complaintSubthemeNL",
         "columns": [
           {
             "name": "ComplaintSubtheme",
@@ -325,7 +339,7 @@
         "mandatory": true
       },
       {
-        "name": "complaintTopic",
+        "name": "complaintTopicNL",
         "columns": [
           {
             "name": "ComplaintTopic"
@@ -334,7 +348,7 @@
         "mandatory": true
       },
       {
-        "name": "complaintThemeEn",
+        "name": "complaintTheme",
         "columns": [
           {
             "name": "ComplaintTheme_EN"
@@ -343,7 +357,7 @@
         "mandatory": true
       },
       {
-        "name": "complaintSubthemeEn",
+        "name": "complaintSubtheme",
         "columns": [
           {
             "name": "ComplaintSubtheme_EN",
@@ -355,7 +369,7 @@
         "mandatory": true
       },
       {
-        "name": "complaintTopicEn",
+        "name": "complaintTopic",
         "columns": [
           {
             "name": "ComplaintTopic_EN"
@@ -370,10 +384,12 @@
     "file_directory": "data\\BPIC16\\prepared\\",
     "file_name": "BPIC16Questions.csv",
     "labels": [
-      "Event"
+      "CustomerRecord",
+      "OfficeRecord",
+      "QuestionEventRecord"
     ],
     "add_log": true,
-    "add_event_index": true,
+    "add_index": true,
     "sample": {
       "use_random_sample": false,
       "population_column": "CustomerID",
@@ -402,7 +418,7 @@
     },
     "attributes": [
       {
-        "name": "activity",
+        "name": "questionThemeNL",
         "columns": [
           {
             "name": "QuestionTheme"
@@ -411,7 +427,7 @@
         "mandatory": true
       },
       {
-        "name": "timestamp",
+        "name": "completeTime",
         "columns": [
           {
             "name": "ContactDate"
@@ -429,7 +445,7 @@
         "mandatory": true
       },
       {
-        "name": "start",
+        "name": "startTime",
         "columns": [
           {
             "name": "ContactDate"
@@ -525,7 +541,7 @@
         "mandatory": true
       },
       {
-        "name": "questionSubtheme",
+        "name": "questionSubthemeNL",
         "columns": [
           {
             "name": "QuestionSubtheme"
@@ -543,7 +559,7 @@
         "mandatory": true
       },
       {
-        "name": "questionThemeEn",
+        "name": "questionTheme",
         "columns": [
           {
             "name": "QuestionTheme_EN"
@@ -552,7 +568,7 @@
         "mandatory": true
       },
       {
-        "name": "questionSubthemeEn",
+        "name": "questionSubtheme",
         "columns": [
           {
             "name": "QuestionSubtheme_EN"
@@ -561,7 +577,7 @@
         "mandatory": true
       },
       {
-        "name": "questionTopicEn",
+        "name": "questionTopic",
         "columns": [
           {
             "name": "QuestionTopic_EN"
@@ -576,10 +592,12 @@
     "file_directory": "data\\BPIC16\\prepared\\",
     "file_name": "BPIC16Messages.csv",
     "labels": [
-      "Event"
+      "CustomerRecord",
+      "OfficeRecord",
+      "MessageEventRecord"
     ],
     "add_log": true,
-    "add_event_index": true,
+    "add_index": true,
     "sample": {
       "file_name": "BPIC16Messages.csv",
       "use_random_sample": false,

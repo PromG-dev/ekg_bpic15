@@ -1,102 +1,346 @@
 {
   "name": "BPIC16",
   "version": "1.0.0",
-  "entities": [
+  "nodes": [
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
+      "type": "Event",
+      "constructor": [
+        {
+          "prevalent_record": "(record:ComplaintEventRecord)",
+          "result": "(e:Event:ComplaintEvent {timestamp:record.timestamp, activity: \"Submit Complaint\"})"
+        },
+        {
+          "prevalent_record": "(record:ClickEventRecord {pageLoadError: 0})",
+          "result": "(e:Event:ClickEvent {timestamp:record.timestamp, activity = \"Click page - successful\"})"
+        },
+        {
+          "prevalent_record": "(record:ClickEventRecord {pageLoadError: 1})",
+          "result": "(e:Event:ClickEvent {timestamp:record.timestamp, activity = \"Click page - fail\"})"
+        },
+        {
+          "prevalent_record": "(record:QuestionEventRecord)",
+          "result": "(e:Event:CallEvent {timestamp:record.startTime, activity = \"Start call\"})"
+        },
+        {
+          "prevalent_record": "(record:QuestionEventRecord)",
+          "result": "(e:Event:CallEvent {timestamp:record.completeTime, activity = \"Complete call\"})"
+        },
+        {
+          "prevalent_record": "(record:MessageEventRecord)",
+          "result": "(e:Event:MessageEvent {timestamp:record.timestamp, activity = \"Send message\"})"
+        }
+      ]
+    },
+    {
+      "type": "Activity",
+      "constructor": [
+        {
+          "prevalent_record": "(record:ComplaintEventRecord)",
+          "result": "(a:Activity {activity: \"Submit Complaint\"})",
+          "infer_observed": true
+        },
+        {
+          "prevalent_record": "(record:ClickEventRecord {pageLoadError: 0})",
+          "result": "(a:Activity {activity = \"Click page - successful\"})",
+          "infer_observed": true
+        },
+        {
+          "prevalent_record": "(record:ClickEventRecord {pageLoadError: 1})",
+          "result": "(a:Activity {activity = \"Click page - fail\"})",
+          "infer_observed": true
+        },
+        {
+          "prevalent_record": "(record:QuestionEventRecord)",
+          "result": "(a:Activity {activity = \"Start call\"})",
+          "infer_observed": true
+        },
+        {
+          "prevalent_record": "(record:QuestionEventRecord)",
+          "result": "(a:Activity {activity = \"Complete call\"})",
+          "infer_observed": true
+        },
+        {
+          "prevalent_record": "(record:MessageEventRecord)",
+          "result": "(a:Activity {activity = \"Start call\"})",
+          "infer_observed": true
+        }
+      ]
+    },
+    {
       "type": "Customer",
-      "labels": ["Customer"],
-      "primary_keys": ["customerId"],
-      "df": true,
+      "constructor": [
+        {
+          "prevalent_record": "(record:CustomerRecord)",
+          "result": "(cust:Entity:Customer {sysId: record.customerId, ageCategory:record.ageCategory, gender:record.gender})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "EXECUTED_BY"
+        }
+      ],
+      "infer_df": true,
       "include_label_in_df": true,
-      "corr": true,
       "merge_duplicate_df": true
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
-      "type": "OfficeU",
-      "labels": ["OfficeU"],
-      "primary_keys": ["officeU"],
-      "df": true,
-      "include_label_in_df": true,
-      "corr": true,
-      "merge_duplicate_df": true
+      "type": "Office",
+      "constructor": [
+        {
+          "prevalent_record": "(record:OfficeRecord)",
+          "result": "(bo:Entity:Office {sysId: record.officeU})",
+          "set_labels": "BenefitsOffice"
+        },
+        {
+          "prevalent_record": "(record:OfficeRecord)",
+          "result": "(eso:Entity:Office {sysId: record.officeW})",
+          "set_labels": "EmploymentServiceOffice"
+        }
+      ]
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
-      "type": "OfficeW",
-      "labels": ["OfficeW"],
-      "primary_keys": ["officeW"],
-      "df": true,
-      "include_label_in_df": true,
-      "corr": true,
-      "merge_duplicate_df": true
-    },
-    {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "Complaint",
-      "labels": ["Complaint"],
-      "primary_keys": ["complaintId"],
-      "df": true,
-      "include_label_in_df": true,
-      "corr": true,
-      "merge_duplicate_df": true
+      "constructor": [
+        {
+          "prevalent_record": "(record:ComplaintEventRecord)",
+          "result": "(c:Entity:Complaint {sysId: record.complaintId})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "RELATED_COMPLAINT"
+        }
+      ]
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "ComplaintDossier",
-      "labels": ["ComplaintDossier"],
-      "primary_keys": ["complaintDossierId"],
-      "df": true,
-      "include_label_in_df": true,
-      "corr": true,
-      "merge_duplicate_df": true
+      "constructor": [
+        {
+          "prevalent_record": "(record:ComplaintEventRecord)",
+          "result": "(cd:Entity:ComplaintDossier {sysId: record.complaintDossierId})",
+          "infer_corr_from_event_record": false
+        }
+      ]
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
+      "type": "ComplaintTopic",
+      "constructor": [
+        {
+          "prevalent_record": "(record:ComplaintEventRecord)",
+          "result": "(ct:Entity:ComplaintTopic {sysId: record.complaintTopic, theme: record.complaintTheme})",
+          "set_properties": "ct.subtheme = record.complaintSubtheme",
+          "infer_corr_from_event_record": false
+        }
+      ]
+    },
+    {
+      "type": "ContactChannel",
+      "constructor": [
+        {
+          "prevalent_record": "(record:ComplaintEventRecord)",
+          "result": "(cc:Entity:Channel:ContactChannel {sysId: record.contactChannelId})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "COMPLAINT_VIA"
+        }
+      ]
+    },
+    {
+      "type": "Page",
+      "constructor": [
+        {
+          "prevalent_record": "(record:ClickEventRecord)",
+          "result": "(p:Entity:Page {sysId: record.pageName, vHost: record.vHost, urlFile: record.urlFile})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "CLICKED"
+        }
+      ]
+    },
+    {
       "type": "Session",
-      "labels": ["Session"],
-      "primary_keys": ["sessionId"],
-      "df": true,
-      "include_label_in_df": true,
-      "corr": true,
-      "merge_duplicate_df": true
+      "constructor": [
+        {
+          "prevalent_record": "(record:ClickEventRecord)",
+          "result": "(s:Entity:Session {sysId: record.sessionId})",
+          "infer_corr_from_event_record": false
+        }
+      ]
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "IP",
-      "labels": ["IP"],
-      "primary_keys": ["ipid"],
-      "df": true,
-      "include_label_in_df": true,
-      "corr": true,
-      "merge_duplicate_df": true
-    }
-  ],
-  "classes": [
+      "constructor": [
+        {
+          "prevalent_record": "(record:ClickEventRecord)",
+          "result": "(ip:Entity:IP {sysId: record.ipId})",
+          "infer_corr_from_event_record": false
+        }
+      ]
+    },
     {
-      "label": "Event",
-      "class_identifiers": [
-        "activity"
+      "type": "Message",
+      "constructor": [
+        {
+          "prevalent_record": "(record:MessageEventRecord)",
+          "result": "(m:Entity:Message {sysId: record.index})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "RELATED_MESSAGE"
+        }
+      ]
+    },
+    {
+      "type": "HandlingChannel",
+      "constructor": [
+        {
+          "prevalent_record": "(record:MessageEventRecord)",
+          "result": "(hc:Entity:Channel:HandlingChannel {sysId: record.handlingChannelId})",
+          "infer_corr_from_event_record": false
+        }
+      ]
+    },
+    {
+      "type": "QuestionTopic",
+      "constructor": [
+        {
+          "prevalent_record": "(record:QuestionEventRecord)",
+          "result": "(qt:Entity:QuestionTopic {sysId: record.questionTopic, theme: record.questionTheme})",
+          "set_properties": "qt.subtheme: record.questionSubtheme",
+          "infer_corr_from_event_record": false
+        }
+      ]
+    },
+    {
+      "type": "Call",
+      "constructor": [
+        {
+          "prevalent_record": "(record:QuestionEventRecord)",
+          "result": "(qt:Entity:Call {sysId: record.index})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "RELATED_CALL"
+        }
       ]
     }
   ],
-  "log": {
-    "include": true,
-    "has": true
-  }
+  "relations": [
+    {
+      "type": "RELATED_OFFICE_B",
+      "constructor": {
+        "prevalent_record": "(:CustomerRecord:OfficeRecord {customerId: c.sysId, officeU: bo.sysId})",
+        "from_node": "(c:Customer)",
+        "to_node": "(bo:BenefitsOffice)",
+        "result": "(c) - [:RELATED_OFFICE_B] -> (bo)"
+      }
+    },
+    {
+      "type": "RELATED_OFFICE_ES",
+      "constructor": {
+        "prevalent_record": "(:CustomerRecord:OfficeRecord {customerId: c.sysId, officeW: eso.sysId})",
+        "from_node": "(c:Customer)",
+        "to_node": "(eso:EmploymentServiceOffice)",
+        "result": "(c) - [:RELATED_OFFICE_ES] -> (eso)"
+      }
+    },
+    {
+      "type": "DOSSIER_OF",
+      "constructor": [
+        {
+          "prevalent_record": "(:ComplaintEventRecord:CustomerRecord {customerId: c.sysId, complaintDossierId: cd.sysId})",
+          "from_node": "(c:Customer)",
+          "to_node": "(cd:ComplaintDossier)",
+          "result": "(c) - [:DOSSIER_OF] -> (cd)"
+        }
+      ]
+    },
+    {
+      "type": "IN_DOSSIER",
+      "constructor": [
+        {
+          "prevalent_record": "(:ComplaintEventRecord {complaintId: c.sysId, complaintDossierId: cd.sysId})",
+          "from_node": "(c:Complaint)",
+          "to_node": "(cd:ComplaintDossier)",
+          "result": "(c) - [:DOSSIER_IN] -> (cd)"
+        }
+      ]
+    },
+    {
+      "type": "HAS_TOPIC",
+      "constructor": [
+        {
+          "prevalent_record": "(:ComplaintEventRecord {complaintId: c.sysId, complaintTopic: ct.sysId})",
+          "from_node": "(c:Complaint)",
+          "to_node": "(ct:ComplaintTopic)",
+          "result": "(c) - [:HAS_TOPIC] -> (ct)"
+        }
+      ]
+    },
+    {
+      "type": "SESSION_OF",
+      "constructor": [
+        {
+          "prevalent_record": "(:ClickEventRecord:CustomerRecord {customerId: c.sysId, sessionId: s.sysId})",
+          "from_node": "(s:Session)",
+          "to_node": "(c:Customer)",
+          "result": "(s) - [:SESSION_OF] -> (c)"
+        }
+      ]
+    },
+    {
+      "type": "FROM_IP",
+      "constructor": [
+        {
+          "prevalent_record": "(:ClickEventRecord {sessionId: s.sysId, ipId: ip.sysId})",
+          "from_node": "(s:Session)",
+          "to_node": "(ip:IP)",
+          "result": "(s) - [:FROM_IP] -> (ip)"
+        }
+      ]
+    },
+    {
+      "type": "VISITED",
+      "constructor": [
+        {
+          "prevalent_record": "(:ClickEventRecord {sessionId: s.sysId, pageName: p.sysId})",
+          "from_node": "(s:Session)",
+          "to_node": "(p:Page)",
+          "result": "(s) - [:VISITED] -> (p)"
+        }
+      ]
+    },
+    {
+      "type": "CALL_OF",
+      "constructor": [
+        {
+          "prevalent_record": "(:QuestionEventRecord:CustomerRecord {customerId: cust.sysId, index: call.sysId})",
+          "from_node": "(call:Call)",
+          "to_node": "(cust:Customer)",
+          "result": "(call) - [:CALL_OF] -> (cust)"
+        }
+      ]
+    },
+    {
+      "type": "HAS_TOPIC",
+      "constructor": [
+        {
+          "prevalent_record": "(:QuestionEventRecord {index: call.sysId, questionTopic: qt.sysId})",
+          "from_node": "(call:Call)",
+          "to_node": "(qt:QuestionTopic)",
+          "result": "(call) - [:HAS_TOPIC] -> (qt)"
+        }
+      ]
+    },
+    {
+      "type": "HANDLED_THROUGH",
+      "constructor": [
+        {
+          "prevalent_record": "(:MessageEventRecord {index: m.sysId, handlingChannelId: hc.sysId})",
+          "from_node": "(m:Message)",
+          "to_node": "(hc:HandlingChannel)",
+          "result": "(m) - [:HANDLED_THROUGH] -> (hc)"
+        }
+      ]
+    },
+    {
+      "type": "MESSAGE_OF",
+      "constructor": [
+        {
+          "prevalent_record": "(:MessageEventRecord {index: m.sysId, handlingChannelId: c.sysId})",
+          "from_node": "(m:Message)",
+          "to_node": "(c:Customer)",
+          "result": "(m) - [:MESSAGE_OF] -> (c)"
+        }
+      ]
+    }
+  ]
 }

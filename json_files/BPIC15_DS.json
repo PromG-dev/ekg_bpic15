@@ -150,20 +150,6 @@
         "mandatory": true
       },
       {
-        "name": "start",
-        "columns": [
-          {
-            "name": "startTime"
-          }
-        ],
-        "datetime_object": {
-          "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
-        },
-        "mandatory": true
-      },
-      {
         "name": "timestamp",
         "columns": [
           {
@@ -238,7 +224,7 @@
         "mandatory": false
       },
       {
-        "name": "endDate",
+        "name": "endDatePlanned",
         "columns": [
           {
             "name": "endDatePlanned"
@@ -467,7 +453,7 @@
         "mandatory": true
       },
       {
-        "name": "start",
+        "name": "startTime",
         "columns": [
           {
             "name": "startTime"
@@ -627,6 +613,16 @@
         "columns": [
           {
             "name": "activityNameEN"
+          }
+        ],
+        "mandatory": true
+      },
+
+      {
+        "name": "activityDutch",
+        "columns": [
+          {
+            "name": "activityNameNL"
           }
         ],
         "mandatory": true
