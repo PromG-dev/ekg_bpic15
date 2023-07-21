@@ -125,8 +125,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -139,8 +138,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": false
       },
@@ -153,8 +151,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": false
       },
@@ -167,8 +164,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": false
       },
@@ -181,8 +177,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": false
       },
@@ -195,8 +190,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": false
       },
@@ -209,8 +203,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -223,8 +216,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -237,8 +229,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -434,8 +425,7 @@
         ],
         "datetime_object": {
           "format": "d/M/y H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -448,8 +438,7 @@
         ],
         "datetime_object": {
           "format": "d/M/y H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": false
       },
@@ -462,8 +451,7 @@
         ],
         "datetime_object": {
           "format": "d/M/y H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": false
       },
@@ -476,8 +464,7 @@
         ],
         "datetime_object": {
           "format": "d/M/y H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -631,8 +618,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -830,8 +816,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -844,8 +829,7 @@
         ],
         "datetime_object": {
           "format": "d-M-y H:mX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },

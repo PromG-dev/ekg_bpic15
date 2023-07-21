@@ -55,8 +55,7 @@
         ],
         "datetime_object": {
           "format": "y-M-d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -213,8 +212,7 @@
           }
         ],
         "datetime_object": {
-          "format": "y-M-d",
-          "convert_to": "ISO_DATE"
+          "format": "y-M-d"
         },
         "mandatory": true
       },
@@ -439,8 +437,7 @@
         "separator": " ",
         "datetime_object": {
           "format": "y-M-d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -457,8 +454,7 @@
         "separator": " ",
         "datetime_object": {
           "format": "y-M-d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
@@ -645,8 +641,7 @@
         "separator": " ",
         "datetime_object": {
           "format": "y-M-d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },

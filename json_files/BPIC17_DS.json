@@ -67,8 +67,7 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
         "mandatory": true
       },
