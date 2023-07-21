@@ -1,113 +1,152 @@
 {
   "name": "BPIC19",
   "version": "1.0.0",
-  "entities": [
+  "nodes": [
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
-      "type": "POItem",
-      "labels": [
-        "POItem"
-      ],
-      "primary_keys": [
-        "cId"
-      ],
-      "entity_attributes": [
-        "cPoId"
-      ],
-      "corr": true,
-      "df": true,
-      "include_label_in_df": true,
-      "merge_duplicate_df": true
+      "type": "Event",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(e:Event {timestamp:record.timestamp, activity: record.activity})"
+        }
+      ]
     },
     {
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
-      "type": "PO",
-      "labels": [
-        "PO"
-      ],
-      "primary_keys": [
-        "cPoId"
-      ],
-      "corr": true,
-      "df": true,
-      "include_label_in_df": true,
-      "merge_duplicate_df": true
+      "type": "Activity",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(a:Activity {activity: record.activity})",
+          "infer_observed": true
+        }
+      ]
     },
     {
-      "include": false,
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
-      "type": "Resource",
-      "labels": [
-        "Resource"
-      ],
-      "primary_keys": [
-        "resource"
-      ],
-      "corr": true,
-      "df": true,
-      "include_label_in_df": true,
-      "merge_duplicate_df": true
-    },
-    {
-      "include": false,
-      "constructed_by_node": {
-        "node_label": "Event"
-      },
       "type": "Vendor",
-      "labels": [
-        "Vendor"
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(v:Entity:Vendor {sysId: record.vendorId, vendorName: record.vendorName})"
+        },
+        {
+          "prevalent_record": "(record:EventRecord WHERE record.activity = \"Vendor creates invoice\" OR record.activity = \"Vendor creates debit memo\")",
+          "result": "(v:Entity:Vendor {sysId: record.vendorId, vendorName: record.vendorName})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "CREATED_BY"
+        }
+      ]
+    },
+    {
+      "type": "Company",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(v:Entity:Company {sysId: record.companyId})"
+        }
+      ]
+    },
+    {
+      "type": "PurchaseOrder",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(v:Entity:Company {sysId: record.purchaseOrderId, documentType: record.PODocumentType})",
+          "infer_corr_from_event_record": true
+        }
       ],
-      "primary_keys": [
-        "cVendor"
-      ],
-      "corr": true,
-      "df": true,
+      "infer_df": true,
       "include_label_in_df": true,
       "merge_duplicate_df": true
     },
     {
-      "include": false,
-      "constructed_by_relation": {
-        "relation_type": "PO"
-      },
-      "type": "PO",
-      "labels": [
-        "PO"
+      "type": "PurchaseOrderItem",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord)",
+          "result": "(v:Entity:Company {sysId: record.purchaseOrderItemId, itemId: record.itemId, type: record.itemType, category: record.itemCategory, hasInvoiceAfterGoodsReceipt: record.hasInvoiceAfterGoodsReceipt, hasGoodsReceipt: record.hasGoodsReceipt, purchaseArea: record.purchaseArea, subPurchaseArea: record.subPurchaseArea, spendClassification: record.spendClassification   })",
+          "infer_corr_from_event_record": true
+        }
       ],
-      "primary_keys": [
-        "poitemId",
-        "poId"
+      "infer_df": true,
+      "include_label_in_df": true,
+      "merge_duplicate_df": true
+    },
+    {
+      "type": "Invoice",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord {activity: \"Vendor creates invoice\"})",
+          "result": "(v:Entity:Company {sysId: record.index, itemId: record.itemId, value: record.itemValue})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "CREATES"
+        }
+      ]
+    },
+    {
+      "type": "HumanResource",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord WHERE record.resource STARTS WITH \"user\")",
+          "result": "(v:Entity:Resource:HumanResource {sysId: record.resource})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "EXECUTED_BY"
+        }
       ],
-      "corr": true,
-      "df": false
+      "infer_df": true,
+      "include_label_in_df": true,
+      "merge_duplicate_df": true
+    },
+    {
+      "type": "HumanResource",
+      "constructor": [
+        {
+          "prevalent_record": "(record:EventRecord WHERE record.resource STARTS WITH \"batch\")",
+          "result": "(v:Entity:Resource:System {sysId: record.resource})",
+          "infer_corr_from_event_record": true,
+          "corr_type": "EXECUTED_BY"
+        }
+      ]
     }
   ],
   "relations": [
     {
-      "type": "PO",
-      "constructed_by_nodes": {
-        "from_node_label": "POItem",
-        "to_node_label": "PO",
-        "foreign_key": "cPoId"
+      "type": "SELLS",
+      "constructor": {
+        "prevalent_record": "(:EventRecord {vendorID: v.sysId, purchaseOrderId: po.sysId})",
+        "from_node": "(v:Vendor)",
+        "to_node": "(po:PurchaseOrder)",
+        "result": "(v) - [:SELLS] -> (po)"
+      }
+    },
+
+    {
+      "type": "BUYS",
+      "constructor": {
+        "prevalent_record": "(:EventRecord {companyId: c.sysId, purchaseOrderId: po.sysId})",
+        "from_node": "(c:Company)",
+        "to_node": "(po:PurchaseOrder)",
+        "result": "(c) - [:BUYS] -> (po)"
+      }
+    },
+
+    {
+      "type": "HAS_ITEM",
+      "constructor": {
+        "prevalent_record": "(:EventRecord {purchaseOrderId: po.sysId, purchaseOrderItemId: poi.sysId})",
+        "from_node": "(po:PurchaseOrder)",
+        "to_node": "(poi:PurchaseOrderItem)",
+        "result": "(po) - [:HAS_ITEM] -> (poi)"
+      }
+    },
+
+    {
+      "type": "INVOICE_OF",
+      "constructor": {
+        "prevalent_record": "(:EventRecord {index: inv.sysId, purchaseOrderItemId: poi.sysId})",
+        "from_node": "(inv:Invoice)",
+        "to_node": "(poi:PurchaseOrderItem)",
+        "result": "(inv) - [:INVOICE_OF] -> (poi)"
       }
     }
-  ],
-  "classes": [
-    {
-      "label": "Event",
-      "class_identifiers": [
-        "activity"
-      ]
-    }
-  ],
-  "log": {
-    "include": true,
-    "has": true
-  }
+  ]
 }
