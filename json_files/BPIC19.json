@@ -50,7 +50,7 @@
       "constructor": [
         {
           "prevalent_record": "(record:EventRecord)",
-          "result": "(v:Entity:Company {sysId: record.purchaseOrderId, documentType: record.PODocumentType})",
+          "result": "(v:Entity:PurchaseOrder {sysId: record.purchaseOrderId, documentType: record.PODocumentType})",
           "infer_corr_from_event_record": true
         }
       ],
@@ -63,7 +63,7 @@
       "constructor": [
         {
           "prevalent_record": "(record:EventRecord)",
-          "result": "(v:Entity:Company {sysId: record.purchaseOrderItemId, itemId: record.itemId, type: record.itemType, category: record.itemCategory, hasInvoiceAfterGoodsReceipt: record.hasInvoiceAfterGoodsReceipt, hasGoodsReceipt: record.hasGoodsReceipt, purchaseArea: record.purchaseArea, subPurchaseArea: record.subPurchaseArea, spendClassification: record.spendClassification   })",
+          "result": "(v:Entity:PurchaseOrderItem {sysId: record.purchaseOrderItemId, itemId: record.itemId, type: record.itemType, category: record.itemCategory, hasInvoiceAfterGoodsReceipt: record.hasInvoiceAfterGoodsReceipt, hasGoodsReceipt: record.hasGoodsReceipt, purchaseArea: record.purchaseArea, subPurchaseArea: record.subPurchaseArea, spendClassification: record.spendClassification   })",
           "infer_corr_from_event_record": true
         }
       ],
@@ -76,7 +76,7 @@
       "constructor": [
         {
           "prevalent_record": "(record:EventRecord {activity: \"Vendor creates invoice\"})",
-          "result": "(v:Entity:Company {sysId: record.index, itemId: record.itemId, value: record.itemValue})",
+          "result": "(v:Entity:Invoice {sysId: record.index, itemId: record.itemId, value: record.itemValue})",
           "infer_corr_from_event_record": true,
           "corr_type": "CREATES"
         }
