@@ -1,6 +1,79 @@
 {
   "name": "BPIC17",
   "version": "1.0.0",
+  "records": [
+    {
+      "record_labels": "EventRecord",
+      "prevalent_record": "(record:Record)",
+      "required_attributes": [
+        "timestamp",
+        "activity",
+        "lifecycle",
+        "eventOrigin",
+        "action"
+      ]
+    },
+    {
+      "record_labels": "ApplicationRecord",
+      "prevalent_record": "(record:Record)",
+      "required_attributes": [
+        "case"
+      ]
+    },
+    {
+      "record_labels": "ApplicationDetailRecord",
+      "prevalent_record": "(record:Record {eventOrigin: 'Application'})",
+      "required_attributes": [
+        "case",
+        "applicationType",
+        "requestedAmount"
+      ],
+      "optional_attributes": [
+        "loanGoal"
+      ]
+    },
+    {
+      "record_labels": "WorkflowRecord",
+      "prevalent_record": "(record:Record)",
+      "required_attributes": [
+        "case"
+      ]
+    },
+    {
+      "record_labels": "WorkflowCorrRecord",
+      "prevalent_record": "(record:Record {eventOrigin: 'Workflow'})",
+      "required_attributes": [
+        "case"
+      ]
+    },
+    {
+      "record_labels": "OfferRecord:OfferEventIdRecord",
+      "prevalent_record": "(record:Record WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'Offer_')",
+      "required_attributes": [
+        "eventId",
+        "case",
+        "creditScore",
+        "firstWithdrawalAmount",
+        "monthlyCost",
+        "numberOfTerms",
+        "offeredAmount"
+      ]
+    },
+    {
+      "record_labels": "OfferRecord:OfferIdRecord",
+      "prevalent_record": "(record:Record WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'OfferState_')",
+      "required_attributes": [
+        "offerId"
+      ]
+    },
+    {
+      "record_labels": "ResourceRecord",
+      "prevalent_record": "(record:Record)",
+      "required_attributes": [
+        "resourceId"
+      ]
+    }
+  ],
   "nodes": [
     {
       "type": "Event",
@@ -25,12 +98,12 @@
       "type": "Application",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord {eventOrigin: 'Application'})",
+          "prevalent_record": "(record:ApplicationDetailRecord)",
           "result": "(a:Entity:Application {sysId: record.case, loanGoal: record.loanGoal, requestedAmount: record.requestedAmount})",
           "infer_corr_from_event_record": true
         },
         {
-          "prevalent_record": "(record:EventRecord)",
+          "prevalent_record": "(record:ApplicationRecord)",
           "result": "(a:Entity:Application {sysId: record.case})",
           "infer_corr_from_event_record": false
         }
@@ -43,12 +116,12 @@
       "type": "Workflow",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord {eventOrigin: 'Workflow'})",
+          "prevalent_record": "(record:WorkflowCorrRecord)",
           "result": "(w:Entity:Workflow {sysId: record.case})",
           "infer_corr_from_event_record": true
         },
         {
-          "prevalent_record": "(record:EventRecord)",
+          "prevalent_record": "(record:WorkflowRecord)",
           "result": "(w:Entity:Workflow {sysId: record.case})",
           "infer_corr_from_event_record": false
         }
@@ -61,12 +134,12 @@
       "type": "Offer",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'Offer_')",
+          "prevalent_record": "(record:OfferEventIdRecord)",
           "result": "(o:Entity:Offer {sysId: record.eventId, case: record.case, creditScore: record.creditScore, firstWithdrawalAmount: record.firstWithdrawalAmount, monthlyCost: record.monthlyCost, numberOfTerms: record.numberOfTerms, offeredAmount: record.offeredAmount})",
           "infer_corr_from_event_record": true
         },
         {
-          "prevalent_record": "(record:EventRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'OfferState_')",
+          "prevalent_record": "(record:OfferIdRecord)",
           "result": "(o:Entity:Offer {sysId: record.offerId})",
           "infer_corr_from_event_record": true
         }
@@ -79,7 +152,7 @@
       "type": "Resource",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
+          "prevalent_record": "(record:ResourceRecord)",
           "result": "(r:Entity:Resource {sysId: record.resource})",
           "infer_corr_from_event_record": true
         }
