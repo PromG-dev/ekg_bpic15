@@ -122,7 +122,7 @@
         {
           "prevalent_record": "(record:ComplaintEventRecord)",
           "result": "(ct:Entity:ComplaintTopic {sysId: record.complaintTopic, theme: record.complaintTheme})",
-          "set_properties": "ct.subtheme = record.complaintSubtheme",
+          "set_optional_properties": "ct.subtheme = record.complaintSubtheme",
           "infer_corr_from_event_record": false
         }
       ]
@@ -196,7 +196,7 @@
         {
           "prevalent_record": "(record:QuestionEventRecord)",
           "result": "(qt:Entity:QuestionTopic {sysId: record.questionTopic, theme: record.questionTheme})",
-          "set_properties": "qt.subtheme: record.questionSubtheme",
+          "set_optional_properties": "qt.subtheme: record.questionSubtheme",
           "infer_corr_from_event_record": false
         }
       ]

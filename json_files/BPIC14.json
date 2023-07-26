@@ -57,12 +57,12 @@
         {
           "prevalent_record": "(record:ACIRecord)",
           "result": "(ci:Entity:ConfigurationItem {sysId: record.ciNameAff})",
-          "set_properties": "ci.type = record.ciTypeAff, ci.subType = record.ciSubtypeAff"
+          "set_optional_properties": "ci.type = record.ciTypeAff, ci.subType = record.ciSubtypeAff"
         },
         {
           "prevalent_record": "(record:CBCIRecord)",
           "result": "(ci:Entity:ConfigurationItem {sysId: record.ciNameCBy})",
-          "set_properties": "ci.type = record.ciTypeCBy, ci.subType = record.ciSubtypeCBy"
+          "set_optional_properties": "ci.type = record.ciTypeCBy, ci.subType = record.ciSubtypeCBy"
         }
       ]
     },
@@ -87,7 +87,7 @@
         {
           "prevalent_record": "(record:IncidentRecord)",
           "result": "(i:Entity:Incident {sysId: record.incidentId})",
-          "set_properties": "i.category = record.category, i.openTime = record.openTime, i.reopenTime = record.reopenTime, i.closeTime = record.closeTime, i.resolvedTime = record.resolvedTime, i.status = record.status, i.alertStatus = record.alertStatus, i.impact = record.impact, i.urgency = record.urgency, i.priority = record.priority, i.numReassignments = record.numReassignments, i.handleTimeHours = record.handleTimeHours, i.closureCode = record.closureCode",
+          "set_optional_properties": "i.category = record.category, i.openTime = record.openTime, i.reopenTime = record.reopenTime, i.closeTime = record.closeTime, i.resolvedTime = record.resolvedTime, i.status = record.status, i.alertStatus = record.alertStatus, i.impact = record.impact, i.urgency = record.urgency, i.priority = record.priority, i.numReassignments = record.numReassignments, i.handleTimeHours = record.handleTimeHours, i.closureCode = record.closureCode",
           "infer_corr_from_entity_record": true,
           "event_label": "IncidentEvent"
         },
@@ -108,7 +108,7 @@
         {
           "prevalent_record": "(record:InteractionRecord)",
           "result": "(it:Entity:Interaction {sysId: record.interactionId})",
-          "set_properties": "it.impact = record.impact, it.urgency = record.urgency, it.priority = record.priority, it.status = record.status, it.firstCallResolution = record.firstCallResolution, it.category = record.category, it.openTime = record.openTime, it.closeTime = record.closeTime, it.handleTimeSecs = record.handleTimeSecs, it.closureCode = record.closureCode"
+          "set_optional_properties": "it.impact = record.impact, it.urgency = record.urgency, it.priority = record.priority, it.status = record.status, it.firstCallResolution = record.firstCallResolution, it.category = record.category, it.openTime = record.openTime, it.closeTime = record.closeTime, it.handleTimeSecs = record.handleTimeSecs, it.closureCode = record.closureCode"
         },
         {
           "prevalent_record": "(record:EventRecord)",
@@ -126,7 +126,7 @@
         {
           "prevalent_record": "(record: ChangeRecord)",
           "result": "(c:Entity:Change {sysId: record.changeId})",
-          "set_properties": "c.type = record.changeType, c.riskAssessment = record.riskAssessment, c.emergencyChange = record.emergencyChange, c.cabApprovalNeeded = record.cabApprovalNeeded, c.plannedStart = record.plannedStart, c.requestedEndDate = record.requestedEndDate, c.changeRecordOpenTime = record.changeRecordOpenTime, c.changeRecordCloseTime = record.changeRecordCloseTime, c.originatedFrom = record.originatedFrom, c.plannedEnd: record.plannedEnd, c.scheduledDowntimeStart: record.scheduledDowntimeStart, c.scheduledDowntimeEnd: record.scheduledDowntimeEnd, c.actualStart: record.actualEnd, c.numRelatedIncidents: record.numRelatedIncidents, c.numRelatedInteractions: record.numRelatedInteractions"
+          "set_optional_properties": "c.type = record.changeType, c.riskAssessment = record.riskAssessment, c.emergencyChange = record.emergencyChange, c.cabApprovalNeeded = record.cabApprovalNeeded, c.plannedStart = record.plannedStart, c.requestedEndDate = record.requestedEndDate, c.changeRecordOpenTime = record.changeRecordOpenTime, c.changeRecordCloseTime = record.changeRecordCloseTime, c.originatedFrom = record.originatedFrom, c.plannedEnd: record.plannedEnd, c.scheduledDowntimeStart: record.scheduledDowntimeStart, c.scheduledDowntimeEnd: record.scheduledDowntimeEnd, c.actualStart: record.actualEnd, c.numRelatedIncidents: record.numRelatedIncidents, c.numRelatedInteractions: record.numRelatedInteractions"
         },
         {
           "prevalent_record": "(record:IncidentRecord)",

@@ -44,7 +44,7 @@
             "name": "PAGE_NAME"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "timestamp",
@@ -57,7 +57,7 @@
           "format": "y-M-d H:m:s.nX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "customerId",
@@ -67,7 +67,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "ageCategory",
@@ -76,7 +76,7 @@
             "name": "AgeCategory"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "gender",
@@ -85,7 +85,7 @@
             "name": "Gender"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "officeU",
@@ -95,7 +95,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "officeW",
@@ -105,7 +105,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "sessionId",
@@ -115,7 +115,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "ipId",
@@ -125,7 +125,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "vHost",
@@ -134,7 +134,7 @@
             "name": "VHOST"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "urlFile",
@@ -143,9 +143,8 @@
             "name": "URL_FILE"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
-
       {
         "name": "pageLoadError",
         "columns": [
@@ -153,7 +152,7 @@
             "name": "page_load_error"
           }
         ],
-        "mandatory": true
+        "optional": false
       }
     ]
   },
@@ -202,7 +201,7 @@
             "name": "ComplaintTheme"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "timestamp",
@@ -214,7 +213,7 @@
         "datetime_object": {
           "format": "y-M-d"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "customerId",
@@ -224,7 +223,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "ageCategory",
@@ -233,7 +232,7 @@
             "name": "AgeCategory"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "gender",
@@ -242,7 +241,7 @@
             "name": "Gender"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "officeU",
@@ -252,7 +251,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "officeW",
@@ -262,7 +261,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintDossierId",
@@ -272,7 +271,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintId",
@@ -282,7 +281,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "contactChannelId",
@@ -292,7 +291,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintThemeId",
@@ -302,7 +301,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintSubthemeId",
@@ -312,7 +311,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintTopicId",
@@ -322,7 +321,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintSubthemeNL",
@@ -334,7 +333,7 @@
             ]
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintTopicNL",
@@ -343,7 +342,7 @@
             "name": "ComplaintTopic"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintTheme",
@@ -352,7 +351,7 @@
             "name": "ComplaintTheme_EN"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintSubtheme",
@@ -364,7 +363,7 @@
             ]
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "complaintTopic",
@@ -373,7 +372,7 @@
             "name": "ComplaintTopic_EN"
           }
         ],
-        "mandatory": true
+        "optional": false
       }
     ]
   },
@@ -422,7 +421,7 @@
             "name": "QuestionTheme"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "completeTime",
@@ -439,7 +438,7 @@
           "format": "y-M-d H:m:s.nX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "startTime",
@@ -456,7 +455,7 @@
           "format": "y-M-d H:m:s.nX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "customerId",
@@ -466,7 +465,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "ageCategory",
@@ -475,7 +474,7 @@
             "name": "AgeCategory"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "gender",
@@ -484,7 +483,7 @@
             "name": "Gender"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "officeU",
@@ -494,7 +493,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "officeW",
@@ -504,7 +503,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "questionThemeId",
@@ -514,7 +513,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "questionSubthemeId",
@@ -524,7 +523,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "questionTopicId",
@@ -534,7 +533,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "questionSubthemeNL",
@@ -543,7 +542,7 @@
             "name": "QuestionSubtheme"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "questionTopic",
@@ -552,7 +551,7 @@
             "name": "QuestionTopic"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "questionTheme",
@@ -561,7 +560,7 @@
             "name": "QuestionTheme_EN"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "questionSubtheme",
@@ -570,7 +569,7 @@
             "name": "QuestionSubtheme_EN"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "questionTopic",
@@ -579,7 +578,7 @@
             "name": "QuestionTopic_EN"
           }
         ],
-        "mandatory": true
+        "optional": false
       }
     ]
   },
@@ -629,7 +628,7 @@
             "name": "EventType"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "timestamp",
@@ -643,7 +642,7 @@
           "format": "y-M-d H:m:s.nX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "customerId",
@@ -653,7 +652,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "ageCategory",
@@ -662,7 +661,7 @@
             "name": "AgeCategory"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "gender",
@@ -671,7 +670,7 @@
             "name": "Gender"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "officeU",
@@ -681,7 +680,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "officeW",
@@ -691,7 +690,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "handlingChannelId",
@@ -701,7 +700,7 @@
             "dtype": "Int32"
           }
         ],
-        "mandatory": true
+        "optional": false
       }
     ]
   }

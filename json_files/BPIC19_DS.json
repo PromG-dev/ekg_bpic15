@@ -50,7 +50,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "vendorName",
@@ -60,7 +60,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "companyId",
@@ -70,7 +70,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "purchaseOrderId",
@@ -80,7 +80,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "PODocumentType",
@@ -90,7 +90,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "hasGoodsReceipt",
@@ -100,7 +100,7 @@
             "dtype": "boolean"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "hasInvoiceAfterGoodsReceipt",
@@ -110,7 +110,7 @@
             "dtype": "boolean"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "purchaseOrderItemId",
@@ -120,7 +120,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "itemId",
@@ -130,7 +130,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "itemValue",
@@ -140,7 +140,7 @@
             "dtype": "int"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "itemType",
@@ -150,7 +150,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "itemCategory",
@@ -160,7 +160,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "purchaseArea",
@@ -170,7 +170,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "subPurchaseArea",
@@ -180,7 +180,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "spendClassification",
@@ -190,7 +190,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "resource",
@@ -203,7 +203,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "activity",
@@ -213,7 +213,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "timestamp",
@@ -227,7 +227,7 @@
           "format": "d-M-y H:m:s.nX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       }
     ]
   }

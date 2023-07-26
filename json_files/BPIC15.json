@@ -17,7 +17,7 @@
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(a:Activity {activity:record.activity, code:record.code})",
-          "set_properties": "a.activityDutch = record.activityDutch",
+          "set_optional_properties": "a.activityDutch = record.activityDutch",
           "infer_observed": true
         }
       ]
@@ -28,7 +28,7 @@
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(a:Entity:Application {sysId: record.caseId, startDate:record.startDate, caseStatus:record.caseStatus, parts:record.parts, requestComplete:record.requestComplete, lastPhase:record.lastPhase})",
-          "set_properties": "a.termName = record.termName, a.caseProcedure = record.caseProcedure, a.includesSubCases = record.includesSubCases, a.endDatePlanned = record.endDatePlanned, a.landRegisterId = record.landRegisterId, a.sumleges = record.sumleges, a.idOfConceptCase = record.idOfConceptCase",
+          "set_optional_properties": "a.termName = record.termName, a.caseProcedure = record.caseProcedure, a.includesSubCases = record.includesSubCases, a.endDatePlanned = record.endDatePlanned, a.landRegisterId = record.landRegisterId, a.sumleges = record.sumleges, a.idOfConceptCase = record.idOfConceptCase",
           "infer_corr_from_event_record": true
         }
       ],

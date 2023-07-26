@@ -28,7 +28,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "ciTypeAff",
@@ -41,7 +41,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "ciSubtypeAff",
@@ -54,7 +54,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "serviceComponentAff",
@@ -64,7 +64,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "changeId",
@@ -74,7 +74,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "changeType",
@@ -84,7 +84,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "riskAssessment",
@@ -94,7 +94,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "emergencyChange",
@@ -104,7 +104,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "cabApprovalNeeded",
@@ -114,7 +114,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "plannedStart",
@@ -127,7 +127,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "plannedEnd",
@@ -140,7 +140,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "scheduledDowntimeStart",
@@ -153,7 +153,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "scheduledDowntimeEnd",
@@ -166,7 +166,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "actualStart",
@@ -179,7 +179,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "actualEnd",
@@ -192,7 +192,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "requestedEndDate",
@@ -205,7 +205,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "changeRecordOpenTime",
@@ -218,7 +218,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "changeRecordCloseTime",
@@ -231,7 +231,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "originatedFrom",
@@ -240,7 +240,7 @@
             "name": "Originated from"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "numRelatedInteractions",
@@ -250,7 +250,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "numRelatedIncidents",
@@ -260,7 +260,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": false
+        "optional": true
       }
     ]
   },
@@ -288,7 +288,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "ciTypeAff",
@@ -301,7 +301,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "ciSubtypeAff",
@@ -314,7 +314,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "serviceComponentAff",
@@ -324,7 +324,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "incidentId",
@@ -334,7 +334,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "status",
@@ -344,7 +344,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "impact",
@@ -354,7 +354,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "urgency",
@@ -364,7 +364,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "priority",
@@ -374,7 +374,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "category",
@@ -384,7 +384,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "kmNumber",
@@ -394,7 +394,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "alertStatus",
@@ -404,7 +404,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "numReassignments",
@@ -414,7 +414,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "openTime",
@@ -427,7 +427,7 @@
           "format": "d/M/y H:m:sX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "reopenTime",
@@ -440,7 +440,7 @@
           "format": "d/M/y H:m:sX",
           "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "resolvedTime",
@@ -453,7 +453,7 @@
           "format": "d/M/y H:m:sX",
           "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "closeTime",
@@ -466,7 +466,7 @@
           "format": "d/M/y H:m:sX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "handleTimeHours",
@@ -476,7 +476,7 @@
             "dtype": "float"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "numRelatedInteractions",
@@ -486,7 +486,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "relatedInteraction",
@@ -499,7 +499,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "numRelatedIncidents",
@@ -509,7 +509,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "numRelatedChanges",
@@ -519,7 +519,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "relatedChange",
@@ -531,7 +531,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "ciNameCby",
@@ -543,7 +543,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "ciTypeCby",
@@ -555,7 +555,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "ciSubtypeCby",
@@ -567,7 +567,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "serviceComponentCBy",
@@ -579,7 +579,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       }
     ]
   },
@@ -607,7 +607,7 @@
             "name": "Incident ID"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "timestamp",
@@ -620,7 +620,7 @@
           "format": "d-M-y H:m:sX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "activityNumber",
@@ -629,7 +629,7 @@
             "name": "IncidentActivity_Number"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "activity",
@@ -638,7 +638,7 @@
             "name": "IncidentActivity_Type"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "assignmentGroup",
@@ -647,7 +647,7 @@
             "name": "Assignment Group"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "kmNumber",
@@ -656,7 +656,7 @@
             "name": "KM number"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "interactionId",
@@ -668,7 +668,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       }
     ]
   },
@@ -703,7 +703,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "ciTypeAff",
@@ -716,7 +716,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "ciSubtypeAff",
@@ -729,7 +729,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "serviceComponentAff",
@@ -739,7 +739,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "interactionId",
@@ -748,7 +748,7 @@
             "name": "Interaction ID"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "status",
@@ -757,7 +757,7 @@
             "name": "Status"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "impact",
@@ -767,7 +767,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "urgency",
@@ -777,7 +777,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "priority",
@@ -787,7 +787,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "category",
@@ -796,7 +796,7 @@
             "name": "Category"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "kmNumber",
@@ -805,7 +805,7 @@
             "name": "KM number"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "openTime",
@@ -818,7 +818,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "closeTime",
@@ -831,7 +831,7 @@
           "format": "d-M-y H:mX",
           "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "closureCode",
@@ -843,7 +843,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "firstCallResolution",
@@ -853,7 +853,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional":  false
       },
       {
         "name": "handleTimeSecs",
@@ -863,7 +863,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "relatedIncident",
@@ -875,7 +875,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       }
     ]
   }
