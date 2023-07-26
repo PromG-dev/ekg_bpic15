@@ -3,7 +3,7 @@ from typing import Dict, Optional
 
 from string import Template
 
-from ekg_creator.database_managers.db_connection import Query
+from promg import Query
 
 
 class CustomCypherQueryLibrary:

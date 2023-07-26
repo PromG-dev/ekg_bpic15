@@ -1,5 +1,5 @@
-from ekg_creator.database_managers.db_connection import DatabaseConnection
-from ekg_creator.utilities.performance_handling import Performance
+from promg import DatabaseConnection
+from promg import Performance
 from ekg_creator_custom.cypher_queries.custom_query_library import CustomCypherQueryLibrary as ccql
 
 
