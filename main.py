@@ -1,12 +1,12 @@
 import os
 from pathlib import Path
 
-from ekg_creator.data_managers.semantic_header import SemanticHeader
-from ekg_creator.database_managers.EventKnowledgeGraph import EventKnowledgeGraph, DatabaseConnection
-from ekg_creator.database_managers import authentication
-from ekg_creator.data_managers.datastructures import ImportedDataStructures
+from promg import SemanticHeader
+from promg import EventKnowledgeGraph, DatabaseConnection
+from promg import authentication
+from promg import ImportedDataStructures
 
-from ekg_creator.utilities.performance_handling import Performance
+from promg import Performance
 from ekg_creator_custom.ekg_modules.ekg_custom_module import CustomModule
 
 # several steps of import, each can be switch on/off
@@ -14,9 +14,9 @@ from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC19'
+dataset_name = 'BPIC17'
 use_sample = True
-use_preprocessed_files = True
+use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
 
@@ -73,6 +73,7 @@ def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
     graph.set_constraints()
     perf.finished_step(log_message=f"All constraints are set")
 
+    graph.create_records()
     # for each entity, we add the entity nodes to graph and correlate them to the correct events
     graph.create_nodes_by_records()
     perf.finished_step(log_message=f"(:Entity) nodes done")
