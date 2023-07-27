@@ -108,30 +108,30 @@
   "relations": [
     {
       "type": "HAS_RESPONSIBLE_ACTOR",
-      "constructed_by_nodes": {
+      "constructor": {
         "prevalent_record": "(:EventRecord {responsibleActor:r.sysId, caseId: a.sysId})",
         "from_node": "(a:Application)",
-        "to_node": "(r:ResponsibleActor)"
-      },
-      "result": "(a) - [:HAS_RESPONSIBLE_ACTOR] -> (r)"
+        "to_node": "(r:ResponsibleActor)",
+        "result": "(a) - [:HAS_RESPONSIBLE_ACTOR] -> (r)"
+      }
     },
     {
       "type": "MONITORS",
-      "constructed_by_nodes": {
+      "constructor": {
         "prevalent_record": "(:EventRecord {resource:r.sysId, monitoringResource: m.sysId})",
         "from_node": "(m:MonitoringResource)",
-        "to_node": "(r:Resource)"
-      },
-      "result": "(m) - [:MONITORS] -> (r)"
+        "to_node": "(r:Resource)",
+        "result": "(m) - [:MONITORS] -> (r)"
+      }
     },
     {
       "type": "WORKS_FOR",
-      "constructed_by_nodes": {
+      "constructor": {
         "prevalent_record": "(:EventRecord {resource:r.sysId, log: m.sysId})",
         "to_node": "(m:Municipality)",
-        "from_node": "(r:Resource)"
-      },
-      "result": "(r) - [:WORKS_FOR] -> (m)"
+        "from_node": "(r:Resource)",
+        "result": "(r) - [:WORKS_FOR] -> (m)"
+      }
     }
   ]
 }
