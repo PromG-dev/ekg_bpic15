@@ -8,9 +8,6 @@
       "BPIC15_4.csv",
       "BPIC15_5.csv"
     ],
-    "labels": [
-      "EventRecord"
-    ],
     "add_log": true,
     "add_event_index": true,
     "true_values": [
@@ -193,7 +190,7 @@
         "optional": true
       },
       {
-        "name": "responsibleActor",
+        "name": "responsibleActorId",
         "columns": [
           {
             "name": "Responsible_actor",
@@ -292,7 +289,7 @@
         "optional": true
       },
       {
-        "name": "resource",
+        "name": "resourceId",
         "columns": [
           {
             "name": "org:resource",
@@ -373,7 +370,7 @@
         "optional": true
       },
       {
-        "name": "monitoringResource",
+        "name": "monitoringResourceId",
         "columns": [
           {
             "name": "monitoringResource",
@@ -388,9 +385,6 @@
     "name": "BPIC15",
     "file_directory": "data\\BPIC15\\",
     "file_name": "BPIC15_2.csv",
-    "labels": [
-      "EventRecord"
-    ],
     "add_log": true,
     "add_event_index": true,
     "true_values": [
@@ -502,7 +496,7 @@
         "optional": true
       },
       {
-        "name": "responsibleActor",
+        "name": "responsibleActorId",
         "columns": [
           {
             "name": "Responsible_actor",
@@ -589,7 +583,7 @@
         "optional": true
       },
       {
-        "name": "resource",
+        "name": "resourceId",
         "columns": [
           {
             "name": "org:resource",
@@ -680,7 +674,7 @@
         "optional": true
       },
       {
-        "name": "monitoringResource",
+        "name": "monitoringResourceId",
         "columns": [
           {
             "name": "monitoringResource",

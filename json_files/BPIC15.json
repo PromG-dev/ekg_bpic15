@@ -1,6 +1,14 @@
 {
   "name": "BPIC15",
   "version": "1.0.0",
+  "records": [
+    "(record:EventRecord {timestamp, activity, code, OPTIONAL activityDutch})",
+    "(record:ApplicationRecord {caseId, startDate, caseStatus, parts, requestComplete, lastPhase, OPTIONAL termName, OPTIONAL caseProcedure, OPTIONAL includesSubCases, OPTIONAL endDatePlanned, OPTIONAL landRegisterId, OPTIONAL sumleges, OPTIONAL idOfConceptCase})",
+    "(record:MunicipalityRecord {log})",
+    "(record:ResourceRecord {resourceId})",
+    "(record:MonitoringResourceRecord {monitoringResourceId})",
+    "(record:ResponsibleActorRecord {responsibleActorId})"
+  ],
   "nodes": [
     {
       "type": "Event",
@@ -16,8 +24,7 @@
       "constructor": [
         {
           "prevalent_record": "(record:EventRecord)",
-          "result": "(a:Activity {activity:record.activity, code:record.code})",
-          "set_optional_properties": "a.activityDutch = record.activityDutch",
+          "result": "(a:Activity {activity:record.activity, code:record.code, OPTIONAL activityDutch: record.activityDutch})",
           "infer_observed": true
         }
       ]
@@ -26,9 +33,8 @@
       "type": "Application",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
-          "result": "(a:Entity:Application {sysId: record.caseId, startDate:record.startDate, caseStatus:record.caseStatus, parts:record.parts, requestComplete:record.requestComplete, lastPhase:record.lastPhase})",
-          "set_optional_properties": "a.termName = record.termName, a.caseProcedure = record.caseProcedure, a.includesSubCases = record.includesSubCases, a.endDatePlanned = record.endDatePlanned, a.landRegisterId = record.landRegisterId, a.sumleges = record.sumleges, a.idOfConceptCase = record.idOfConceptCase",
+          "prevalent_record": "(record:ApplicationRecord)",
+          "result": "(a:Entity:Application {sysId: record.caseId, startDate:record.startDate, caseStatus:record.caseStatus, parts:record.parts, requestComplete:record.requestComplete, lastPhase:record.lastPhase, OPTIONAL termName: record.termName, OPTIONAL caseProcedure: record.caseProcedure, OPTIONAL includesSubCases: record.includesSubCases, OPTIONAL endDatePlanned: record.endDatePlanned, OPTIONAL landRegisterId: record.landRegisterId, OPTIONAL sumleges: record.sumleges, OPTIONAL idOfConceptCase: record.idOfConceptCase})",
           "infer_corr_from_event_record": true
         }
       ],
@@ -40,27 +46,27 @@
       "type": "Municipality",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord {log:\"BPIC15_1.csv\"})",
+          "prevalent_record": "(record:MunicipalityRecord {log:\"BPIC15_1.csv\"})",
           "result": "(a:Entity:Municipality {sysId: \"MunicipalityA\"})",
           "infer_corr_from_event_record": true
         },
         {
-          "prevalent_record": "(record:EventRecord {log:\"BPIC15_2.csv\"})",
+          "prevalent_record": "(record:MunicipalityRecord {log:\"BPIC15_2.csv\"})",
           "result": "(a:Entity:Municipality {sysId: \"MunicipalityB\"})",
           "infer_corr_from_event_record": true
         },
         {
-          "prevalent_record": "(record:EventRecord {log:\"BPIC15_3.csv\"})",
+          "prevalent_record": "(record:MunicipalityRecord {log:\"BPIC15_3.csv\"})",
           "result": "(a:Entity:Municipality {sysId: \"MunicipalityC\"})",
           "infer_corr_from_event_record": true
         },
         {
-          "prevalent_record": "(record:EventRecord {log:\"BPIC15_4.csv\"})",
+          "prevalent_record": "(record:MunicipalityRecord {log:\"BPIC15_4.csv\"})",
           "result": "(a:Entity:Municipality {sysId: \"MunicipalityD\"})",
           "infer_corr_from_event_record": true
         },
         {
-          "prevalent_record": "(record:EventRecord {log:\"BPIC15_5.csv\"})",
+          "prevalent_record": "(record:MunicipalityRecord {log:\"BPIC15_5.csv\"})",
           "result": "(a:Entity:Municipality {sysId: \"MunicipalityE\"})",
           "infer_corr_from_event_record": true
         }
@@ -70,8 +76,8 @@
       "type": "Resource",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
-          "result": "(resource:Entity:Resource {sysId:record.resource})",
+          "prevalent_record": "(record:ResourceRecord)",
+          "result": "(resource:Entity:Resource {sysId:record.resourceId})",
           "infer_corr_from_event_record": true,
           "corr_type": "EXECUTED_BY"
         }
@@ -84,8 +90,8 @@
       "type": "MonitoringResource",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
-          "result": "(resource:Entity:Resource {sysId:record.monitoringResource})",
+          "prevalent_record": "(record:MonitoringResourceRecord)",
+          "result": "(resource:Entity:Resource {sysId:record.monitoringResourceId})",
           "set_labels": "MonitoringResource",
           "infer_corr_from_event_record": true,
           "corr_type": "MONITORED_BY"
@@ -97,7 +103,7 @@
       "constructor": [
         {
           "prevalent_record": "(record:EventRecord)",
-          "result": "(resource:Entity:Resource {sysId:record.responsibleActor})",
+          "result": "(resource:Entity:Resource {sysId:record.responsibleActorId})",
           "set_labels": "ResponsibleActor",
           "infer_corr_from_event_record": true,
           "corr_type": "RESPONSIBLE"
@@ -109,28 +115,28 @@
     {
       "type": "HAS_RESPONSIBLE_ACTOR",
       "constructor": {
-        "prevalent_record": "(:EventRecord {responsibleActor:r.sysId, caseId: a.sysId})",
+        "prevalent_record": "(:ResponsibleActorRecord:ApplicationRecord)",
         "from_node": "(a:Application)",
-        "to_node": "(r:ResponsibleActor)",
-        "result": "(a) - [:HAS_RESPONSIBLE_ACTOR] -> (r)"
+        "to_node": "(ra:ResponsibleActor)",
+        "result": "(a) - [:HAS_RESPONSIBLE_ACTOR] -> (ra)"
       }
     },
     {
       "type": "MONITORS",
       "constructor": {
-        "prevalent_record": "(:EventRecord {resource:r.sysId, monitoringResource: m.sysId})",
+        "prevalent_record": "(:MonitoringResourceRecord:ResourceRecord)",
         "from_node": "(m:MonitoringResource)",
-        "to_node": "(r:Resource)",
-        "result": "(m) - [:MONITORS] -> (r)"
+        "to_node": "(res:Resource)",
+        "result": "(m) - [:MONITORS] -> (res)"
       }
     },
     {
       "type": "WORKS_FOR",
       "constructor": {
-        "prevalent_record": "(:EventRecord {resource:r.sysId, log: m.sysId})",
+        "prevalent_record": "(:MunicipalityRecord:ResourceRecord)",
         "to_node": "(m:Municipality)",
-        "from_node": "(r:Resource)",
-        "result": "(r) - [:WORKS_FOR] -> (m)"
+        "from_node": "(res:Resource)",
+        "result": "(res) - [:WORKS_FOR] -> (m)"
       }
     }
   ]

@@ -14,9 +14,9 @@ from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC17'
-use_sample = False
-use_preprocessed_files = True
+dataset_name = 'BPIC14'
+use_sample = True
+use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
 
@@ -30,7 +30,6 @@ datastructures = ImportedDataStructures(ds_path)
 step_clear_db = True
 step_populate_graph = True
 
-use_preloaded_files = False  # if false, read/import files instead
 verbose = False
 
 db_connection = DatabaseConnection(db_name=connection.user, uri=connection.uri, user=connection.user,
@@ -98,7 +97,7 @@ def main() -> None:
     Main function, read all the logs, clear and create the graph, perform checks
     @return: None
     """
-    if use_preloaded_files:
+    if use_preprocessed_files:
         print(Fore.RED + '💾 Preloaded files are used!' + Fore.RESET)
     else:
         print(Fore.RED + '📝 Importing and creating files' + Fore.RESET)

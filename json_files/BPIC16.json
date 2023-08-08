@@ -1,6 +1,24 @@
 {
   "name": "BPIC16",
   "version": "1.0.0",
+  "records": [
+    "(record:ComplaintEventRecord {timestamp})",
+    "(record:ClickEventRecord {pageLoadError, timestamp})",
+    "(record:QuestionEventRecord:CallRecord {startTime, completeTime, index})",
+    "(record:MessageEventRecord:MessageRecord {timestamp, index})",
+    "(record:CustomerRecord {customerId, ageCategory, gender})",
+    "(record:OfficeURecord {officeU})",
+    "(record:OfficeWRecord {officeW})",
+    "(record:ComplaintRecord {complaintId})",
+    "(record:ComplaintDossierRecord {complaintDossierId})",
+    "(record:ComplaintTopicRecord {complaintTopic, complaintTheme, OPTIONAL complaintSubtheme})",
+    "(record:ContactChannelRecord {contactChannelId})",
+    "(record:PageRecord {pageName, vHost, urlFile})",
+    "(record:SessionRecord {sessionId})",
+    "(record:IPRecord {ipId})",
+    "(record:HandlingChannelRecord {handlingChannelId})",
+    "(record:QuestionTopicRecord {questionTopic, questionTheme, OPTIONAL questionSubtheme})"
+  ],
   "nodes": [
     {
       "type": "Event",
@@ -61,7 +79,7 @@
         },
         {
           "prevalent_record": "(record:MessageEventRecord)",
-          "result": "(a:Activity {activity = \"Start call\"})",
+          "result": "(a:Activity {activity = \"Initiate message\"})",
           "infer_observed": true
         }
       ]
@@ -84,12 +102,12 @@
       "type": "Office",
       "constructor": [
         {
-          "prevalent_record": "(record:OfficeRecord)",
+          "prevalent_record": "(record:OfficeURecord)",
           "result": "(bo:Entity:Office {sysId: record.officeU})",
           "set_labels": "BenefitsOffice"
         },
         {
-          "prevalent_record": "(record:OfficeRecord)",
+          "prevalent_record": "(record:OfficeWRecord)",
           "result": "(eso:Entity:Office {sysId: record.officeW})",
           "set_labels": "EmploymentServiceOffice"
         }
@@ -99,7 +117,7 @@
       "type": "Complaint",
       "constructor": [
         {
-          "prevalent_record": "(record:ComplaintEventRecord)",
+          "prevalent_record": "(record:ComplaintRecord)",
           "result": "(c:Entity:Complaint {sysId: record.complaintId})",
           "infer_corr_from_event_record": true,
           "corr_type": "RELATED_COMPLAINT"
@@ -110,7 +128,7 @@
       "type": "ComplaintDossier",
       "constructor": [
         {
-          "prevalent_record": "(record:ComplaintEventRecord)",
+          "prevalent_record": "(record:ComplaintDossierRecord)",
           "result": "(cd:Entity:ComplaintDossier {sysId: record.complaintDossierId})",
           "infer_corr_from_event_record": false
         }
@@ -120,9 +138,8 @@
       "type": "ComplaintTopic",
       "constructor": [
         {
-          "prevalent_record": "(record:ComplaintEventRecord)",
-          "result": "(ct:Entity:ComplaintTopic {sysId: record.complaintTopic, theme: record.complaintTheme})",
-          "set_optional_properties": "ct.subtheme = record.complaintSubtheme",
+          "prevalent_record": "(record:ComplaintTopicRecord)",
+          "result": "(ct:Entity:ComplaintTopic {sysId: record.complaintTopic, theme: record.complaintTheme, OPTIONAL subtheme:record.complaintSubtheme})",
           "infer_corr_from_event_record": false
         }
       ]
@@ -131,7 +148,7 @@
       "type": "ContactChannel",
       "constructor": [
         {
-          "prevalent_record": "(record:ComplaintEventRecord)",
+          "prevalent_record": "(record:ContactChannelRecord)",
           "result": "(cc:Entity:Channel:ContactChannel {sysId: record.contactChannelId})",
           "infer_corr_from_event_record": true,
           "corr_type": "COMPLAINT_VIA"
@@ -142,7 +159,7 @@
       "type": "Page",
       "constructor": [
         {
-          "prevalent_record": "(record:ClickEventRecord)",
+          "prevalent_record": "(record:PageRecord)",
           "result": "(p:Entity:Page {sysId: record.pageName, vHost: record.vHost, urlFile: record.urlFile})",
           "infer_corr_from_event_record": true,
           "corr_type": "CLICKED"
@@ -153,7 +170,7 @@
       "type": "Session",
       "constructor": [
         {
-          "prevalent_record": "(record:ClickEventRecord)",
+          "prevalent_record": "(record:SessionRecord)",
           "result": "(s:Entity:Session {sysId: record.sessionId})",
           "infer_corr_from_event_record": false
         }
@@ -163,7 +180,7 @@
       "type": "IP",
       "constructor": [
         {
-          "prevalent_record": "(record:ClickEventRecord)",
+          "prevalent_record": "(record:IPRecord)",
           "result": "(ip:Entity:IP {sysId: record.ipId})",
           "infer_corr_from_event_record": false
         }
@@ -173,7 +190,7 @@
       "type": "Message",
       "constructor": [
         {
-          "prevalent_record": "(record:MessageEventRecord)",
+          "prevalent_record": "(record:MessageRecord)",
           "result": "(m:Entity:Message {sysId: record.index})",
           "infer_corr_from_event_record": true,
           "corr_type": "RELATED_MESSAGE"
@@ -184,7 +201,7 @@
       "type": "HandlingChannel",
       "constructor": [
         {
-          "prevalent_record": "(record:MessageEventRecord)",
+          "prevalent_record": "(record:HandlingChannelRecord)",
           "result": "(hc:Entity:Channel:HandlingChannel {sysId: record.handlingChannelId})",
           "infer_corr_from_event_record": false
         }
@@ -194,9 +211,8 @@
       "type": "QuestionTopic",
       "constructor": [
         {
-          "prevalent_record": "(record:QuestionEventRecord)",
-          "result": "(qt:Entity:QuestionTopic {sysId: record.questionTopic, theme: record.questionTheme})",
-          "set_optional_properties": "qt.subtheme: record.questionSubtheme",
+          "prevalent_record": "(record:QuestionTopicRecord)",
+          "result": "(qt:Entity:QuestionTopic {sysId: record.questionTopic, theme: record.questionTheme, OPTIONAL subtheme: record.questionSubtheme})",
           "infer_corr_from_event_record": false
         }
       ]
@@ -205,7 +221,7 @@
       "type": "Call",
       "constructor": [
         {
-          "prevalent_record": "(record:QuestionEventRecord)",
+          "prevalent_record": "(record:CallRecord)",
           "result": "(qt:Entity:Call {sysId: record.index})",
           "infer_corr_from_event_record": true,
           "corr_type": "RELATED_CALL"
@@ -217,7 +233,7 @@
     {
       "type": "RELATED_OFFICE_B",
       "constructor": {
-        "prevalent_record": "(:CustomerRecord:OfficeRecord {customerId: c.sysId, officeU: bo.sysId})",
+        "prevalent_record": "(:CustomerRecord:OfficeURecord",
         "from_node": "(c:Customer)",
         "to_node": "(bo:BenefitsOffice)",
         "result": "(c) - [:RELATED_OFFICE_B] -> (bo)"
@@ -226,7 +242,7 @@
     {
       "type": "RELATED_OFFICE_ES",
       "constructor": {
-        "prevalent_record": "(:CustomerRecord:OfficeRecord {customerId: c.sysId, officeW: eso.sysId})",
+        "prevalent_record": "(:CustomerRecord:OfficeWRecord)",
         "from_node": "(c:Customer)",
         "to_node": "(eso:EmploymentServiceOffice)",
         "result": "(c) - [:RELATED_OFFICE_ES] -> (eso)"
@@ -236,7 +252,7 @@
       "type": "DOSSIER_OF",
       "constructor": [
         {
-          "prevalent_record": "(:ComplaintEventRecord:CustomerRecord {customerId: c.sysId, complaintDossierId: cd.sysId})",
+          "prevalent_record": "(:ComplaintDossierRecord:CustomerRecord)",
           "from_node": "(c:Customer)",
           "to_node": "(cd:ComplaintDossier)",
           "result": "(c) - [:DOSSIER_OF] -> (cd)"
@@ -247,10 +263,10 @@
       "type": "IN_DOSSIER",
       "constructor": [
         {
-          "prevalent_record": "(:ComplaintEventRecord {complaintId: c.sysId, complaintDossierId: cd.sysId})",
+          "prevalent_record": "(:ComplaintDossierRecord:ComplaintRecord)",
           "from_node": "(c:Complaint)",
           "to_node": "(cd:ComplaintDossier)",
-          "result": "(c) - [:DOSSIER_IN] -> (cd)"
+          "result": "(c) - [:IN_DOSSIER] -> (cd)"
         }
       ]
     },
@@ -258,7 +274,7 @@
       "type": "HAS_TOPIC",
       "constructor": [
         {
-          "prevalent_record": "(:ComplaintEventRecord {complaintId: c.sysId, complaintTopic: ct.sysId})",
+          "prevalent_record": "(:ComplaintRecord:ComplaintTopicRecord)",
           "from_node": "(c:Complaint)",
           "to_node": "(ct:ComplaintTopic)",
           "result": "(c) - [:HAS_TOPIC] -> (ct)"
@@ -269,7 +285,7 @@
       "type": "SESSION_OF",
       "constructor": [
         {
-          "prevalent_record": "(:ClickEventRecord:CustomerRecord {customerId: c.sysId, sessionId: s.sysId})",
+          "prevalent_record": "(:SessionRecord:CustomerRecord)",
           "from_node": "(s:Session)",
           "to_node": "(c:Customer)",
           "result": "(s) - [:SESSION_OF] -> (c)"
@@ -280,7 +296,7 @@
       "type": "FROM_IP",
       "constructor": [
         {
-          "prevalent_record": "(:ClickEventRecord {sessionId: s.sysId, ipId: ip.sysId})",
+          "prevalent_record": "(:SessionRecord:IPRecord)",
           "from_node": "(s:Session)",
           "to_node": "(ip:IP)",
           "result": "(s) - [:FROM_IP] -> (ip)"
@@ -291,7 +307,7 @@
       "type": "VISITED",
       "constructor": [
         {
-          "prevalent_record": "(:ClickEventRecord {sessionId: s.sysId, pageName: p.sysId})",
+          "prevalent_record": "(:SessionRecord:PageRecord)",
           "from_node": "(s:Session)",
           "to_node": "(p:Page)",
           "result": "(s) - [:VISITED] -> (p)"
@@ -302,7 +318,7 @@
       "type": "CALL_OF",
       "constructor": [
         {
-          "prevalent_record": "(:QuestionEventRecord:CustomerRecord {customerId: cust.sysId, index: call.sysId})",
+          "prevalent_record": "(:CallRecord:CustomerRecord)",
           "from_node": "(call:Call)",
           "to_node": "(cust:Customer)",
           "result": "(call) - [:CALL_OF] -> (cust)"
@@ -313,7 +329,7 @@
       "type": "HAS_TOPIC",
       "constructor": [
         {
-          "prevalent_record": "(:QuestionEventRecord {index: call.sysId, questionTopic: qt.sysId})",
+          "prevalent_record": "(:CallRecord:QuestionTopicRecord)",
           "from_node": "(call:Call)",
           "to_node": "(qt:QuestionTopic)",
           "result": "(call) - [:HAS_TOPIC] -> (qt)"
@@ -324,7 +340,7 @@
       "type": "HANDLED_THROUGH",
       "constructor": [
         {
-          "prevalent_record": "(:MessageEventRecord {index: m.sysId, handlingChannelId: hc.sysId})",
+          "prevalent_record": "(:MessageRecord:HandlingChannelRecord)",
           "from_node": "(m:Message)",
           "to_node": "(hc:HandlingChannel)",
           "result": "(m) - [:HANDLED_THROUGH] -> (hc)"
@@ -335,7 +351,7 @@
       "type": "MESSAGE_OF",
       "constructor": [
         {
-          "prevalent_record": "(:MessageEventRecord {index: m.sysId, handlingChannelId: c.sysId})",
+          "prevalent_record": "(:MessageEventRecord:CustomerRecord)",
           "from_node": "(m:Message)",
           "to_node": "(c:Customer)",
           "result": "(m) - [:MESSAGE_OF] -> (c)"

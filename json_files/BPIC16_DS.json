@@ -5,8 +5,12 @@
     "file_name": "BPIC16Clicks.csv",
     "labels": [
       "CustomerRecord",
-      "OfficeRecord",
-      "ClickEventRecord"
+      "OfficeURecord",
+      "OfficeWRecord",
+      "ClickEventRecord",
+      "PageRecord",
+      "SessionRecord",
+      "IPRecord"
     ],
     "add_log": true,
     "add_index": false,
@@ -162,8 +166,13 @@
     "file_name": "BPIC16Complaints.csv",
     "labels": [
       "CustomerRecord",
-      "OfficeRecord",
-      "ComplaintEventRecord"
+      "OfficeURecord",
+      "OfficeWRecord",
+      "ComplaintEventRecord",
+      "ComplaintRecord",
+      "ComplaintDossierRecord",
+      "ComplaintTopicRecord",
+      "ContactChannelRecord"
     ],
     "add_log": true,
     "add_index": false,
@@ -382,8 +391,11 @@
     "file_name": "BPIC16Questions.csv",
     "labels": [
       "CustomerRecord",
-      "OfficeRecord",
-      "QuestionEventRecord"
+      "OfficeURecord",
+      "OfficeWRecord",
+      "QuestionEventRecord",
+      "CallRecord",
+      "QuestionTopicRecord"
     ],
     "add_log": true,
     "add_index": true,
@@ -588,8 +600,11 @@
     "file_name": "BPIC16Messages.csv",
     "labels": [
       "CustomerRecord",
-      "OfficeRecord",
-      "MessageEventRecord"
+      "OfficeURecord",
+      "OfficeWRecord",
+      "MessageEventRecord",
+      "MessageRecord",
+      "HandlingChannelRecord"
     ],
     "add_log": true,
     "add_index": true,

@@ -4,8 +4,7 @@
     "file_directory": "data\\BPIC14\\",
     "file_name": "Detail_Change.csv",
     "labels": [
-      "ChangeRecord",
-      "ACIRecord"
+      "Record"
     ],
     "seperator": ";",
     "true_values": [
@@ -269,10 +268,7 @@
     "file_directory": "data\\BPIC14\\prepared\\",
     "file_name": "BPIC14Incident.csv",
     "labels": [
-      "IncidentRecord",
-      "ACIRecord",
-      "CBCIRecord",
-      "KMRecord"
+      "Record"
     ],
     "sample": {
       "use_random_sample": false,
@@ -593,8 +589,7 @@
       "between": ["01-01-2014", "30-06-2014"]
     },
     "labels": [
-      "EventRecord",
-      "KMRecord"
+      "Record"
     ],
     "add_log": true,
     "add_event_index": true,
@@ -677,9 +672,7 @@
     "file_directory": "data\\BPIC14\\prepared\\",
     "file_name": "BPIC14Interaction.csv",
     "labels": [
-      "ACIRecord",
-      "KMRecord",
-      "InteractionRecord"
+      "Record"
     ],
     "true_values": [
       "Y"
