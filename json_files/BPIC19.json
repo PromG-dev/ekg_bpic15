@@ -1,6 +1,17 @@
 {
   "name": "BPIC19",
   "version": "1.0.0",
+  "records": [
+    "(record:EventRecord {timestamp, activity})",
+    "(record:VendorRecord {vendorId, vendorName})",
+    "(record:VendorEventRecord WHERE record.activity = \"Vendor creates invoice\" OR record.activity = \"Vendor creates debit memo\" {vendorId, vendorName})",
+    "(record:CompanyRecord {companyId})",
+    "(record:PurchaseOrderRecord {purchaseOrderId, PODocumentType})",
+    "(record:PurchaseOrderItemRecord {purchaseOrderItemId, itemId, itemType, itemCategory, hasInvoiceAfterGoodsReceipt, hasGoodsReceipt, purchaseArea, subPurchaseArea, spendClassification})",
+    "(record:InvoiceRecord WHERE record.activity: \"Vendor creates invoice\" {index, itemId, itemValue})",
+    "(record:HumanResourceRecord WHERE record.resourceId STARTS WITH \"user\" {resourceId})",
+    "(record:SystemResourceRecord WHERE record.resourceId STARTS WITH \"batch\" {resourceId})"
+  ],
   "nodes": [
     {
       "type": "Event",
@@ -25,14 +36,14 @@
       "type": "Vendor",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
-          "result": "(v:Entity:Vendor {sysId: record.vendorId, vendorName: record.vendorName})"
-        },
-        {
-          "prevalent_record": "(record:EventRecord WHERE record.activity = \"Vendor creates invoice\" OR record.activity = \"Vendor creates debit memo\")",
+          "prevalent_record": "(record:VendorEventRecord)",
           "result": "(v:Entity:Vendor {sysId: record.vendorId, vendorName: record.vendorName})",
           "infer_corr_from_event_record": true,
           "corr_type": "CREATED_BY"
+        },
+        {
+          "prevalent_record": "(record:VendorRecord)",
+          "result": "(v:Entity:Vendor {sysId: record.vendorId, vendorName: record.vendorName})"
         }
       ]
     },
@@ -40,7 +51,7 @@
       "type": "Company",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
+          "prevalent_record": "(record:CompanyRecord)",
           "result": "(v:Entity:Company {sysId: record.companyId})"
         }
       ]
@@ -49,7 +60,7 @@
       "type": "PurchaseOrder",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
+          "prevalent_record": "(record:PurchaseOrderRecord)",
           "result": "(v:Entity:PurchaseOrder {sysId: record.purchaseOrderId, documentType: record.PODocumentType})",
           "infer_corr_from_event_record": true
         }
@@ -62,7 +73,7 @@
       "type": "PurchaseOrderItem",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
+          "prevalent_record": "(record:PurchaseOrderItemRecord)",
           "result": "(v:Entity:PurchaseOrderItem {sysId: record.purchaseOrderItemId, itemId: record.itemId, type: record.itemType, category: record.itemCategory, hasInvoiceAfterGoodsReceipt: record.hasInvoiceAfterGoodsReceipt, hasGoodsReceipt: record.hasGoodsReceipt, purchaseArea: record.purchaseArea, subPurchaseArea: record.subPurchaseArea, spendClassification: record.spendClassification   })",
           "infer_corr_from_event_record": true
         }
@@ -75,7 +86,7 @@
       "type": "Invoice",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord {activity: \"Vendor creates invoice\"})",
+          "prevalent_record": "(record:InvoiceRecord)",
           "result": "(v:Entity:Invoice {sysId: record.index, itemId: record.itemId, value: record.itemValue})",
           "infer_corr_from_event_record": true,
           "corr_type": "CREATES"
@@ -86,7 +97,7 @@
       "type": "HumanResource",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord WHERE record.resource STARTS WITH \"user\")",
+          "prevalent_record": "(record:HumanResourceRecord)",
           "result": "(v:Entity:Resource:HumanResource {sysId: record.resource})",
           "infer_corr_from_event_record": true,
           "corr_type": "EXECUTED_BY"
@@ -97,11 +108,11 @@
       "merge_duplicate_df": true
     },
     {
-      "type": "HumanResource",
+      "type": "SystemResource",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord WHERE record.resource STARTS WITH \"batch\")",
-          "result": "(v:Entity:Resource:System {sysId: record.resource})",
+          "prevalent_record": "(record:SystemResourceRecord)",
+          "result": "(v:Entity:Resource:System {sysId: record.resourceId})",
           "infer_corr_from_event_record": true,
           "corr_type": "EXECUTED_BY"
         }
@@ -112,7 +123,7 @@
     {
       "type": "SELLS",
       "constructor": {
-        "prevalent_record": "(:EventRecord {vendorID: v.sysId, purchaseOrderId: po.sysId})",
+        "prevalent_record": "(:VendorRecord:PurchaseOrderRecord)",
         "from_node": "(v:Vendor)",
         "to_node": "(po:PurchaseOrder)",
         "result": "(v) - [:SELLS] -> (po)"
@@ -122,7 +133,7 @@
     {
       "type": "BUYS",
       "constructor": {
-        "prevalent_record": "(:EventRecord {companyId: c.sysId, purchaseOrderId: po.sysId})",
+        "prevalent_record": "(:CompanyRecord:PurchaseOrderRecord)",
         "from_node": "(c:Company)",
         "to_node": "(po:PurchaseOrder)",
         "result": "(c) - [:BUYS] -> (po)"
@@ -132,7 +143,7 @@
     {
       "type": "HAS_ITEM",
       "constructor": {
-        "prevalent_record": "(:EventRecord {purchaseOrderId: po.sysId, purchaseOrderItemId: poi.sysId})",
+        "prevalent_record": "(:PurchaseOrderRecord:PurchaseOrderItemRecord)",
         "from_node": "(po:PurchaseOrder)",
         "to_node": "(poi:PurchaseOrderItem)",
         "result": "(po) - [:HAS_ITEM] -> (poi)"
@@ -142,7 +153,7 @@
     {
       "type": "INVOICE_OF",
       "constructor": {
-        "prevalent_record": "(:EventRecord {index: inv.sysId, purchaseOrderItemId: poi.sysId})",
+        "prevalent_record": "(:InvoiceRecord:PurchaseOrderItemRecord)",
         "from_node": "(inv:Invoice)",
         "to_node": "(poi:PurchaseOrderItem)",
         "result": "(inv) - [:INVOICE_OF] -> (poi)"

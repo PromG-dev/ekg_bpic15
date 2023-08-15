@@ -27,6 +27,7 @@ def create_bpic16():
                                     "service_detail_EN": "str", "tip_EN": "str"})
     # find ids to ensure that the other data sets only contain these customer ids
     ids = clicks_log['CustomerID'].unique().tolist()
+    clicks_log.loc[~clicks_log['TIMESTAMP'].str.contains("\."), 'TIMESTAMP'] = clicks_log['TIMESTAMP'] + ".00"
     clicks_log['TIMESTAMP'] = pd.to_datetime(clicks_log['TIMESTAMP']).dt.strftime("%Y-%m-%d %H:%M:%S.%f")
     clicks_log.to_csv(os.path.join(output_path, f"{file_name}Clicks.csv"))
 

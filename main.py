@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from pathlib import Path
 
 from promg import SemanticHeader
@@ -15,7 +16,8 @@ from colorama import Fore
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
 dataset_name = 'BPIC14'
-use_sample = True
+use_sample = False
+batch_size = 5000
 use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
@@ -36,20 +38,20 @@ db_connection = DatabaseConnection(db_name=connection.user, uri=connection.uri, 
                                    password=connection.password, verbose=verbose)
 
 
-def create_graph_instance(perf: Performance) -> EventKnowledgeGraph:
+def create_graph_instance() -> EventKnowledgeGraph:
     """
     Creates an instance of an EventKnowledgeGraph
     @return: returns an EventKnowledgeGraph
     """
     return EventKnowledgeGraph(db_connection=db_connection, db_name=connection.user,
-                               batch_size=5000, specification_of_data_structures=datastructures,
+                               batch_size=batch_size, specification_of_data_structures=datastructures,
                                use_sample=use_sample,
                                use_preprocessed_files=use_preprocessed_files,
-                               semantic_header=semantic_header, perf=perf,
+                               semantic_header=semantic_header, perf_path=perf_path,
                                custom_module_name=CustomModule)
 
 
-def clear_graph(graph: EventKnowledgeGraph, perf: Performance) -> None:
+def clear_graph(graph: EventKnowledgeGraph) -> None:
     """
     # delete all nodes and relations in the graph to start fresh
     @param graph: EventKnowledgeGraph
@@ -59,37 +61,29 @@ def clear_graph(graph: EventKnowledgeGraph, perf: Performance) -> None:
 
     print("Clearing DB...")
     graph.clear_db()
-    perf.finished_step(log_message=f"Cleared DB")
 
 
-def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
+def populate_graph(graph: EventKnowledgeGraph):
     graph.create_static_nodes_and_relations()
 
     # import the events from all sublogs in the graph with the corresponding labels
     graph.import_data()
-    perf.finished_step(log_message=f"(:Event) nodes done")
 
     # TODO: constraints in semantic header?
     graph.set_constraints()
-    perf.finished_step(log_message=f"All constraints are set")
 
     # for each entity, we add the entity nodes to graph and correlate them to the correct events
     graph.create_nodes_by_records()
-    perf.finished_step(log_message=f"(:Entity) nodes done")
 
     graph.create_relations_using_record()
-    perf.finished_step(log_message=f"Reified (:Entity) nodes done")
 
     # graph.create_nodes_by_relations()
 
-    graph.create_df_edges()
-    perf.finished_step(log_message=f"[:DF] edges done")
-
-    graph.delete_parallel_dfs_derived()
-    perf.finished_step(log_message=f"Deleted all duplicate parallel [:DF] edges done")
-
-    graph.merge_duplicate_df()
-    perf.finished_step(log_message=f"Merged duplicate [:DF] edges done")
+    # graph.create_df_edges()
+    #
+    # graph.delete_parallel_dfs_derived()
+    #
+    # graph.merge_duplicate_df()
 
 
 def main() -> None:
@@ -97,25 +91,24 @@ def main() -> None:
     Main function, read all the logs, clear and create the graph, perform checks
     @return: None
     """
+    print("Started at =", datetime.now().strftime("%H:%M:%S"))
+
     if use_preprocessed_files:
         print(Fore.RED + '💾 Preloaded files are used!' + Fore.RESET)
     else:
         print(Fore.RED + '📝 Importing and creating files' + Fore.RESET)
 
     # performance class to measure performance
-    perf = Performance(perf_path, number_of_steps=number_of_steps)
-    graph = create_graph_instance(perf)
+    graph = create_graph_instance()
 
     if step_clear_db:
-        clear_graph(graph=graph, perf=perf)
+        clear_graph(graph=graph)
 
     if step_populate_graph:
-        populate_graph(graph=graph, perf=perf)
-
-    perf.finish()
-    perf.save()
+        populate_graph(graph=graph)
 
     graph.print_statistics()
+    graph.save_perf()
 
     db_connection.close_connection()
 
