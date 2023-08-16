@@ -12,13 +12,11 @@
     "(record:ServiceComponentCByRecord {serviceComponentCBy})",
     "(record:IncidentRecord {incidentId, OPTIONAL category, OPTIONAL resolvedTime, OPTIONAL status, OPTIONAL alertStatus, OPTIONAL impact, OPTIONAL urgency, OPTIONAL priority, OPTIONAL numReassignments, OPTIONAL handleTimeHours, OPTIONAL closureCode})",
     "(record:InteractionRecord {interactionId, OPTIONAL impact, OPTIONAL urgency, OPTIONAL priority, OPTIONAL status, OPTIONAL firstCallResolution, OPTIONAL category, OPTIONAL openTime, OPTIONAL closeTime, OPTIONAL handleTimeSecs, OPTIONAL closureCode})",
-    "(record:RelatedInteractionRecord {relatedInteraction})",
+    "(record:RelatedInteractionRecord {relatedInteractionId})",
     "(record:ChangeRecord {changeId, OPTIONAL changeType, OPTIONAL riskAssessment, OPTIONAL emergencyChange, OPTIONAL cabApprovalNeeded, OPTIONAL plannedStart, OPTIONAL requestedEndDate, OPTIONAL changeRecordOpenTime, OPTIONAL changeRecordCloseTime, OPTIONAL originatedFrom, OPTIONAL plannedEnd, OPTIONAL scheduledDowntimeStart, OPTIONAL scheduledDowntimeEnd, OPTIONAL actualEnd, OPTIONAL numRelatedIncidents, OPTIONAL numRelatedInteractions})",
     "(record:RelatedChangeRecord {relatedChange})",
     "(record:ResourceRecord {assignmentGroup})",
-    "(record:KMRecord {kmNumber})",
-    "(record:OfferRecord:OfferIdRecord WHERE record.eventOrigin = 'Offer' AND record.eventId STARTS WITH 'OfferState_' {offerId})",
-    "(record:ResourceRecord {resourceId})"
+    "(record:KMRecord {kmNumber})"
   ],
   "nodes": [
     {
@@ -111,6 +109,11 @@
               "relation_type": "CORR"
             },
             {
+              "event": "(:Event {activity: \"Open Incident\"})",
+              "record_labels": "IncidentOpenRecord",
+              "relation_type": "OPENS"
+            },
+            {
               "event": "(:Event {activity: \"Reopen Incident\"})",
               "record_labels": "IncidentReopenRecord",
               "relation_type": "REOPENS"
@@ -144,7 +147,7 @@
         {
           "include": false,
           "prevalent_record": "(record:RelatedInteractionRecord)",
-          "result": "(it:Entity:Interaction {sysId: record.relatedInteraction})"
+          "result": "(it:Entity:Interaction {sysId: record.relatedInteractionId})"
         }
       ],
       "include_label_in_df": true,

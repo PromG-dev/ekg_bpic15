@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "records": [
     "(record:ComplaintEventRecord {timestamp})",
-    "(record:ClickEventRecord {pageLoadError, timestamp})",
+    "(record:ClickEventRecord:ClickSuccessEventRecord WHERE record.pageLoadError = 0 {pageLoadError, timestamp})",
+    "(record:ClickEventRecord:ClickFailEventRecord WHERE record.pageLoadError = 1 {pageLoadError, timestamp})",
     "(record:QuestionEventRecord:CallRecord {startTime, completeTime, index})",
     "(record:MessageEventRecord:MessageRecord {timestamp, index})",
     "(record:CustomerRecord {customerId, ageCategory, gender})",
@@ -20,8 +21,7 @@
     "(record:QuestionTopicRecord {questionTopic, questionTheme, OPTIONAL questionSubtheme})"
   ],
   "nodes": [
-    {
-      "include": true,
+    {"include": false,
       "type": "Event",
       "constructor": [
         {
@@ -29,11 +29,11 @@
           "result": "(e:Event:ComplaintEvent {timestamp:record.timestamp, activity: \"Submit Complaint\"})"
         },
         {
-          "prevalent_record": "(record:ClickEventRecord {pageLoadError: 0})",
+          "prevalent_record": "(record:ClickSuccessEventRecord)",
           "result": "(e:Event:ClickEvent {timestamp:record.timestamp, activity = \"Click page - successful\"})"
         },
         {
-          "prevalent_record": "(record:ClickEventRecord {pageLoadError: 1})",
+          "prevalent_record": "(record:ClickFailEventRecord)",
           "result": "(e:Event:ClickEvent {timestamp:record.timestamp, activity = \"Click page - fail\"})"
         },
         {
@@ -50,8 +50,7 @@
         }
       ]
     },
-    {
-      "include": true,
+    {"include": false,
       "type": "Activity",
       "constructor": [
         {
@@ -60,12 +59,12 @@
           "infer_observed": true
         },
         {
-          "prevalent_record": "(record:ClickEventRecord {pageLoadError: 0})",
+          "prevalent_record": "(record:ClickSuccessEventRecord)",
           "result": "(a:Activity {activity = \"Click page - successful\"})",
           "infer_observed": true
         },
         {
-          "prevalent_record": "(record:ClickEventRecord {pageLoadError: 1})",
+          "prevalent_record": "(record:ClickFailEventRecord)",
           "result": "(a:Activity {activity = \"Click page - fail\"})",
           "infer_observed": true
         },
@@ -241,6 +240,7 @@
   ],
   "relations": [
     {
+      "include": true,
       "type": "RELATED_OFFICE_B",
       "constructor": {
         "prevalent_record": "(:CustomerRecord:OfficeURecord",
@@ -250,6 +250,7 @@
       }
     },
     {
+      "include": true,
       "type": "RELATED_OFFICE_ES",
       "constructor": {
         "prevalent_record": "(:CustomerRecord:OfficeWRecord)",
@@ -259,6 +260,7 @@
       }
     },
     {
+      "include": true,
       "type": "DOSSIER_OF",
       "constructor": [
         {
@@ -270,6 +272,7 @@
       ]
     },
     {
+      "include": true,
       "type": "IN_DOSSIER",
       "constructor": [
         {
@@ -281,6 +284,7 @@
       ]
     },
     {
+      "include": true,
       "type": "HAS_TOPIC",
       "constructor": [
         {
@@ -292,6 +296,7 @@
       ]
     },
     {
+      "include": true,
       "type": "SESSION_OF",
       "constructor": [
         {
@@ -303,6 +308,7 @@
       ]
     },
     {
+      "include": true,
       "type": "FROM_IP",
       "constructor": [
         {

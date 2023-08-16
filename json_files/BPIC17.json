@@ -110,40 +110,6 @@
         }
       ],
       "infer_df": false
-    },
-    {"include": false,
-      "type": "CaseAO",
-      "constructor": [
-        {
-          "relation": "(o:Offer) - [:CASE_AO] -> (a:Application)",
-          "result": "(case_ao:Entity:CaseAO {offerId: o.sysId, applicationId: a.sysId})",
-          "infer_reified_relation": true,
-          "infer_corr_from_reified_parents": true
-        }
-      ],
-      "infer_df": false
-    },
-    {"include": false,
-      "type": "CaseAW",
-      "constructor": [
-        {
-          "relation": "(w:Workflow) - [:CASE_AW] -> (a:Application)",
-          "result": "(case_aw:Entity:CaseAW {workflowId: w.sysId, applicationId: a.sysId})",
-          "infer_reified_relation": true,
-          "infer_corr_from_reified_parents": true
-        }
-      ],
-      "infer_df": false
-    },
-    {"include": false,
-      "type": "CaseWO",
-      "constructor": {
-        "relation": "(o:Offer) - [:CASE_WO] -> (w:Workflow)",
-        "result": "(case_wo:Entity:CaseWO {workflowId: w.sysId, offerId: o.sysId})",
-        "infer_reified_relation": true,
-        "infer_corr_from_reified_parents": true
-      },
-      "infer_df": false
     }
   ],
   "relations": [

@@ -4,7 +4,9 @@
     "file_directory": "data\\BPIC14\\",
     "file_name": "Detail_Change.csv",
     "labels": [
-      "Record"
+      "ConfigurationItemAffRecord",
+      "ServiceComponentAffRecord",
+      "ChangeRecord"
     ],
     "seperator": ";",
     "true_values": [
@@ -268,7 +270,15 @@
     "file_directory": "data\\BPIC14\\prepared\\",
     "file_name": "BPIC14Incident.csv",
     "labels": [
-      "Record"
+      "ConfigurationItemAffRecord",
+      "ConfigurationItemCByRecord",
+      "ServiceComponentAffRecord",
+      "ServiceComponentCByRecord",
+      "IncidentEventRecord",
+      "IncidentRecord",
+      "RelatedInteractionRecord",
+      "RelatedChangeRecord",
+      "KMRecord"
     ],
     "sample": {
       "use_random_sample": false,
@@ -485,7 +495,7 @@
         "optional": true
       },
       {
-        "name": "relatedInteraction",
+        "name": "relatedInteractionId",
         "columns": [
           {
             "name": "Related Interaction",
@@ -589,7 +599,11 @@
       "between": ["01-01-2014", "30-06-2014"]
     },
     "labels": [
-      "Record"
+      "EventRecord",
+      "IncidentRecord",
+      "InteractionRecord",
+      "ResourceRecord",
+      "KMRecord"
     ],
     "add_log": true,
     "add_event_index": true,
@@ -672,7 +686,10 @@
     "file_directory": "data\\BPIC14\\prepared\\",
     "file_name": "BPIC14Interaction.csv",
     "labels": [
-      "Record"
+      "ConfigurationItemAffRecord",
+      "ServiceComponentAffRecord",
+      "InteractionRecord",
+      "KMRecord"
     ],
     "true_values": [
       "Y"

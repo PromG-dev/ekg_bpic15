@@ -4,13 +4,13 @@
   "records": [
     "(record:EventRecord {timestamp, activity})",
     "(record:VendorRecord {vendorId, vendorName})",
-    "(record:VendorEventRecord WHERE record.activity = \"Vendor creates invoice\" OR record.activity = \"Vendor creates debit memo\" {vendorId, vendorName})",
+    "(record:VendorEventRecord WHERE record.activity = 'Vendor creates invoice' OR record.activity = 'Vendor creates debit memo' {vendorId, vendorName})",
     "(record:CompanyRecord {companyId})",
     "(record:PurchaseOrderRecord {purchaseOrderId, PODocumentType})",
     "(record:PurchaseOrderItemRecord {purchaseOrderItemId, itemId, itemType, itemCategory, hasInvoiceAfterGoodsReceipt, hasGoodsReceipt, purchaseArea, subPurchaseArea, spendClassification})",
-    "(record:InvoiceRecord WHERE record.activity: \"Vendor creates invoice\" {index, itemId, itemValue})",
-    "(record:HumanResourceRecord WHERE record.resourceId STARTS WITH \"user\" {resourceId})",
-    "(record:SystemResourceRecord WHERE record.resourceId STARTS WITH \"batch\" {resourceId})"
+    "(record:InvoiceRecord WHERE record.activity = 'Vendor creates invoice' {index, itemId, itemValue})",
+    "(record:HumanResourceRecord WHERE record.resourceId STARTS WITH 'user' {resourceId})",
+    "(record:SystemResourceRecord WHERE record.resourceId STARTS WITH 'batch' {resourceId})"
   ],
   "nodes": [
     {

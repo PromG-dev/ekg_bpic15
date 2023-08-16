@@ -17,14 +17,13 @@ connection = authentication.connections_map[authentication.Connections.LOCAL]
 
 dataset_name = 'BPIC14'
 use_sample = False
-batch_size = 5000
+batch_size = 30000
 use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
 
 semantic_header = SemanticHeader.create_semantic_header(semantic_header_path)
-perf_path = os.path.join("..", "perf", dataset_name, f"{dataset_name}Performance.csv")
-number_of_steps = 100
+perf_path = os.path.join("..", "perf", dataset_name, f"{dataset_name}_{'sample_'*use_sample}Performance.csv")
 
 ds_path = Path(f'json_files/{dataset_name}_DS.json')
 datastructures = ImportedDataStructures(ds_path)
@@ -66,11 +65,11 @@ def clear_graph(graph: EventKnowledgeGraph) -> None:
 def populate_graph(graph: EventKnowledgeGraph):
     graph.create_static_nodes_and_relations()
 
-    # import the events from all sublogs in the graph with the corresponding labels
-    graph.import_data()
-
     # TODO: constraints in semantic header?
     graph.set_constraints()
+
+    # import the events from all sublogs in the graph with the corresponding labels
+    graph.import_data()
 
     # for each entity, we add the entity nodes to graph and correlate them to the correct events
     graph.create_nodes_by_records()
@@ -80,9 +79,9 @@ def populate_graph(graph: EventKnowledgeGraph):
     # graph.create_nodes_by_relations()
 
     # graph.create_df_edges()
-    #
+
     # graph.delete_parallel_dfs_derived()
-    #
+
     # graph.merge_duplicate_df()
 
 
@@ -107,8 +106,8 @@ def main() -> None:
     if step_populate_graph:
         populate_graph(graph=graph)
 
-    graph.print_statistics()
     graph.save_perf()
+    graph.print_statistics()
 
     db_connection.close_connection()
 
