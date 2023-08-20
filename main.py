@@ -15,9 +15,9 @@ from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC14'
+dataset_name = 'BPIC19'
 use_sample = False
-batch_size = 30000
+batch_size = 100000
 use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
