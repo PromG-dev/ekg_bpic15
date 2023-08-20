@@ -21,7 +21,7 @@
     "(record:QuestionTopicRecord {questionTopic, questionTheme, OPTIONAL questionSubtheme})"
   ],
   "nodes": [
-    {"include": false,
+    {"include": true,
       "type": "Event",
       "constructor": [
         {
@@ -50,7 +50,7 @@
         }
       ]
     },
-    {"include": false,
+    {"include": true,
       "type": "Activity",
       "constructor": [
         {

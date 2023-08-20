@@ -98,7 +98,7 @@
       "constructor": [
         {
           "prevalent_record": "(record:HumanResourceRecord)",
-          "result": "(v:Entity:Resource:HumanResource {sysId: record.resource})",
+          "result": "(v:Entity:Resource:HumanResource {sysId: record.resourceId})",
           "infer_corr_from_event_record": true,
           "corr_type": "EXECUTED_BY"
         }
