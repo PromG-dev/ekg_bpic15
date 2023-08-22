@@ -102,7 +102,7 @@
       "type": "ResponsibleActor",
       "constructor": [
         {
-          "prevalent_record": "(record:EventRecord)",
+          "prevalent_record": "(record:ResponsibleActorRecord)",
           "result": "(resource:Entity:Resource {sysId:record.responsibleActorId})",
           "set_labels": "ResponsibleActor",
           "infer_corr_from_event_record": true,

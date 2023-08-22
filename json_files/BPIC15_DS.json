@@ -197,7 +197,7 @@
             "dtype": "str"
           }
         ],
-        "optional": false
+        "optional": true
       },
       {
         "name": "caseStatus",
@@ -503,7 +503,7 @@
             "dtype": "str"
           }
         ],
-        "optional": false
+        "optional": true
       },
       {
         "name": "caseStatus",
