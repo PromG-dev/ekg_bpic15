@@ -1,13 +1,13 @@
 import os
+from datetime import datetime
 from pathlib import Path
 
-from ekg_creator.data_managers.interpreters import Interpreter
-from ekg_creator.data_managers.semantic_header import SemanticHeader
-from ekg_creator.database_managers.EventKnowledgeGraph import EventKnowledgeGraph, DatabaseConnection
-from ekg_creator.database_managers import authentication
-from ekg_creator.data_managers.datastructures import ImportedDataStructures
+from promg import SemanticHeader
+from promg import EventKnowledgeGraph, DatabaseConnection
+from promg import authentication
+from promg import ImportedDataStructures
 
-from ekg_creator.utilities.performance_handling import Performance
+from promg import Performance
 from ekg_creator_custom.ekg_modules.ekg_custom_module import CustomModule
 
 # several steps of import, each can be switch on/off
@@ -15,16 +15,15 @@ from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC14'
-use_sample = True
+dataset_name = 'BPIC19'
+use_sample = False
+batch_size = 100000
 use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
 
-query_interpreter = Interpreter("Cypher")
-semantic_header = SemanticHeader.create_semantic_header(semantic_header_path, query_interpreter)
-perf_path = os.path.join("..", "perf", dataset_name, f"{dataset_name}Performance.csv")
-number_of_steps = 100
+semantic_header = SemanticHeader.create_semantic_header(semantic_header_path)
+perf_path = os.path.join("..", "perf", dataset_name, f"{dataset_name}_{'sample_'*use_sample}Performance.csv")
 
 ds_path = Path(f'json_files/{dataset_name}_DS.json')
 datastructures = ImportedDataStructures(ds_path)
@@ -32,26 +31,26 @@ datastructures = ImportedDataStructures(ds_path)
 step_clear_db = True
 step_populate_graph = True
 
-use_preloaded_files = False  # if false, read/import files instead
 verbose = False
 
 db_connection = DatabaseConnection(db_name=connection.user, uri=connection.uri, user=connection.user,
                                    password=connection.password, verbose=verbose)
 
 
-def create_graph_instance(perf: Performance) -> EventKnowledgeGraph:
+def create_graph_instance() -> EventKnowledgeGraph:
     """
     Creates an instance of an EventKnowledgeGraph
     @return: returns an EventKnowledgeGraph
     """
     return EventKnowledgeGraph(db_connection=db_connection, db_name=connection.user,
-                               batch_size=5000, specification_of_data_structures=datastructures, use_sample=use_sample,
+                               batch_size=batch_size, specification_of_data_structures=datastructures,
+                               use_sample=use_sample,
                                use_preprocessed_files=use_preprocessed_files,
-                               semantic_header=semantic_header, perf=perf,
+                               semantic_header=semantic_header, perf_path=perf_path,
                                custom_module_name=CustomModule)
 
 
-def clear_graph(graph: EventKnowledgeGraph, perf: Performance) -> None:
+def clear_graph(graph: EventKnowledgeGraph) -> None:
     """
     # delete all nodes and relations in the graph to start fresh
     @param graph: EventKnowledgeGraph
@@ -61,54 +60,29 @@ def clear_graph(graph: EventKnowledgeGraph, perf: Performance) -> None:
 
     print("Clearing DB...")
     graph.clear_db()
-    perf.finished_step(log_message=f"Cleared DB")
 
 
-def populate_graph(graph: EventKnowledgeGraph, perf: Performance):
+def populate_graph(graph: EventKnowledgeGraph):
     graph.create_static_nodes_and_relations()
-
-    # import the events from all sublogs in the graph with the corresponding labels
-    graph.import_data()
-    perf.finished_step(log_message=f"(:Event) nodes done")
 
     # TODO: constraints in semantic header?
     graph.set_constraints()
-    perf.finished_step(log_message=f"All constraints are set")
 
-    graph.create_log()
-    perf.finished_step(log_message=f"(:Log) nodes and [:HAS] relations done")
+    # import the events from all sublogs in the graph with the corresponding labels
+    graph.import_data()
 
     # for each entity, we add the entity nodes to graph and correlate them to the correct events
-    graph.create_entities_by_nodes()
-    perf.finished_step(log_message=f"(:Entity) nodes done")
+    graph.create_nodes_by_records()
 
-    graph.correlate_events_to_entities()
-    perf.finished_step(log_message=f"[:CORR] edges done")
+    graph.create_relations_using_record()
 
-    if dataset_name == "BPIC17":
-        graph.do_custom_query("get_corr_between_o_created_events_and_offer_entities")
+    # graph.create_nodes_by_relations()
 
-    graph.create_classes()
-    perf.finished_step(log_message=f"(:Class) nodes done")
+    # graph.create_df_edges()
 
-    graph.create_entity_relations_using_nodes()
-    graph.create_entity_relations_using_relations()
-    perf.finished_step(log_message=f"[:REL] edges done")
+    # graph.delete_parallel_dfs_derived()
 
-    graph.create_entities_by_relations()
-    perf.finished_step(log_message=f"Reified (:Entity) nodes done")
-
-    graph.correlate_events_to_reification()
-    perf.finished_step(log_message=f"[:CORR] edges for Reified (:Entity) nodes done")
-
-    graph.create_df_edges()
-    perf.finished_step(log_message=f"[:DF] edges done")
-
-    graph.delete_parallel_dfs_derived()
-    perf.finished_step(log_message=f"Deleted all duplicate parallel [:DF] edges done")
-
-    graph.merge_duplicate_df()
-    perf.finished_step(log_message=f"Merged duplicate [:DF] edges done")
+    # graph.merge_duplicate_df()
 
 
 def main() -> None:
@@ -116,24 +90,23 @@ def main() -> None:
     Main function, read all the logs, clear and create the graph, perform checks
     @return: None
     """
-    if use_preloaded_files:
+    print("Started at =", datetime.now().strftime("%H:%M:%S"))
+
+    if use_preprocessed_files:
         print(Fore.RED + '💾 Preloaded files are used!' + Fore.RESET)
     else:
         print(Fore.RED + '📝 Importing and creating files' + Fore.RESET)
 
     # performance class to measure performance
-    perf = Performance(perf_path, number_of_steps=number_of_steps)
-    graph = create_graph_instance(perf)
+    graph = create_graph_instance()
 
     if step_clear_db:
-        clear_graph(graph=graph, perf=perf)
+        clear_graph(graph=graph)
 
     if step_populate_graph:
-        populate_graph(graph=graph, perf=perf)
+        populate_graph(graph=graph)
 
-    perf.finish()
-    perf.save()
-
+    graph.save_perf()
     graph.print_statistics()
 
     db_connection.close_connection()

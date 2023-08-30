@@ -4,7 +4,7 @@
     "file_directory": "data\\BPIC17\\",
     "file_name": "BPI_Challenge_2017.csv",
     "labels": [
-      "Event"
+      "Record"
     ],
     "add_log": true,
     "add_event_index": true,
@@ -42,7 +42,7 @@
             "name": "event"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "lifecycle",
@@ -51,7 +51,7 @@
             "name": "lifecycle:transition"
           }
         ],
-        "mandatory": true,
+        "optional": false,
         "use_filter": false,
         "filter_exclude_values": [
           "SUSPEND",
@@ -67,10 +67,9 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "case",
@@ -79,7 +78,7 @@
             "name": "case"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "applicationType",
@@ -88,7 +87,7 @@
             "name": "ApplicationType"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "loanGoal",
@@ -100,7 +99,7 @@
             ]
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "requestedAmount",
@@ -110,7 +109,7 @@
             "dtype": "float"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "monthlyCost",
@@ -120,16 +119,16 @@
             "dtype": "float"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
-        "name": "resource",
+        "name": "resourceId",
         "columns": [
           {
             "name": "org:resource"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "selected",
@@ -139,7 +138,7 @@
             "dtype": "boolean"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "eventId",
@@ -148,7 +147,7 @@
             "name": "EventID"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "offerId",
@@ -157,7 +156,7 @@
             "name": "OfferID"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "firstWithdrawalAmount",
@@ -167,7 +166,7 @@
             "dtype": "float"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "action",
@@ -176,7 +175,7 @@
             "name": "Action"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "accepted",
@@ -186,7 +185,7 @@
             "dtype": "boolean"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "creditScore",
@@ -196,7 +195,7 @@
             "dtype": "float"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "numberOfTerms",
@@ -206,7 +205,7 @@
             "dtype": "Int64"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "eventOrigin",
@@ -215,7 +214,7 @@
             "name": "EventOrigin"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "offeredAmount",
@@ -225,7 +224,7 @@
             "dtype": "float"
           }
         ],
-        "mandatory": false
+        "optional": true
       }
     ]
   }

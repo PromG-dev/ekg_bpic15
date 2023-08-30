@@ -8,9 +8,6 @@
       "BPIC15_4.csv",
       "BPIC15_5.csv"
     ],
-    "labels": [
-      "Event"
-    ],
     "add_log": true,
     "add_event_index": true,
     "true_values": [
@@ -25,26 +22,26 @@
         "use_random_sample": false,
         "population_column": "case",
         "ids": [
-          9691153,
-          9294701,
-          3084709,
-          4375473,
-          3837125,
-          4397208,
-          5843747,
-          3606967,
-          11773351,
-          8051084,
-          8021700,
-          2847199,
-          8958665,
-          2794023,
-          2899336,
-          8816378,
-          5288872,
-          5106291,
-          10997930,
-          6985928
+          "9691153",
+          "9294701",
+          "3084709",
+          "4375473",
+          "3837125",
+          "4397208",
+          "5843747",
+          "3606967",
+          "11773351",
+          "8051084",
+          "8021700",
+          "2847199",
+          "8958665",
+          "2794023",
+          "2899336",
+          "8816378",
+          "5288872",
+          "5106291",
+          "10997930",
+          "6985928"
         ]
       },
       {
@@ -52,26 +49,26 @@
         "use_random_sample": false,
         "population_column": "case",
         "ids": [
-          3055383,
-          6616348,
-          3963963,
-          5245298,
-          5007761,
-          6015049,
-          3824284,
-          5489846,
-          3691884,
-          3965191,
-          7313344,
-          3871869,
-          5718151,
-          3721360,
-          5585560,
-          5702384,
-          5562464,
-          5961864,
-          3829589,
-          4350022
+          "3055383",
+          "6616348",
+          "3963963",
+          "5245298",
+          "5007761",
+          "6015049",
+          "3824284",
+          "5489846",
+          "3691884",
+          "3965191",
+          "7313344",
+          "3871869",
+          "5718151",
+          "3721360",
+          "5585560",
+          "5702384",
+          "5562464",
+          "5961864",
+          "3829589",
+          "4350022"
         ]
       },
       {
@@ -79,26 +76,26 @@
         "use_random_sample": false,
         "population_column": "case",
         "ids": [
-          10516319,
-          9279433,
-          4235583,
-          5932529,
-          8577457,
-          6873521,
-          7084443,
-          4968228,
-          5421204,
-          4578191,
-          8352642,
-          4800472,
-          11167513,
-          9665535,
-          7345969,
-          9095800,
-          7533366,
-          5673981,
-          5902757,
-          11164523
+          "10516319",
+          "9279433",
+          "4235583",
+          "5932529",
+          "8577457",
+          "6873521",
+          "7084443",
+          "4968228",
+          "5421204",
+          "4578191",
+          "8352642",
+          "4800472",
+          "11167513",
+          "9665535",
+          "7345969",
+          "9095800",
+          "7533366",
+          "5673981",
+          "5902757",
+          "11164523"
         ]
       },
       {
@@ -106,26 +103,26 @@
         "use_random_sample": false,
         "population_column": "case",
         "ids": [
-          10873742,
-          4171558,
-          4495115,
-          10837828,
-          3634775,
-          8126523,
-          3589696,
-          10286510,
-          7888926,
-          4532439,
-          6365048,
-          8460573,
-          8315159,
-          6793246,
-          6791482,
-          8612436,
-          4927985,
-          4637475,
-          4592223,
-          8114679
+          "10873742",
+          "4171558",
+          "4495115",
+          "10837828",
+          "3634775",
+          "8126523",
+          "3589696",
+          "10286510",
+          "7888926",
+          "4532439",
+          "6365048",
+          "8460573",
+          "8315159",
+          "6793246",
+          "6791482",
+          "8612436",
+          "4927985",
+          "4637475",
+          "4592223",
+          "8114679"
         ]
       }
     ],
@@ -135,33 +132,19 @@
         "columns": [
           {
             "name": "case",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
-        "name": "activity",
+        "name": "code",
         "columns": [
           {
             "name": "event"
           }
         ],
-        "mandatory": true
-      },
-      {
-        "name": "start",
-        "columns": [
-          {
-            "name": "startTime"
-          }
-        ],
-        "datetime_object": {
-          "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
-        },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "timestamp",
@@ -172,10 +155,9 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "termName",
@@ -184,7 +166,7 @@
             "name": "termName"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "startDate",
@@ -194,10 +176,9 @@
           }
         ],
         "datetime_object": {
-          "format": "y/M/d H:m:s.n",
-          "convert_to": "ISO_DATE"
+          "format": "y/M/d H:m:s.n"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "caseProcedure",
@@ -206,17 +187,17 @@
             "name": "caseProcedure"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
-        "name": "responsibleActor",
+        "name": "responsibleActorId",
         "columns": [
           {
             "name": "Responsible_actor",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "caseStatus",
@@ -225,7 +206,7 @@
             "name": "caseStatus"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "includesSubCases",
@@ -235,20 +216,19 @@
             "dtype": "boolean"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
-        "name": "endDate",
+        "name": "endDatePlanned",
         "columns": [
           {
             "name": "endDatePlanned"
           }
         ],
         "datetime_object": {
-          "format": "y/M/d H:m:s.n",
-          "convert_to": "ISO_DATE"
+          "format": "y/M/d H:m:s.n"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "parts",
@@ -257,7 +237,7 @@
             "name": "parts"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "requestComplete",
@@ -267,7 +247,7 @@
             "dtype": "boolean"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "lastPhase",
@@ -276,17 +256,17 @@
             "name": "last_phase"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "landRegisterId",
         "columns": [
           {
             "name": "landRegisterID",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "sumleges",
@@ -296,36 +276,36 @@
             "dtype": "float"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "idOfConceptCase",
         "columns": [
           {
             "name": "IDofConceptCase",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
-        "name": "resource",
+        "name": "resourceId",
         "columns": [
           {
             "name": "org:resource",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
-        "name": "activityNameEn",
+        "name": "activity",
         "columns": [
           {
             "name": "activityNameEN"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "planned",
@@ -336,10 +316,9 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "dateStop",
@@ -350,10 +329,9 @@
         ],
         "datetime_object": {
           "format": "y-M-d H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "dateFinished",
@@ -364,10 +342,9 @@
         ],
         "datetime_object": {
           "format": "y-M-d H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "question",
@@ -377,7 +354,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "dueDate",
@@ -388,20 +365,19 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
-        "name": "monitoringResource",
+        "name": "monitoringResourceId",
         "columns": [
           {
             "name": "monitoringResource",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       }
     ]
   },
@@ -409,9 +385,6 @@
     "name": "BPIC15",
     "file_directory": "data\\BPIC15\\",
     "file_name": "BPIC15_2.csv",
-    "labels": [
-      "Event"
-    ],
     "add_log": true,
     "add_event_index": true,
     "true_values": [
@@ -424,26 +397,26 @@
       "use_random_sample": false,
       "population_column": "case",
       "ids": [
-        20284125,
-        23142529,
-        3585731,
-        21038392,
-        19995133,
-        3874234,
-        22139866,
-        4623044,
-        3948666,
-        3702964,
-        20930456,
-        20063170,
-        3808540,
-        20025552,
-        20888077,
-        21986652,
-        20235405,
-        19940265,
-        4395219,
-        20742337
+        "20284125",
+        "23142529",
+        "3585731",
+        "21038392",
+        "19995133",
+        "3874234",
+        "22139866",
+        "4623044",
+        "3948666",
+        "3702964",
+        "20930456",
+        "20063170",
+        "3808540",
+        "20025552",
+        "20888077",
+        "21986652",
+        "20235405",
+        "19940265",
+        "4395219",
+        "20742337"
       ]
     },
     "attributes": [
@@ -452,22 +425,22 @@
         "columns": [
           {
             "name": "case",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
-        "name": "activity",
+        "name": "code",
         "columns": [
           {
             "name": "event"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
-        "name": "start",
+        "name": "startTime",
         "columns": [
           {
             "name": "startTime"
@@ -475,10 +448,9 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "timestamp",
@@ -489,10 +461,9 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "termName",
@@ -501,7 +472,7 @@
             "name": "termName"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "startDate",
@@ -511,10 +482,9 @@
           }
         ],
         "datetime_object": {
-          "format": "y/M/d H:m:s.n",
-          "convert_to": "ISO_DATE"
+          "format": "y/M/d H:m:s.n"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "caseProcedure",
@@ -523,17 +493,17 @@
             "name": "caseProcedure"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
-        "name": "responsibleActor",
+        "name": "responsibleActorId",
         "columns": [
           {
             "name": "Responsible_actor",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "caseStatus",
@@ -542,7 +512,7 @@
             "name": "caseStatus"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "includesSubCases",
@@ -552,7 +522,7 @@
             "dtype": "boolean"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "parts",
@@ -561,7 +531,7 @@
             "name": "parts"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "requestComplete",
@@ -571,7 +541,7 @@
             "dtype": "boolean"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "lastPhase",
@@ -580,17 +550,17 @@
             "name": "last_phase"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "landRegisterId",
         "columns": [
           {
             "name": "landRegisterID",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "sumleges",
@@ -600,36 +570,46 @@
             "dtype": "float"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "idOfConceptCase",
         "columns": [
           {
             "name": "IDofConceptCase",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": false
+        "optional": true
       },
       {
-        "name": "resource",
+        "name": "resourceId",
         "columns": [
           {
             "name": "org:resource",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
-        "name": "activityNameEn",
+        "name": "activity",
         "columns": [
           {
             "name": "activityNameEN"
           }
         ],
-        "mandatory": true
+        "optional": false
+      },
+
+      {
+        "name": "activityDutch",
+        "columns": [
+          {
+            "name": "activityNameNL"
+          }
+        ],
+        "optional": false
       },
       {
         "name": "planned",
@@ -640,10 +620,9 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "dateStop",
@@ -654,10 +633,9 @@
         ],
         "datetime_object": {
           "format": "y-M-d H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
         "name": "dateFinished",
@@ -668,10 +646,9 @@
         ],
         "datetime_object": {
           "format": "y-M-d H:m:sX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "question",
@@ -681,7 +658,7 @@
             "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       },
       {
         "name": "dueDate",
@@ -692,20 +669,19 @@
         ],
         "datetime_object": {
           "format": "y/M/d H:m:s.nX",
-          "timezone_offset": "+01",
-          "convert_to": "ISO_DATE_TIME"
+          "timezone_offset": "+01"
         },
-        "mandatory": false
+        "optional": true
       },
       {
-        "name": "monitoringResource",
+        "name": "monitoringResourceId",
         "columns": [
           {
             "name": "monitoringResource",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
-        "mandatory": true
+        "optional": false
       }
     ]
   }
