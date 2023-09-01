@@ -4,8 +4,8 @@ from ekg_creator_custom.cypher_queries.custom_query_library import CustomCypherQ
 
 
 class CustomModule:
-    def __init__(self, db_connection: DatabaseConnection):
-        self.connection = db_connection
+    def __init__(self):
+        self.connection = DatabaseConnection()
 
     def do_custom_query(self, query_name, **kwargs):
         func = getattr(self, query_name)
