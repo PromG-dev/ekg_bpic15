@@ -15,36 +15,39 @@ from colorama import Fore
 
 connection = authentication.connections_map[authentication.Connections.LOCAL]
 
-dataset_name = 'BPIC14'
+dataset_name = 'BPIC17'
 use_sample = True
-batch_size = 100000
+batch_size = 10000
 use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
-semantic_header = SemanticHeader.create_semantic_header(semantic_header_path)
 
-perf_path = os.path.join("..", "perf", dataset_name, f"{dataset_name}_{'sample_' * use_sample}Performance.csv")
+semantic_header = SemanticHeader.create_semantic_header(semantic_header_path)
+perf_path = os.path.join("..", "perf", dataset_name, f"{dataset_name}_{'sample_'*use_sample}Performance.csv")
 
 ds_path = Path(f'json_files/{dataset_name}_DS.json')
 datastructures = ImportedDataStructures(ds_path)
 
 step_clear_db = True
 step_populate_graph = True
+step_build_tasks = True
 
-connection_key = authentication.Connections.LOCAL
 verbose = False
+
+db_connection = DatabaseConnection(db_name=connection.user, uri=connection.uri, user=connection.user,
+                                   password=connection.password, verbose=verbose)
+
 
 def create_graph_instance() -> EventKnowledgeGraph:
     """
     Creates an instance of an EventKnowledgeGraph
     @return: returns an EventKnowledgeGraph
     """
-    return EventKnowledgeGraph(batch_size=batch_size,
-                               specification_of_data_structures=datastructures,
+    return EventKnowledgeGraph(db_connection=db_connection, db_name=connection.user,
+                               batch_size=batch_size, specification_of_data_structures=datastructures,
                                use_sample=use_sample,
                                use_preprocessed_files=use_preprocessed_files,
-                               semantic_header=semantic_header,
-                               perf_path=perf_path,
+                               semantic_header=semantic_header, perf_path=perf_path,
                                custom_module_name=CustomModule)
 
 
@@ -61,10 +64,10 @@ def clear_graph(graph: EventKnowledgeGraph) -> None:
 
 
 def populate_graph(graph: EventKnowledgeGraph):
+    graph.create_static_nodes_and_relations()
+
     # TODO: constraints in semantic header?
     graph.set_constraints()
-
-    graph.create_static_nodes_and_relations()
 
     # import the events from all sublogs in the graph with the corresponding labels
     graph.import_data()
@@ -72,16 +75,21 @@ def populate_graph(graph: EventKnowledgeGraph):
     # for each entity, we add the entity nodes to graph and correlate them to the correct events
     graph.create_nodes_by_records()
 
-    # for each relation, we add the entity nodes to graph and correlate them to the correct events
-    graph.create_relations()
+    graph.create_relations_using_record()
 
-    # graph.create_nodes_by_relations()
+    graph.create_nodes_by_relations()
 
-    # graph.create_df_edges()
+    graph.create_df_edges()
 
     # graph.delete_parallel_dfs_derived()
 
     # graph.merge_duplicate_df()
+
+
+def build_tasks(graph: EventKnowledgeGraph):
+    graph.identify_task(resource="Resource", case="CaseAWO")
+
+    graph.aggregate_tasks(resource="Resource", case="CaseAWO")
 
 
 def main() -> None:
@@ -90,9 +98,6 @@ def main() -> None:
     @return: None
     """
     print("Started at =", datetime.now().strftime("%H:%M:%S"))
-
-    db_connection = DatabaseConnection.set_up_connection_using_key(key=connection_key,
-                                                                   verbose=verbose)
 
     if use_preprocessed_files:
         print(Fore.RED + '💾 Preloaded files are used!' + Fore.RESET)
@@ -107,6 +112,9 @@ def main() -> None:
 
     if step_populate_graph:
         populate_graph(graph=graph)
+
+    if step_build_tasks:
+        build_tasks(graph=graph)
 
     graph.save_perf()
     graph.print_statistics()
