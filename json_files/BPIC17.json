@@ -106,10 +106,12 @@
         {
           "prevalent_record": "(record:EventRecord)",
           "result": "(case_awo:Entity:CaseAWO {sysId: record.case)}",
-          "infer_corr_from_event_record": false
+          "infer_corr_from_event_record": true
         }
       ],
-      "infer_df": false
+      "infer_df": true,
+      "include_label_in_df": true,
+      "merge_duplicate_df": true
     }
   ],
   "relations": [
