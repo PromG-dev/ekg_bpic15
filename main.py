@@ -11,7 +11,7 @@ from promg import Performance
 from promg.modules.db_management import DBManagement
 from promg.modules.task_identification import TaskIdentification
 
-from ekg_creator_custom.ekg_modules.ekg_custom_module import CustomModule
+from custom_modules.custom_modules.custom_module import CustomModule
 
 # several steps of import, each can be switch on/off
 from colorama import Fore
@@ -34,6 +34,7 @@ dataset_descriptions = DatasetDescriptions(ds_path)
 step_clear_db = True
 step_populate_graph = True
 step_build_tasks = True
+step_custom_module = True
 
 verbose = False
 credentials_key = authentication.Connections.LOCAL
@@ -72,6 +73,10 @@ def main() -> None:
         task_identifier = TaskIdentification(resource="Resource", case="CaseAWO")
         task_identifier.identify_tasks()
         task_identifier.aggregate_on_task_variant()
+
+    if step_custom_module:
+        custom_module = CustomModule()
+        custom_module.test_query()
 
     performance.finish_and_save()
     db_manager.print_statistics()
