@@ -13,7 +13,6 @@
   ],
   "nodes": [
     {
-
       "type": "Event",
       "constructor": [
         {
@@ -122,9 +121,12 @@
         "from_node": "(o: Offer)",
         "to_node": "(a: Application)",
         "result": "(o) - [:CASE_AO:Entity] -> (a)",
-        "model_as_node": true,
         "infer_corr_from_reified_parents": true
-      }
+      },
+      "model_as_node": true,
+      "infer_df": true,
+      "include_label_in_df": true,
+      "merge_duplicate_df": true
     },
     {
       "type": "CASE_AW",
@@ -133,9 +135,12 @@
         "from_node": "(w: Workflow)",
         "to_node": "(a: Application)",
         "result": "(w) - [:CASE_AW:Entity] -> (a)",
-        "model_as_node": true,
         "infer_corr_from_reified_parents": true
-      }
+      },
+      "model_as_node": true,
+      "infer_df": true,
+      "include_label_in_df": true,
+      "merge_duplicate_df": true
     },
     {
       "type": "CASE_WO",
@@ -144,9 +149,12 @@
         "from_node": "(o: Offer)",
         "to_node": "(w: Workflow)",
         "result": "(o) - [:CASE_WO:Entity] -> (w)",
-        "model_as_node": true,
         "infer_corr_from_reified_parents": true
-      }
+      },
+      "model_as_node": true,
+      "infer_df": true,
+      "include_label_in_df": true,
+      "merge_duplicate_df": true
     }
   ]
 }
