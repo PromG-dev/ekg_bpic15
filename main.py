@@ -74,39 +74,39 @@ def main() -> None:
                          use_preprocessed_files=use_preprocessed_files)
         oced_pg.load_and_transform()
         oced_pg.create_df_edges()
+    if dataset_name == 'BPIC17':
+        if step_infer_df_over_relations:
+            print(Fore.RED + 'Inferring DF over relations between objects.' + Fore.RESET)
+            infer_df_interactions = InferDFInteractions()
+            infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AO', 'Application')
+            infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AO', 'Offer')
+            infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AW', 'Application')
+            infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AW', 'Workflow')
+            infer_df_interactions.delete_parallel_directly_follows_derived('CASE_WO', 'Workflow')
+            infer_df_interactions.delete_parallel_directly_follows_derived('CASE_WO', 'Offer')
 
-    if step_infer_df_over_relations:
-        print(Fore.RED + 'Inferring DF over relations between objects.' + Fore.RESET)
-        infer_df_interactions = InferDFInteractions()
-        infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AO', 'Application')
-        infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AO', 'Offer')
-        infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AW', 'Application')
-        infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AW', 'Workflow')
-        infer_df_interactions.delete_parallel_directly_follows_derived('CASE_WO', 'Workflow')
-        infer_df_interactions.delete_parallel_directly_follows_derived('CASE_WO', 'Offer')
+        if step_discover_model:
+            print(Fore.RED + 'Discovering multi-object DFG.' + Fore.RESET)
+            dfg = DiscoverDFG()
+            dfg.discover_dfg_for_entity("Application", 500, 0.0)
+            dfg.discover_dfg_for_entity("Offer", 500, 0.0)
+            dfg.discover_dfg_for_entity("Workflow", 500, 0.0)
+            dfg.discover_dfg_for_entity("CASE_AO", 500, 0.0)
+            dfg.discover_dfg_for_entity("CASE_AW", 500, 0.0)
+            dfg.discover_dfg_for_entity("CASE_WO", 500, 0.0)
 
-    if step_discover_model:
-        print(Fore.RED + 'Discovering multi-object DFG.' + Fore.RESET)
-        dfg = DiscoverDFG()
-        dfg.discover_dfg_for_entity("Application", 500, 0.0)
-        dfg.discover_dfg_for_entity("Offer", 500, 0.0)
-        dfg.discover_dfg_for_entity("Workflow", 500, 0.0)
-        dfg.discover_dfg_for_entity("CASE_AO", 500, 0.0)
-        dfg.discover_dfg_for_entity("CASE_AW", 500, 0.0)
-        dfg.discover_dfg_for_entity("CASE_WO", 500, 0.0)
+        if step_build_tasks:
+            print(Fore.RED + 'Detecting tasks.' + Fore.RESET)
+            task_identifier = TaskIdentification(resource="Resource", case="CaseAWO")
+            task_identifier.identify_tasks()
+            task_identifier.aggregate_on_task_variant()
 
-    if step_build_tasks:
-        print(Fore.RED + 'Detecting tasks.' + Fore.RESET)
-        task_identifier = TaskIdentification(resource="Resource", case="CaseAWO")
-        task_identifier.identify_tasks()
-        task_identifier.aggregate_on_task_variant()
-
-    if step_infer_delays:
-        print(Fore.RED + 'Computing delay edges.' + Fore.RESET)
-        delays = PerformanceAnalyzeDelays()
-        # delays.enrich_with_delay_edges()
-        # delays.analyze_delays()
-        delays.visualize_delays(10000)
+        if step_infer_delays:
+            print(Fore.RED + 'Computing delay edges.' + Fore.RESET)
+            delays = PerformanceAnalyzeDelays()
+            # delays.enrich_with_delay_edges()
+            # delays.analyze_delays()
+            delays.visualize_delays(10000)
 
     performance.finish_and_save()
     db_manager.print_statistics()
