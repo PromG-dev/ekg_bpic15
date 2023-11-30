@@ -19,30 +19,28 @@ from custom_modules.custom_modules.discover_dfg import DiscoverDFG
 # several steps of import, each can be switch on/off
 from colorama import Fore
 
-connection = authentication.connections_map[authentication.Connections.LOCAL]
-
-dataset_name = 'BPIC17'
+dataset_name = 'BPIC16'
 use_sample = False
-batch_size = 100000
+batch_size = 10000
 use_preprocessed_files = False
 
 semantic_header_path = Path(f'json_files/{dataset_name}.json')
 
 semantic_header = SemanticHeader.create_semantic_header(semantic_header_path)
-perf_path = os.path.join("..", "perf", dataset_name, f"{dataset_name}_{'sample_' * use_sample}Performance.csv")
 
 ds_path = Path(f'json_files/{dataset_name}_DS.json')
 dataset_descriptions = DatasetDescriptions(ds_path)
 
 step_clear_db = True
 step_populate_graph = True
-step_infer_df_over_relations = True
+step_delete_parallel_df = True
 step_discover_model = True
 step_build_tasks = True
 step_infer_delays = True
 
 verbose = False
 credentials_key = authentication.Connections.LOCAL
+import_directory = "TODO"
 
 
 def main() -> None:
@@ -71,11 +69,13 @@ def main() -> None:
 
         oced_pg = OcedPg(dataset_descriptions=dataset_descriptions,
                          use_sample=use_sample,
-                         use_preprocessed_files=use_preprocessed_files)
+                         use_preprocessed_files=use_preprocessed_files,
+                         import_directory=import_directory)
         oced_pg.load_and_transform()
         oced_pg.create_df_edges()
+
     if dataset_name == 'BPIC17':
-        if step_infer_df_over_relations:
+        if step_delete_parallel_df:
             print(Fore.RED + 'Inferring DF over relations between objects.' + Fore.RESET)
             infer_df_interactions = InferDFInteractions()
             infer_df_interactions.delete_parallel_directly_follows_derived('CASE_AO', 'Application')
@@ -88,12 +88,12 @@ def main() -> None:
         if step_discover_model:
             print(Fore.RED + 'Discovering multi-object DFG.' + Fore.RESET)
             dfg = DiscoverDFG()
-            dfg.discover_dfg_for_entity("Application", 500, 0.0)
-            dfg.discover_dfg_for_entity("Offer", 500, 0.0)
-            dfg.discover_dfg_for_entity("Workflow", 500, 0.0)
-            dfg.discover_dfg_for_entity("CASE_AO", 500, 0.0)
-            dfg.discover_dfg_for_entity("CASE_AW", 500, 0.0)
-            dfg.discover_dfg_for_entity("CASE_WO", 500, 0.0)
+            dfg.discover_dfg_for_entity("Application", 25000, 0.0)
+            dfg.discover_dfg_for_entity("Offer", 25000, 0.0)
+            dfg.discover_dfg_for_entity("Workflow", 25000, 0.0)
+            dfg.discover_dfg_for_entity("CASE_AO", 25000, 0.0)
+            dfg.discover_dfg_for_entity("CASE_AW", 25000, 0.0)
+            dfg.discover_dfg_for_entity("CASE_WO", 25000, 0.0)
 
         if step_build_tasks:
             print(Fore.RED + 'Detecting tasks.' + Fore.RESET)

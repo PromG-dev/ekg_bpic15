@@ -1,166 +1,5 @@
 [
   {
-    "name": "BPIC16Clicks",
-    "file_directory": "data\\BPIC16\\prepared\\",
-    "file_name": "BPIC16Clicks.csv",
-    "labels": [
-      "CustomerRecord",
-      "OfficeURecord",
-      "OfficeWRecord",
-      "ClickEventRecord",
-      "PageRecord",
-      "SessionRecord",
-      "IPRecord"
-    ],
-    "add_log": true,
-    "add_index": false,
-    "sample": {
-      "use_random_sample": false,
-      "population_column": "CustomerID",
-      "ids": [
-        2026796,
-        2223803,
-        2023026,
-        114939,
-        2011721,
-        2022933,
-        919259,
-        2079086,
-        466152,
-        2057965,
-        1039204,
-        395673,
-        1710155,
-        2081135,
-        1723340,
-        1893155,
-        1042998,
-        435939,
-        1735039,
-        2045407
-      ]
-    },
-    "attributes": [
-      {
-        "name": "pageName",
-        "columns": [
-          {
-            "name": "PAGE_NAME"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "timestamp",
-        "columns": [
-          {
-            "name": "TIMESTAMP"
-          }
-        ],
-        "datetime_object": {
-          "format": "y-M-d H:m:s.nX",
-          "timezone_offset": "+01"
-        },
-        "optional": false
-      },
-      {
-        "name": "customerId",
-        "columns": [
-          {
-            "name": "CustomerID",
-            "dtype": "Int64"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "ageCategory",
-        "columns": [
-          {
-            "name": "AgeCategory"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "gender",
-        "columns": [
-          {
-            "name": "Gender"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "officeU",
-        "columns": [
-          {
-            "name": "Office_U",
-            "dtype": "Int32"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "officeW",
-        "columns": [
-          {
-            "name": "Office_W",
-            "dtype": "Int32"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "sessionId",
-        "columns": [
-          {
-            "name": "SessionID",
-            "dtype": "Int64"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "ipId",
-        "columns": [
-          {
-            "name": "IPID",
-            "dtype": "Int64"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "vHost",
-        "columns": [
-          {
-            "name": "VHOST"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "urlFile",
-        "columns": [
-          {
-            "name": "URL_FILE"
-          }
-        ],
-        "optional": false
-      },
-      {
-        "name": "pageLoadError",
-        "columns": [
-          {
-            "name": "page_load_error"
-          }
-        ],
-        "optional": false
-      }
-    ]
-  },
-  {
     "name": "BPIC16Complaints",
     "file_directory": "data\\BPIC16\\prepared\\",
     "file_name": "BPIC16Complaints.csv",
@@ -180,26 +19,26 @@
       "use_random_sample": false,
       "population_column": "CustomerID",
       "ids": [
-        2026796,
-        2223803,
-        2023026,
-        114939,
-        2011721,
-        2022933,
-        919259,
-        2079086,
-        466152,
-        2057965,
-        1039204,
-        395673,
-        1710155,
-        2081135,
-        1723340,
-        1893155,
-        1042998,
-        435939,
-        1735039,
-        2045407
+        "2026796",
+        "2223803",
+        "2023026",
+        "114939",
+        "2011721",
+        "2022933",
+        "919259",
+        "2079086",
+        "466152",
+        "2057965",
+        "1039204",
+        "395673",
+        "1710155",
+        "2081135",
+        "1723340",
+        "1893155",
+        "1042998",
+        "435939",
+        "1735039",
+        "2045407"
       ]
     },
     "attributes": [
@@ -229,7 +68,7 @@
         "columns": [
           {
             "name": "CustomerID",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -257,7 +96,7 @@
         "columns": [
           {
             "name": "Office_U",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -267,7 +106,7 @@
         "columns": [
           {
             "name": "Office_W",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -277,7 +116,7 @@
         "columns": [
           {
             "name": "ComplaintDossierID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -287,7 +126,7 @@
         "columns": [
           {
             "name": "ComplaintID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -297,7 +136,7 @@
         "columns": [
           {
             "name": "ContactChannelID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -307,7 +146,7 @@
         "columns": [
           {
             "name": "ComplaintThemeID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -317,7 +156,7 @@
         "columns": [
           {
             "name": "ComplaintSubthemeID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -327,7 +166,7 @@
         "columns": [
           {
             "name": "ComplaintTopicID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -403,26 +242,26 @@
       "use_random_sample": false,
       "population_column": "CustomerID",
       "ids": [
-        2026796,
-        2223803,
-        2023026,
-        114939,
-        2011721,
-        2022933,
-        919259,
-        2079086,
-        466152,
-        2057965,
-        1039204,
-        395673,
-        1710155,
-        2081135,
-        1723340,
-        1893155,
-        1042998,
-        435939,
-        1735039,
-        2045407
+        "2026796",
+        "2223803",
+        "2023026",
+        "114939",
+        "2011721",
+        "2022933",
+        "919259",
+        "2079086",
+        "466152",
+        "2057965",
+        "1039204",
+        "395673",
+        "1710155",
+        "2081135",
+        "1723340",
+        "1893155",
+        "1042998",
+        "435939",
+        "1735039",
+        "2045407"
       ]
     },
     "attributes": [
@@ -474,7 +313,7 @@
         "columns": [
           {
             "name": "CustomerID",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -502,7 +341,7 @@
         "columns": [
           {
             "name": "Office_U",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -512,7 +351,7 @@
         "columns": [
           {
             "name": "Office_W",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -522,7 +361,7 @@
         "columns": [
           {
             "name": "QuestionThemeID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -532,7 +371,7 @@
         "columns": [
           {
             "name": "QuestionSubthemeID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -542,7 +381,7 @@
         "columns": [
           {
             "name": "QuestionTopicID",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -613,26 +452,26 @@
       "use_random_sample": false,
       "population_column": "CustomerID",
       "ids": [
-        2026796,
-        2223803,
-        2023026,
-        114939,
-        2011721,
-        2022933,
-        919259,
-        2079086,
-        466152,
-        2057965,
-        1039204,
-        395673,
-        1710155,
-        2081135,
-        1723340,
-        1893155,
-        1042998,
-        435939,
-        1735039,
-        2045407
+        "2026796",
+        "2223803",
+        "2023026",
+        "114939",
+        "2011721",
+        "2022933",
+        "919259",
+        "2079086",
+        "466152",
+        "2057965",
+        "1039204",
+        "395673",
+        "1710155",
+        "2081135",
+        "1723340",
+        "1893155",
+        "1042998",
+        "435939",
+        "1735039",
+        "2045407"
       ]
     },
     "attributes": [
@@ -664,7 +503,7 @@
         "columns": [
           {
             "name": "CustomerID",
-            "dtype": "Int64"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -692,7 +531,7 @@
         "columns": [
           {
             "name": "Office_U",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -702,7 +541,7 @@
         "columns": [
           {
             "name": "Office_W",
-            "dtype": "Int32"
+            "dtype": "str"
           }
         ],
         "optional": false
@@ -712,7 +551,168 @@
         "columns": [
           {
             "name": "HandlingChannelID",
-            "dtype": "Int32"
+            "dtype": "str"
+          }
+        ],
+        "optional": false
+      }
+    ]
+  },
+  {
+    "name": "BPIC16Clicks",
+    "file_directory": "data\\BPIC16\\prepared\\",
+    "file_name": "BPIC16Clicks.csv",
+    "labels": [
+      "CustomerRecord",
+      "OfficeURecord",
+      "OfficeWRecord",
+      "ClickEventRecord",
+      "PageRecord",
+      "SessionRecord",
+      "IPRecord"
+    ],
+    "add_log": true,
+    "add_index": false,
+    "sample": {
+      "use_random_sample": false,
+      "population_column": "CustomerID",
+      "ids": [
+        "2026796",
+        "2223803",
+        "2023026",
+        "114939",
+        "2011721",
+        "2022933",
+        "919259",
+        "2079086",
+        "466152",
+        "2057965",
+        "1039204",
+        "395673",
+        "1710155",
+        "2081135",
+        "1723340",
+        "1893155",
+        "1042998",
+        "435939",
+        "1735039",
+        "2045407"
+      ]
+    },
+    "attributes": [
+      {
+        "name": "pageName",
+        "columns": [
+          {
+            "name": "PAGE_NAME"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "timestamp",
+        "columns": [
+          {
+            "name": "TIMESTAMP"
+          }
+        ],
+        "datetime_object": {
+          "format": "y-M-d H:m:s.nX",
+          "timezone_offset": "+01"
+        },
+        "optional": false
+      },
+      {
+        "name": "customerId",
+        "columns": [
+          {
+            "name": "CustomerID",
+            "dtype": "str"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "ageCategory",
+        "columns": [
+          {
+            "name": "AgeCategory"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "gender",
+        "columns": [
+          {
+            "name": "Gender"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "officeU",
+        "columns": [
+          {
+            "name": "Office_U",
+            "dtype": "str"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "officeW",
+        "columns": [
+          {
+            "name": "Office_W",
+            "dtype": "str"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "sessionId",
+        "columns": [
+          {
+            "name": "SessionID",
+            "dtype": "str"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "ipId",
+        "columns": [
+          {
+            "name": "IPID",
+            "dtype": "str"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "vHost",
+        "columns": [
+          {
+            "name": "VHOST"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "urlFile",
+        "columns": [
+          {
+            "name": "URL_FILE"
+          }
+        ],
+        "optional": false
+      },
+      {
+        "name": "pageLoadError",
+        "columns": [
+          {
+            "name": "page_load_error"
           }
         ],
         "optional": false
