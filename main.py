@@ -17,8 +17,8 @@ from custom_modules.custom_modules.discover_dfg import DiscoverDFG
 from colorama import Fore
 
 config = Configuration()
-semantic_header = SemanticHeader.create_semantic_header(config.semantic_header_path)
-dataset_descriptions = DatasetDescriptions(config.dataset_description_path)
+semantic_header = SemanticHeader.create_semantic_header(config=config)
+dataset_descriptions = DatasetDescriptions(config=config)
 
 # several steps of import, each can be switch on/off
 step_clear_db = True
