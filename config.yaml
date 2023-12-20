@@ -6,9 +6,9 @@ password: "12345678"
 import_directory: "path/to/your/import/directory"
 
 # Dataset information
-dataset_name: "BPIC14"
-semantic_header_path: "json_files/BPIC14.json"
-dataset_description_path: "json_files/BPIC14_DS.json"
+dataset_name: "BPIC15"
+semantic_header_path: "json_files/BPIC15.json"
+dataset_description_path: "json_files/BPIC15_DS.json"
 use_sample: false
 
 # Import settings
