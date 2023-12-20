@@ -3,13 +3,13 @@ db_name: "neo4j"
 uri: "bolt://localhost:7687"
 user: "neo4j"
 password: "12345678"
-import_directory: "C:/Users/s156229/.Neo4jDesktop/relate-data/dbmss/dbms-f239c3b8-6596-4b15-82eb-1ab321ac0aa0/import"
+import_directory: "path/to/your/import/directory"
 
 # Dataset information
 dataset_name: "BPIC14"
 semantic_header_path: "json_files/BPIC14.json"
 dataset_description_path: "json_files/BPIC14_DS.json"
-use_sample: true
+use_sample: false
 
 # Import settings
 verbose: false
