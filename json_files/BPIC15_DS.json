@@ -8,6 +8,14 @@
       "BPIC15_4.csv",
       "BPIC15_5.csv"
     ],
+    "labels": [
+      "EventRecord",
+      "ApplicationRecord",
+      "MunicipalityRecord",
+      "ResourceRecord",
+      "MonitoringResourceRecord",
+      "ResponsibleActorRecord"
+    ],
     "add_log": true,
     "add_event_index": true,
     "true_values": [
@@ -256,7 +264,7 @@
             "name": "last_phase"
           }
         ],
-        "optional": false
+        "optional": true
       },
       {
         "name": "landRegisterId",
@@ -387,6 +395,14 @@
     "file_name": "BPIC15_2.csv",
     "add_log": true,
     "add_event_index": true,
+    "labels": [
+      "EventRecord",
+      "ApplicationRecord",
+      "MunicipalityRecord",
+      "ResourceRecord",
+      "MonitoringResourceRecord",
+      "ResponsibleActorRecord"
+    ],
     "true_values": [
       "J"
     ],
