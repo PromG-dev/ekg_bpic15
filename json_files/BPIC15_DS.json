@@ -1,7 +1,7 @@
 [
   {
     "name": "BPIC15",
-    "file_directory": "data\\BPIC15\\",
+    "file_directory": "data\\",
     "file_names": [
       "BPIC15_1.csv",
       "BPIC15_3.csv",
@@ -383,7 +383,7 @@
   },
   {
     "name": "BPIC15",
-    "file_directory": "data\\BPIC15\\",
+    "file_directory": "data\\",
     "file_name": "BPIC15_2.csv",
     "add_log": true,
     "add_event_index": true,
