@@ -43,8 +43,8 @@ def main() -> None:
 
         oced_pg = OcedPg(dataset_descriptions=dataset_descriptions,
                          use_sample=config.use_sample,
-                         use_preprocessed_files=config.use_preprocessed_files)
-        # import_directory=config.import_directory)
+                         use_preprocessed_files=config.use_preprocessed_files,
+                         import_directory=config.import_directory)
         oced_pg.load_and_transform()
         oced_pg.create_df_edges()
 
