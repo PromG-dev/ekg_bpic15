@@ -26,7 +26,7 @@ def main() -> None:
     """
     print("Started at =", datetime.now().strftime("%H:%M:%S"))
 
-    db_connection = DatabaseConnection.set_up_connection_using_config(config=config)
+    db_connection = DatabaseConnection.set_up_connection(config=config)
     performance = Performance.set_up_performance(config=config)
     db_manager = DBManagement()
 
