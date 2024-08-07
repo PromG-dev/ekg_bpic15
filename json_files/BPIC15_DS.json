@@ -2,13 +2,21 @@
   {
     "name": "BPIC15",
     "file_directory": "data\\",
+    "add_log": true,
     "file_names": [
       "BPIC15_1.csv",
       "BPIC15_3.csv",
       "BPIC15_4.csv",
       "BPIC15_5.csv"
     ],
-    "add_log": true,
+    "labels": [
+      "EventRecord",
+      "ApplicationRecord",
+      "MunicipalityRecord",
+      "ResourceRecord",
+      "MonitoringResourceRecord",
+      "ResponsibleActorRecord"
+    ],
     "add_event_index": true,
     "true_values": [
       "J"
@@ -382,11 +390,19 @@
     ]
   },
   {
-    "name": "BPIC15",
+    "name": "BPIC15_2",
     "file_directory": "data\\",
     "file_name": "BPIC15_2.csv",
     "add_log": true,
     "add_event_index": true,
+    "labels": [
+      "EventRecord",
+      "ApplicationRecord",
+      "MunicipalityRecord",
+      "ResourceRecord",
+      "MonitoringResourceRecord",
+      "ResponsibleActorRecord"
+    ],
     "true_values": [
       "J"
     ],

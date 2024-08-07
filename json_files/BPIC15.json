@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "records": [
     "(record:EventRecord {timestamp, activity, code, OPTIONAL activityDutch})",
-    "(record:ApplicationRecord {caseId, startDate, caseStatus, parts, requestComplete, lastPhase, OPTIONAL termName, OPTIONAL caseProcedure, OPTIONAL includesSubCases, OPTIONAL endDatePlanned, OPTIONAL landRegisterId, OPTIONAL sumleges, OPTIONAL idOfConceptCase})",
+    "(record:ApplicationRecord {caseId, startDate, caseStatus, OPTIONAL parts, requestComplete, OPTIONAL lastPhase, OPTIONAL termName, OPTIONAL caseProcedure, OPTIONAL includesSubCases, OPTIONAL endDatePlanned, OPTIONAL landRegisterId, OPTIONAL sumleges, OPTIONAL idOfConceptCase})",
     "(record:MunicipalityRecord {log})",
     "(record:ResourceRecord {resourceId})",
     "(record:MonitoringResourceRecord {monitoringResourceId})",
@@ -34,7 +34,7 @@
       "constructor": [
         {
           "prevalent_record": "(record:ApplicationRecord)",
-          "result": "(a:Entity:Application {sysId: record.caseId, startDate:record.startDate, caseStatus:record.caseStatus, parts:record.parts, requestComplete:record.requestComplete, lastPhase:record.lastPhase, OPTIONAL termName: record.termName, OPTIONAL caseProcedure: record.caseProcedure, OPTIONAL includesSubCases: record.includesSubCases, OPTIONAL endDatePlanned: record.endDatePlanned, OPTIONAL landRegisterId: record.landRegisterId, OPTIONAL sumleges: record.sumleges, OPTIONAL idOfConceptCase: record.idOfConceptCase})",
+          "result": "(a:Entity:Application {sysId: record.caseId, startDate:record.startDate, caseStatus:record.caseStatus, OPTIONAL parts:record.parts, requestComplete:record.requestComplete, OPTIONAL lastPhase:record.lastPhase, OPTIONAL termName: record.termName, OPTIONAL caseProcedure: record.caseProcedure, OPTIONAL includesSubCases: record.includesSubCases, OPTIONAL endDatePlanned: record.endDatePlanned, OPTIONAL landRegisterId: record.landRegisterId, OPTIONAL sumleges: record.sumleges, OPTIONAL idOfConceptCase: record.idOfConceptCase})",
           "infer_corr_from_event_record": true
         }
       ],
