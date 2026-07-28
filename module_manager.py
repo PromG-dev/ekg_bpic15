@@ -11,11 +11,11 @@ class ModuleManager:
     def __init__(self, config):
         if config is None:
             config = Configuration.init_conf_with_config_file()
-        self._config = config
-        self._db_connection = DatabaseConnection.set_up_connection(config=config)
-        self._performance = Performance.set_up_performance(config=config)
-        self._semantic_header = SemanticHeader.create_semantic_header(config=config)
-        self._dataset_descriptions = DatasetDescriptions(config=config)
+        self._config: Configuration = config
+        self._db_connection = DatabaseConnection.set_up_connection(config=self._config)
+        self._performance = Performance.set_up_performance(config=self._config)
+        self._semantic_header = SemanticHeader.create_semantic_header(config=self._config)
+        self._dataset_descriptions = DatasetDescriptions.from_file(path=self._config.dataset_description_path)
 
         self._db_manager = None
         self._oced_pg = None
@@ -25,6 +25,7 @@ class ModuleManager:
 
     def get_is_preprocessed_files_used(self):
         return self._config.use_preprocessed_files
+
     def get_db_connection(self):
         return self._db_connection
 

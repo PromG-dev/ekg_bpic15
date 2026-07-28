@@ -2,7 +2,7 @@
 db_name: "neo4j"
 uri: "bolt://localhost:7687"
 user: "neo4j"
-password: "12345678"
+password: "bpic2015"
 
 # Dataset information
 dataset_name: "BPIC15"

@@ -33,4 +33,3 @@ class MethodManager:
 
     def close_connection(self):
         db_connection = self.modules.get_db_connection()
-        db_connection.close_connection()
